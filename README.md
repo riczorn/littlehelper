@@ -5,6 +5,7 @@ Little Helper for Joomla helps administrators set up:
 - favicons and Apple touch icons
 - htaccess
 - robots.txt 
+
 It additionally features:
 - Clean cache 
 - Empty trash
