@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fields addfieldpath="/administrator/components/com_littlehelper/elements/" name="params">
+
+	<fieldset name="component" label="COM_LITTLEHELPER_OPTIONS">
+		
+		<field 
+			title="COM_LITTLEHELPER_INFO_TITLE"
+			header="COM_LITTLEHELPER_INFO_HEADER"
+			body="COM_LITTLEHELPER_INFO_BODY"
+			footer="COM_LITTLEHELPER_INFO_FOOTER"
+			type="zzinfo"
+			/>
+		
+		<field 
+			type="spacer"
+			label="COM_LITTLEHELPER_ENABLED_FEATURES"/>
+			
+		<field
+			name="button_cache"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_CACHE"
+			description="COM_LITTLEHELPER_OPTIONS_CACHE_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+		<field
+			name="button_recycle"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_DESC">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+		<field 
+			type="spacer"
+			label="COM_LITTLEHELPER_OPTIONS_FAVICONS_GROUP"/>
+			
+		<field
+			name="favicons_sourcepath"
+			type="folderlist"
+			directory="images"
+			hide_none="true"
+			label="COM_LITTLEHELPER_OPTIONS_FAVICONS_SOURCE_PATH"
+			description="COM_LITTLEHELPER_OPTIONS_FAVICONS_SOURCE_PATH_DESC">
+
+		</field>
+
+		<field
+			name="favicons_forcepreview"
+			type="list"
+			label="COM_LITTLEHELPER_OPTIONS_FAVICONS_FORCE_PREVIEW"
+			description="COM_LITTLEHELPER_OPTIONS_FAVICONS_FORCE_PREVIEW_DESC"
+			default="1">
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+
+		
+	</fieldset>
+	<fieldset 
+			name="cacheoptions" 
+			label="COM_LITTLEHELPER_CACHE_OPTIONS">
+		<field
+			name="clean_all_cache"
+			type="list"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_CLEAN_ALL"
+			description="COM_LITTLEHELPER_OPTIONS_CLEAN_ALL_DESC">
+			<option value="1">COM_LITTLEHELPER_OPTIONS_CLEAN_ALL_OPT_YES</option>
+			<option value="0">COM_LITTLEHELPER_OPTIONS_CLEAN_ALL_OPT_NO</option>
+			</field>	
+			
+		<field
+			name="button_cache_usefs"
+			type="list"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_CACHE_USEFS"
+			description="COM_LITTLEHELPER_OPTIONS_CACHE_USEFS_DESC">
+			<option value="0">COM_LITTLEHELPER_OPTIONS_CACHE_USEFS_OPT_NO</option>
+			<option value="1">COM_LITTLEHELPER_OPTIONS_CACHE_USEFS_OPT_YES</option>
+		</field>		
+		
+		<field type="spacer" label="COM_LITTLEHELPER_CACHE_EXTENSIONS" />
+		
+		<field
+			name="extra_extensions"
+			type="textarea"
+			rows="8"
+			cols="60"
+			label="COM_LITTLEHELPER_OPTIONS_EXTRA"
+			description="COM_LITTLEHELPER_OPTIONS_EXTRA_DESC"
+			default="_system&#13;&#10;com_banners&#13;&#10;com_content&#13;&#10;com_languages&#13;&#10;com_modules&#13;&#10;com_plugins&#13;&#10;com_templates&#13;&#10;mod_banners&#13;&#10;mod_custom&#13;&#10;mod_menu&#13;&#10;page&#13;&#10;"
+			 />
+	</fieldset>
+	
+	<fieldset 
+			name="recycleoptions" 
+			label="COM_LITTLEHELPER_RECYCLE_OPTIONS"
+			description="COM_LITTLEHELPER_RECYCLE_OPTIONS">
+		
+		<field
+			name="recycle_content"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTENT"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTENT_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field
+			name="recycle_menuitems"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MENUITEMS"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MENUITEMS_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field
+			name="recycle_modules"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MODULES"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MODULES_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field
+			name="recycle_featured"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_DB_FEATURED"
+			description="COM_LITTLEHELPER_OPTIONS_DB_FEATURED_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field 
+			name="recycle_featured_keep"
+			type="text"
+			default="100"
+			label="COM_LITTLEHELPER_OPTIONS_DB_FEATURED_KEEP"
+			desc="COM_LITTLEHELPER_OPTIONS_DB_FEATURED_KEEP_DESC"/>
+		<field
+			name="recycle_banners"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_BANNERS"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_BANNERS_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field
+			name="recycle_categories"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CATEGORIES"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CATEGORIES_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>
+		<field
+			name="recycle_contacts"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTACTS"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTACTS_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>		
+		<field
+			name="recycle_weblinks"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_WEBLINKS"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_WEBLINKS_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>			
+		<field
+			name="recycle_messages"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MESSAGES"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MESSAGES_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>				
+			<field
+			name="recycle_newsfeeds"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_NEWSFEEDS"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_NEWSFEEDS_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>	
+			<field
+			name="recycle_redirect"
+			type="radio"
+			default="1"
+			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_REDIRECT"
+			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_REDIRECT_DESC">
+			<option value="0">JNo</option>
+			<option value="1">JYes</option>
+			</field>		
+	</fieldset>		
+
+
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+		>
+	<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_littlehelper"
+			section="component" />
+	</fieldset>
+
+</fields>
+</config>

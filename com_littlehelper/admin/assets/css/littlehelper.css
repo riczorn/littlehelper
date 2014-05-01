@@ -1,0 +1,447 @@
+/**
+ * LittleHelper administrator style
+ */
+
+.error {
+	color: red !important;
+	font-weight: bold
+}
+
+.alert {
+	color: #dd5500 !important;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.result {
+	padding-left: 4em
+}
+
+.result .folder {
+	display: inline-block;
+	width: 200px;
+}
+
+.global {
+	font-weight: bold;
+	font-size: 120%;
+	color: navy
+}
+
+.gray {
+	color: #AAAAAA
+}
+
+.align-right {
+	text-align: right;
+	font-style: italic
+}
+
+.icon-16-ccjoomla, i.icon-ccjoomla {
+	background-image:
+		url(../images/cachejoomla16.png)
+}
+
+.icon-32-ccjoomla {
+	background-image:
+		url(../images/cachejoomla32.png)
+}
+
+.icon-16-ccfs, i.icon-ccfs {
+	background-image:
+		url(../images/cachefs16.png)
+}
+
+.icon-32-ccfs {
+	background-image:
+		url(../images/cachefs32.png)
+}
+
+.icon-32-fix {
+	background-image: url(../images/fix32.png)
+}
+
+.icon-16-fix, i.icon-fix {
+	background-image: url(../images/fix16.png)
+}
+
+.icon-24-littlehelper {
+	background-image: url(../images/logo24.png)
+}
+
+.icon-32-littlehelper {
+	background-image: url(../images/logo32.png)
+}
+
+.icon-48-littlehelper {
+	background-image: url(../images/logo48.png)
+}
+
+li.button .icon-32-options {
+	background-image:
+		url(../images/icons/options.png);
+}
+
+li.button .icon-32-help {
+	background-image:
+		url(../images/icons/help.png)
+}
+
+img.leftimage {
+	float: left;
+	margin-right: 15px;
+}
+
+em {
+	font-weight: normal;
+	font-size: 90%;
+}
+
+pre.littlehelper {
+	font-size: 120%;
+/* 	background-color:blue; */
+/* 	color:white; */
+}
+
+textarea.textbox {width:auto;}
+
+.m #submenu li,
+.sidebar-nav #submenu li {
+	background-image:
+		url(../images/icons/color-o.png);
+	background-repeat: no-repeat;
+	min-height: 16px;
+}
+.m #submenu li {
+	padding-left: 20px;
+	margin-left: 10px;
+}
+
+.sidebar-nav #submenu li {
+	background-position:5px;
+	padding-left: 40px;
+	margin-left: 0px;
+}
+.sidebar-nav #submenu li a {
+	border-radius:12px;
+}
+
+#submenu li:nth-child(2) {
+	background-image:
+		url(../images/icons/color-b.png);
+}
+
+#submenu li:nth-child(3) {
+	background-image:
+		url(../images/icons/color-g.png);
+}
+
+#submenu li:nth-child(4) {
+	background-image:
+		url(../images/icons/color-y.png);
+}
+
+#submenu li:nth-child(5) {
+	background-image:
+		url(../images/icons/color-c.png);
+}
+
+.warn {
+	background:
+		url(../images/res/warn.png) scroll 0
+		0 no-repeat;
+	padding-left: 32px;
+	min-height: 16px;
+	display: inline-block;
+	color: #dd5500;
+}
+
+.warn .fancybutton {vertical-align:top;}
+
+div#toolbar-box .m {
+	background:
+		url(../images/res/back_eq.png)
+		scroll 50% 100% no-repeat;
+}
+
+.moduleinfo {
+	width: 30%;
+	float: left;
+	border: 1px solid #CCCCCC;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px gray;
+	padding: 10px;
+	margin: 10px;
+	height: 100px
+}
+
+.moduleinfo h3 {
+	margin-top:0;
+}
+
+.fancybutton {
+	display: inline-block;
+	padding: 9px 20px 2px 40px;
+	font-size: 12px;
+	margin: 2px 2px;
+	width: 117px;
+	text-align: left;
+	background-color: white;
+	box-shadow: 2px 2px 2px gray;
+	color: navy;
+	border-radius: 4px;
+	cursor:pointer;
+	min-height:22px;
+	background:	url()	scroll 0 0 no-repeat transparent;
+}
+.fancybutton:hover {
+	text-decoration:none;
+	/*border:1px solid white;
+	margin:1px;*/
+}
+.fancybutton:hover {
+	background-color:gray;
+	color:white;
+	transition: all 0.3s ease-in-out;
+}
+.fancybutton.create {
+	background-image:	url(../images/icons/ico-save.png);
+	
+}
+.icon-32-saveicons,
+.fancybutton.save {
+	background-image:	url(../images/icons/ico-save.png);
+	
+}
+i.icon-saveicons {
+	background-image:	url(../images/icons/ico-save16.png);
+}
+.fancybutton.create.test {
+	background-image:	url(../images/icons/ico-test.png);
+	
+}
+.fancybutton.delete {
+	background-image:	url(../images/icons/ico-delete.png);
+	
+}
+.fancybutton.faq {
+	background-image:	url(../images/icons/ico-faq.png);
+}
+.fancybutton.module {
+	background-image:	url(../images/icons/ico-module.png);
+}
+.fancybutton.modulecreate {
+	background-image:	url(../images/icons/ico-modulecreate.png);
+}
+.fancybutton.moduleconfig {
+	background-image:	url(../images/icons/ico-moduleconfig.png);
+}
+.fancybutton.foldercreate {
+	background-image:	url(../images/icons/ico-folder-create.png);
+}
+
+.fancybutton.testtransp  {
+    background-image: url("../images/icons/ico-transparency.png");
+}
+.icon-32-media,
+.fancybutton.media  {
+    background-image: url("../images/icons/ico-media.png");
+}
+i.icon-media  {
+    background-image: url("../images/icons/ico-media16.png");
+}
+
+.fancybutton.restore {
+	background-image:url(../images/icons/ico-restore.png);
+}
+
+.fancybutton.enableplugin {
+	background-image:url(../images/icons/ico-plugin-enable.png);
+}
+.fancybutton.disableplugin {
+	background-image:url(../images/icons/ico-plugin-disable.png);
+}
+.icon-32-plugin,
+.fancybutton.manageplugin {
+	background-image:url(../images/icons/ico-plugin-manage.png);
+}
+i.icon-plugin {
+	background-image:url(../images/icons/ico-plugin-manage16.png);
+}
+div.right {
+	float: right;
+}
+
+.htx,.locked {
+	background:	url(../images/icons/ico-ok.png)	scroll 0 0 no-repeat transparent;
+	/*width: 32px;*/
+	height: 25px;
+	vertical-align:middle;
+	display: inline-block;
+	/*text-indent: -9000px;*/
+	/*overflow: hidden;*/
+	cursor: pointer;
+	padding: 8px 10px 0 36px;
+	text-indent: 0;
+    width: inherit;	
+    
+}
+.htx:hover {
+	border:1px solid green;
+	text-decoration:none;
+	border-radius:5px;
+	margin:-1px -1px -1px -1px;
+}
+.htx.info {
+	background-image:url(../images/icons/ico-info.png);
+	cursor: default
+}
+.htx.info:hover {
+	border:0;margin:0;
+}
+.locked {
+	background-image:url(../images/icons/ico-lock.png);
+}
+
+.htx.ok {
+	background-image:url(../images/icons/ico-ok.png);
+}
+
+.htx.delete {
+	background-image:url(../images/icons/ico-delete.png);
+}
+
+.htx.create {
+	background-image:url(../images/icons/ico-joomla32.png);
+}
+.htx.protect {
+	background-image:url(../images/icons/ico-protect.png);
+}
+.htx.protected {
+	background-image:url(../images/icons/ico-protected.png);
+}
+.htx.createjoomla {
+	background-image:url(../images/icons/ico-joomla.png);
+}
+
+.htx.restore {
+	background-image:url(../images/icons/ico-restore.png);
+}
+
+.lockeddiv {
+	display: none;
+}
+
+iframe#rht_preview {
+	box-shadow: 2px 2px 2px white;
+	height: 50px;
+	width:90%;
+	max-height: 50px;
+	overflow: auto;
+}
+#rht_container {
+	padding:20px;
+}
+#rht_container .buttons {
+	display:none;
+}
+#roothtaccessbuttons ul {
+	list-style-type:none;
+}
+#rht_buttons_info {
+	font-weight:bold;font-size:120%;font-color:red;
+}
+#testrunning {background-image:url(../images/res/loading.gif);width:170px;height:19px;display:inline-block;}
+
+
+.path {font-family:monotype; font-weight:bold}
+div.topList {width:99%}
+div#step1 fieldset {
+	border:0;margin:0;padding:0
+}
+.box {background:-moz-linear-gradient(center top , #F7F7F7 0%, #F4F4F4 100%) repeat scroll 0 0 padding-box transparent;
+	border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.3);
+	border-radius:5px;box-shadow:0 1px 0 #F1F1F1 inset;
+	text-shadow:0 1px 0 #FFFFFF;border-style:solid; border-width:1px;
+}
+div.chosenImages ul {list-style-type:none;display:block;padding:0;width:75%}
+div.chosenImages ul li {
+	display:inline-block;
+	text-align:center;
+	vertical-align:top;
+	padding:4px;margin:6px;
+	box-shadow:2px 2px 2px #E0E0E0;
+	border-radius:0 15px;}
+div.chosenImages div.chktransp {float:right;width:20%; padding:10px; 
+	background:url(../images/res/top_eq.png) scroll 50% 0% no-repeat white;
+}
+/*img.thumb {max-width:100px;max-height:100px;}*/		
+input#upload-file {clear:both;}
+input#upload-submit {
+	background: url("../images/icons/ico-upload.png") no-repeat scroll white;
+    padding:8px 0 8px 36px;
+    text-align:left;
+	clear:both;width:177px;font-size:12px;border:0;margin-bottom:2px}
+input#upload-submit:hover {background-color:gray;
+	transition:all 0.3s easeinout;}
+
+#adminForm table.adminlist tbody tr td:first-child {
+	padding-left:22px;
+	background-repeat:no-repeat;
+	background-image:url(../images/database16.png);
+}
+
+#adminForm table.adminlist tbody tr td.recycle {
+	background-image:url(../images/bin16.png);
+}
+
+#adminForm table.adminlist tbody tr td.cache {
+	background-image:url(../images/cachefs16.png);
+}
+
+/* this is for Joomla 3.0 */
+#trashncacheForm {
+	float:right;
+	margin:0;
+}
+
+.navbar #trashncacheForm .btn-toolbar .btn-wrapper {
+	margin:0 5px 0 0 ;
+}
+.navbar #trashncacheForm  .btn {
+	margin-top:0;
+}
+
+.navbar #trashncacheForm .btn-small {
+	padding: 0 7px;
+	line-height:12px;
+}
+
+/* a quick fix for the mootools tabs; this should be replaced with jquery though... */
+#satab_favicongroup dt {float:left;
+	padding: 3px 15px;
+	border-radius:12px;
+}
+#satab_favicongroup a:hover {text-decoration:none;}
+#satab_favicongroup dt h3 {
+	line-height:18px;
+	font-weight:normal;
+	font-size:100%;
+	padding:0;margin:0;
+}
+
+#satab_favicongroup dt.open {
+	background-color:#0088CC;
+}
+
+#satab_favicongroup dt.open h3 a {
+	color:white;
+}
+
+div.current {clear:both;}
+
+/* favicons: */
+div#gallery > img {
+	max-width:100px;max-height:100px;cursor:pointer;
+}
+div#gallery > img:hover {box-shadow:2px 2px 5px rgba(50,50,50,0.4);}

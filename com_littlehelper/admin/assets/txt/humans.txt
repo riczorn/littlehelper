@@ -1,0 +1,21 @@
+/* TEAM */
+Your title: Your name.
+Site: or link to a contact form, etc.
+Twitter: your Twitter username.
+Location: City, Country.
+
+                [...]
+                
+/* THANKS */
+Name: name or url
+Name: littlehelper from fasterjoomla.com
+
+                [...]
+                
+/* SITE */
+Last update: <date>
+Standards: HTML5, CSS3,..
+Components: Modernizr, jQuery, etc.
+Software: Joomla
+
+                [...]

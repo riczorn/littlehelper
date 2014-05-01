@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_littlehelper">
+	<section name="component">
+		<action name="core.admin" title="JAction_Admin" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.manage" title="JAction_Manage"
+			description="JACTION_MANAGE_COMPONENT_DESC" />
+		<action name="littlehelper.super" title="COM_LITTLEHELPER_ACTION_HTACCESS"
+			description="COM_LITTLEHELPER_ACTION_HTACCESS_DESC" />
+	</section>
+</access>

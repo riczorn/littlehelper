@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="package" version="2.5" method="upgrade">
+	<name>PKG_LITTLEHELPER_XML_PACKAGE</name>
+	<author>Riccardo Zorn</author>
+	<creationDate>February 2013</creationDate>
+ 	<packagename>littlehelper</packagename>
+	 <version>2.0.12</version>
+	 <url>http://www.fasterjoomla.com/littlehelper</url>
+	 <packager>Riccardo Zorn</packager>
+	 <packagerurl>http://www.fasterjoomla.com</packagerurl>
+	 <license>GNU/GPLv3 www.gnu.org/licenses/gpl-3.0.html</license>
+	 <description>PKG_LITTLEHELPER_XML_PACKAGE_DESC</description>
+
+	 <files folder="packages">
+		 <file type="component" id="com_littlehelper" >com_littlehelper.zip</file>
+		 <file type="module" id="mod_littlehelper" client="administrator">mod_littlehelper.zip</file>
+		 <file type="plugin" id="littlehelper" group="system">plg_littlehelper.zip</file>
+	 </files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.pkg_littlehelper.sys.ini</language>
+		<language tag="it-IT">it-IT/it-IT.pkg_littlehelper.sys.ini</language>
+	</languages>		
+
+    <updateservers>
+        <server name="FasterJoomla.com Little Helper Update Site" type="collection" priority="1" >http://www.fasterjoomla.com/files/extensions/littlehelper.xml</server>
+   </updateservers>
+</extension>

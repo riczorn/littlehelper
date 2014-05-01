@@ -1,0 +1,12 @@
+# This .htaccess will prevent execution of scripts.
+# It is ideal to copy this file to any writable directories you have.
+# In a Joomla installation, copy to the /images, /tmp, /cache, /logs, /administrator/cache folders
+# The component littlehelper handles this for you.
+
+# @version SVN: $Id$
+
+Options -ExecCGI
+RemoveHandler .cgi .pl .py .php4 .pcgi4 .php .php3 .phtml .pcgi .php5 .pcgi5
+RemoveType .cgi .pl .py .php4 .pcgi4 .php .php3 .phtml .pcgi .php5 .pcgi5
+
+

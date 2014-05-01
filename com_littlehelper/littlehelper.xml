@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>COM_LITTLEHELPER</name>
+  <creationDate>2-Jun-2012</creationDate>
+  <author>Riccardo Zorn</author>
+  <authorEmail>support@fasterjoomla.com</authorEmail>
+  <authorUrl>http://www.fasterjoomla.com</authorUrl>
+  <copyright>Riccardo Zorn 2013-2014</copyright>
+  <license>GPL</license>
+	<version>2.0.12</version>
+	<description>COM_LITTLEHELPER_XML_DESC</description>
+
+	<files folder="site">
+		<filename>littlehelper.php</filename>
+		<filename>index.html</filename>
+	</files>		
+
+	<administration>
+   		<menu img="components/com_littlehelper/assets/images/logo16.png">COM_LITTLEHELPER</menu>
+   		<submenu>
+			<menu link="option=com_littlehelper&amp;view=trash_n_cache" img="components/com_littlehelper/assets/images/joomla16.png">COM_LITTLEHELPER_TRASH_AND_CACHE</menu>
+			<menu link="option=com_littlehelper&amp;view=favicon" img="components/com_littlehelper/assets/images/favicon16.png">COM_LITTLEHELPER_FAVICON</menu>
+			<menu link="option=com_littlehelper&amp;view=htaccess" img="components/com_littlehelper/assets/images/icons/ico-protect16.png">COM_LITTLEHELPER_HTACCESS</menu>
+			<menu link="option=com_littlehelper&amp;view=roothtaccess" img="components/com_littlehelper/assets/images/icons/ico-j16.png">COM_LITTLEHELPER_ROOTHTACCESS</menu>
+			<menu link="option=com_littlehelper&amp;view=humans" img="components/com_littlehelper/assets/images/humans16.png">COM_LITTLEHELPER_HUMANS</menu>
+			<menu link="option=com_littlehelper&amp;view=robots">COM_LITTLEHELPER_ROBOTS</menu>
+		</submenu>
+ 		<files folder="admin">
+			<filename>README.php</filename>
+			<filename>littlehelper.php</filename>
+			<filename>access.xml</filename>
+			<filename>controller.php</filename>
+			<filename>config.xml</filename>
+			<filename>index.html</filename>
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>elements</folder>
+			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>libraries</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+		</files>
+ 	</administration>
+	<fields name="params" addpath="/administrator/components/com_littlehelper/elements" />
+		<updateservers>
+		<!-- Note: No spaces or linebreaks allowed between the server tags -->
+		<server type="extension" priority="1" name="LittleHelper Update Site">http://www.fasterjoomla.com/files/extensions/littlehelper.xml</server>
+	</updateservers>
+</extension>
+
