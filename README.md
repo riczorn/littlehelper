@@ -10,7 +10,7 @@ It additionally features:
 - Clean cache 
 - Empty trash
 
-Note: this repo is months ahead of the version published on the JED as of 2014/04/30
+*Note*: this repo is months ahead of the version published on the JED as of 2014/04/30, but it's still beta
 
 Extension page on the Joomla Extensions Directory (TM)
 http://extensions.joomla.org/extensions/administration/admin-desk/24016
