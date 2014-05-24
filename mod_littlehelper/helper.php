@@ -55,8 +55,22 @@ abstract class modLittleHelperHelper
 				#littlehelpermoduletoolbar-cpanel-popup-ccjoomla button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/cachecc16.png);}
 				#littlehelpermoduletoolbar-status-popup-trash button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);}
 				#littlehelpermoduletoolbar-cpanel-popup-trash button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);} 					
-	 					
+
+				#trashncacheForm {
+					float:right;
+					margin:0;
+				}
+				.navbar #trashncacheForm .btn-toolbar .btn-wrapper {
+					margin:0 5px 0 0 ;
+				}
+				.navbar #trashncacheForm  .btn {
+					margin-top:0;
+				}
 				
+				.navbar #trashncacheForm .btn-small {
+					padding: 0 7px;
+					line-height:12px;
+				}
 				','text/css');
 		if (version_compare(JVERSION, '3.0.0', 'lt')) {
 			$document->addStyleDeclaration(

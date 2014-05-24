@@ -58,6 +58,10 @@ class LittleHelperHelperFavicon
 	
 		self::$templatePath ="/templates/$template/";
 		
+		if (!self::$imagesPathIsSet) return; // otherwise we'd create folders under /images !
+		
+		//TODO: SPOSTARE NEL POSTFLIGHT DELL'INSTALLER
+		SPOSTARE QUESTO NEL POSTFLIGHT DELL'INSTALLER!!!'
 		$resizedCreated = false; // this is a flag to determine if it's an upgrade and we need to copy files for 2.0 compatibility
 		
 		if (!file_exists(JPATH_SITE . self::$thumbsPath)) {
@@ -74,7 +78,7 @@ class LittleHelperHelperFavicon
 			/* Up until version 1.8.5 the inner workings were simpler, with uploaded images in the
 			 * /images/icons and resized images in /images/resized.
 			* With the advent of version 2.0 and its fancy upload functionality, a new folder is necessary:
-			* /images/source where users upload the files.
+			* /images/icons/source where users upload the files.
 			* We can assume that any images present in the /images/icons folder now was uploaded
 			* by the user during her pre-2.0 usage, and should be copied to source:
 			*/

@@ -39,7 +39,6 @@ class plgSystemLittleHelper extends JPlugin
 	 * Insert the footer scripts at the end of the document just before the </body>
 	 */
 	public function onAfterRender() {
-		$body = JResponse::getBody();
 		if ($this->isAllowed()) {
 			$body = JResponse::getBody();
  			
