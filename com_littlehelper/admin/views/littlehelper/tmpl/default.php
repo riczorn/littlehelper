@@ -11,12 +11,15 @@ defined('_JEXEC') or die;
 
 ?>
 <img src="components/com_littlehelper/assets/images/logo.png" class="leftimage"/>
-<div class="right">
+<div class="right" style="text-align:right">
 <?php 
 echo "<a class='fancybutton moduleconfig' href='$this->adminModulesUrl'>"
  		.JText::_("COM_LITTLEHELPER_MODULE_OPEN_CONFIG")."</a><br>";
 echo $this->faqlink;
 ?>
+<br>
+<span class="news" style="font-weight:bold">News from fasterjoomla</span><br>
+<iframe style="width:250px;height:300px;border:0" noborder src="http://www.fasterjoomla.com/files/extensions/littlehelper/littlehelper_news.php"></iframe>
 </div>
 <h2><?php echo JText::_("COM_LITTLEHELPER_INTRO_TITLE"); ?></h2>
 <p><?php echo JText::_("COM_LITTLEHELPER_INTRO_DESC");  ?></p>
@@ -26,6 +29,7 @@ echo $this->faqlink;
 </span></p>
 <p><?php 
 echo JText::_("COM_LITTLEHELPER_INTRO_RELAX"); ?></p>
+
 <div class='availablemodules'>
 <?php 
 	echo $this->getModuleInfo('status');

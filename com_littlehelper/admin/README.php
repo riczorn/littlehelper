@@ -119,3 +119,5 @@ Version 2.0.0 (2013/10/2)
 2.0.11 (2014/04/15)
 	Folders are now created with 0755;
 	
+2.0.14 (2014/05/12)
+	Correct styles of the statusbar on Joomla 3 

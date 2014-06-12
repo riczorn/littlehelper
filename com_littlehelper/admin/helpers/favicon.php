@@ -60,8 +60,8 @@ class LittleHelperHelperFavicon
 		
 		if (!self::$imagesPathIsSet) return; // otherwise we'd create folders under /images !
 		
-		//TODO: SPOSTARE NEL POSTFLIGHT DELL'INSTALLER
-		SPOSTARE QUESTO NEL POSTFLIGHT DELL'INSTALLER!!!'
+		//@TODO: SPOSTARE NEL POSTFLIGHT DELL'INSTALLER
+		//SPOSTARE QUESTO NEL POSTFLIGHT DELL'INSTALLER!!!'
 		$resizedCreated = false; // this is a flag to determine if it's an upgrade and we need to copy files for 2.0 compatibility
 		
 		if (!file_exists(JPATH_SITE . self::$thumbsPath)) {
