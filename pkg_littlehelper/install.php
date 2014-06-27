@@ -21,11 +21,12 @@ class pkg_littlehelperInstallerScript
 	 */
 	function preflight( $type, $parent ) {
 		error_log('installing littlehelper '. $type);
-		if ( $type == 'update' ) {
+		if ( ($type == 'update') || ($type == 'install') ) {
 			error_log('updating littlehelper');
 			$oldRelease = $this->getParam('version');
 			$rel = $oldRelease . ' to ' . $this->release;
 			error_log($rel);
+			error_log('end reading version info');
 			if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 				// update the folder structure:
 				error_log('updating');
