@@ -26,7 +26,7 @@ class com_littlehelperInstallerScript
 			error_log($rel);
 			if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 				// update the folder structure:
-				error_log('updating')
+				error_log('updating');
 				$mparams = JComponentHelper::getParams( 'com_littlehelper' );
 				$params = $mparams->get('params');
 				if (empty($params->favicons_sourcepath)) {
