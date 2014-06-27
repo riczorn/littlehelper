@@ -105,6 +105,7 @@ class pkg_littlehelperInstallerScript
 			 * We can assume that any images present in the /images/icons folder now was uploaded
 			 * by the user during her pre-2.0 usage, and should be copied to source:
 			 */
+			 error_log("$sourcePath created, now copying files from the root");
 			
 			$files = scandir($source = JPATH_SITE . $imagesPath);
 			$destination = JPATH_SITE . $sourcePath;
@@ -116,6 +117,7 @@ class pkg_littlehelperInstallerScript
 				}
 			}
 			$application = JFactory::getApplication();
+			error_log(var_export($copiedFiles,true));
 			if ($copiedFiles) {
 				$application->enqueueMessage(sprintf("Little Helper update: %s files where copied to %s",$copiedFiles,$sourcePath));
 			}
