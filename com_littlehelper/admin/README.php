@@ -120,4 +120,8 @@ Version 2.0.0 (2013/10/2)
 	Folders are now created with 0755;
 	
 2.0.14 (2014/05/12)
-	Correct styles of the statusbar on Joomla 3 
+	Correct styles of the statusbar on Joomla 3
+	 
+2.0.16 (2014/06/27)
+	Added preflight for migration of 1.x versions
+	

@@ -20,10 +20,13 @@ class com_littlehelperInstallerScript
 	function preflight( $type, $parent ) {
 
 		if ( $type == 'update' ) {
+			error_log('updating littlehelper');
 			$oldRelease = $this->getParam('version');
 			$rel = $oldRelease . ' to ' . $this->release;
-			if ( version_compare( $oldRelease, '1.9.9', 'le' ) ) {
+			error_log($rel);
+			if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 				// update the folder structure:
+				error_log('updating')
 				$mparams = JComponentHelper::getParams( 'com_littlehelper' );
 				$params = $mparams->get('params');
 				if (empty($params->favicons_sourcepath)) {
@@ -33,7 +36,7 @@ class com_littlehelperInstallerScript
 				} else {
 					return $this->moveFolders( $params->favicons_sourcepath);
 				}
-			}
+			} else {error_log('already 2');}
 		}
 	}
 	
