@@ -6,9 +6,6 @@
  * @license    GNU/GPL v2
  */
 
-error_reporting(E_ALL);
-error_log('loading installer');
-
 defined('_JEXEC') or die;
 // http://docs.joomla.org/J2.5:Managing_Component_Updates_%28Script.php%29
 
@@ -29,34 +26,28 @@ class pkg_littlehelperInstallerScript
 			// let's see if littlehelper is already installed:
 			$manifest = JPATH_ADMINISTRATOR.'/components/com_littlehelper/littlehelper.xml';
 			if (file_exists($manifest)) {
-				error_log('manifest exists');
 				// the manifest contains the string:
 				// <version>1.8.6</version>
 				$manifestContents = file_get_contents($manifest);
 				$matches = array();
 				$version = preg_match('@<version>([0-9\.]+)</version>@',$manifestContents,$matches);
 				if (count($matches)>1) {
-					error_log("matches\n\n".var_export($matches,true));
 					$oldRelease = $matches[1];
 					error_log('Identified currently installed version: ' . $oldRelease);
 
 					if ( version_compare( $oldRelease, '1.9', '<' ) ) {
-						// update the folder structure:
-						error_log('updating');
 						return $this->moveFolders();
-					} else {error_log('already 2');}
+					} else {error_log('already version 2+');}
 
 
 				} else {
 					error_log("Could not find version in $manifest");
 					// still return true, this is not really mandatory!
-					
 				}
-				
+
 				// this fails to load... no idea why.
 				/*$reg = new JRegistry();
 				$reg->loadFile($manifest, 'xml');
-				error_log(var_export($reg,true));
 				error_log('found version2 '.$reg->get('extension.version'));
 				*/
 	
@@ -82,7 +73,7 @@ class pkg_littlehelperInstallerScript
 			return true;
 		} else {
 			$imagesPath = $params->favicons_sourcepath;
-			error_log('Images Path: ' . $imagesPath);
+			error_log('Images Path found: ' . $imagesPath);
 		}
 
 
@@ -91,8 +82,6 @@ class pkg_littlehelperInstallerScript
 		} 
 
 		$imagesPath = '/images/'.$imagesPath.'/';
-		error_log($imagesPath);
-		error_log(JPATH_SITE);
 		
 		$croppedPath = $imagesPath.'cropped/';
 		$resizedPath = $imagesPath.'resized/';
@@ -128,7 +117,7 @@ class pkg_littlehelperInstallerScript
 			}
 			$application = JFactory::getApplication();
 			if ($copiedFiles) {
-				$application->enqueueMessage(sprintf("%s files where copied to %s",$copiedFiles,$sourcePath));
+				$application->enqueueMessage(sprintf("Little Helper update: %s files where copied to %s",$copiedFiles,$sourcePath));
 			}
 		}
 	}

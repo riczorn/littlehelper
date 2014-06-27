@@ -7,7 +7,7 @@
   <authorUrl>http://www.fasterjoomla.com</authorUrl>
   <copyright>Riccardo Zorn 2013-2014</copyright>
   <license>GPL</license>
-	<version>2.0.18</version>
+	<version>2.0.19</version>
 	<description>COM_LITTLEHELPER_XML_DESC</description>
 
 	<files folder="site">
