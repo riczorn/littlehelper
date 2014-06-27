@@ -43,12 +43,20 @@ class pkg_littlehelperInstallerScript
 					error_log('Release to install: ' . $this->release);
 					
 
+					if ( version_compare( $oldRelease, '1.9', '<' ) ) {
+						// update the folder structure:
+						error_log('updating');
+						return $this->moveFolders( $params->favicons_sourcepath);
+						
+					} else {error_log('already 2');}
+
+
 				} else {
 					error_log("Could not find version in $manifest");
 					// still return true, this is not really mandatory!
-					return true;
+					
 				}
-
+				
 				// this fails to load... no idea why.
 				/*$reg = new JRegistry();
 				$reg->loadFile($manifest, 'xml');
@@ -60,30 +68,8 @@ class pkg_littlehelperInstallerScript
 				error_log('apparently a fresh installation, proceed');
 			}
 			return true;
-
-/* commented out */
-
-			$oldRelease = $this->getParam('version');
-			$rel = $oldRelease . ' to ' . $this->release;
-			error_log($rel);
-			error_log('end reading version info');
-			if ( version_compare( $oldRelease, '1.9', '<' ) ) {
-				// update the folder structure:
-				error_log('updating');
-				$mparams = JComponentHelper::getParams( 'com_littlehelper' );
-				$params = $mparams->get('params');
-				if (empty($params->favicons_sourcepath)) {
-					// no favicons path set, nothing to move!
-					error_log('favicons_sourcepath is not set, nothing to move');
-					return true;
-				} else {
-					return $this->moveFolders( $params->favicons_sourcepath);
-				}
-			} else {error_log('already 2');}
 		}
 	}
-	
-	private function 
 
 	/**
 	 * if basepath is not set or it doesn't exist, exit;
