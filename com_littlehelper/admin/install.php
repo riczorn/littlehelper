@@ -18,7 +18,7 @@ class com_littlehelperInstallerScript
 	 * here to copy the images to the new folders;
 	 */
 	function preflight( $type, $parent ) {
-
+		error_log('installing littlehelper '. $type);
 		if ( $type == 'update' ) {
 			error_log('updating littlehelper');
 			$oldRelease = $this->getParam('version');
