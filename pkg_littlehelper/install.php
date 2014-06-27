@@ -21,8 +21,23 @@ class pkg_littlehelperInstallerScript
 	 */
 	function preflight( $type, $parent ) {
 		error_log('installing littlehelper '. $type);
+		// interesting to note, in Joomla 2.5, with the extension already installed, 
+		// $type will be == 'install' and getParam() is undefined.
+		// hence more checks are run:
 		if ( ($type == 'update') || ($type == 'install') ) {
 			error_log('updating littlehelper');
+			// let's see if littlehelper is already installed:
+			$manifest = JPATH_ADMINISTRATOR.'components/com_littlehelper/littlehelper.xml';
+			if (file_exists($manifest) {
+				error_log('manifest exists');
+				$reg = JRegistry::getInstance();
+				$reg->loadFile($manifest);
+				error_log('found version '.$reg->get('version'));
+
+			} else {
+				error_log('apparently a fresh installation, proceed');
+			}
+			return true;
 			$oldRelease = $this->getParam('version');
 			$rel = $oldRelease . ' to ' . $this->release;
 			error_log($rel);
