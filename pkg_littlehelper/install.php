@@ -17,12 +17,11 @@ class pkg_littlehelperInstallerScript
 	 * here to copy the images to the new folders;
 	 */
 	function preflight( $type, $parent ) {
-		error_log('installing littlehelper '. $type);
 		// interesting to note, in Joomla 2.5, with the extension already installed, 
 		// $type will be == 'install' and getParam() is undefined.
 		// hence more checks are run:
 		if ( ($type == 'update') || ($type == 'install') ) {
-			error_log('updating littlehelper');
+			error_log('Updating LittleHelper '.$type);
 			// let's see if littlehelper is already installed:
 			$manifest = JPATH_ADMINISTRATOR.'/components/com_littlehelper/littlehelper.xml';
 			if (file_exists($manifest)) {
@@ -33,22 +32,22 @@ class pkg_littlehelperInstallerScript
 				$version = preg_match('@<version>([0-9\.]+)</version>@',$manifestContents,$matches);
 				if (count($matches)>1) {
 					$oldRelease = $matches[1];
-					error_log('Identified currently installed version: ' . $oldRelease);
+					error_log('  Identified currently installed version: ' . $oldRelease);
 
 					if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 						return $this->moveFolders();
-					} else {error_log('already version 2+');}
+					} else {error_log('  Already version 2+, nothing to do');}
 
 
 				} else {
-					error_log("Could not find version in $manifest");
+					error_log("  Could not find version in $manifest");
 					// still return true, this is not really mandatory!
 				}
 
 				// this fails to load... no idea why.
 				/*$reg = new JRegistry();
 				$reg->loadFile($manifest, 'xml');
-				error_log('found version2 '.$reg->get('extension.version'));
+				$oldRelease = $reg->get('extension.version');
 				*/
 	
 			} else {
@@ -60,7 +59,8 @@ class pkg_littlehelperInstallerScript
 
 	/**
 	 * if basepath is not set or it doesn't exist, exit;
-	 * else copy the images to the source folder (cannot move: the images could have been used elsewhere on the site)
+	 * else copy the images to the source folder (cannot move: the images could have 
+	 * been used elsewhere on the site)
 	 * @param unknown $basepath
 	 * @return boolean
 	 */
@@ -69,11 +69,10 @@ class pkg_littlehelperInstallerScript
 		$params = $mparams->get('params');
 		if (empty($params->favicons_sourcepath)) {
 			// no favicons path set, nothing to move!
-			error_log('favicons_sourcepath is not set, nothing to move');
+			error_log('  favicons_sourcepath is not set yet, nothing to move');
 			return true;
 		} else {
 			$imagesPath = $params->favicons_sourcepath;
-			// error_log('Images Path found: ' . $imagesPath);
 		}
 
 
@@ -105,7 +104,7 @@ class pkg_littlehelperInstallerScript
 			 * We can assume that any images present in the /images/icons folder now was uploaded
 			 * by the user during her pre-2.0 usage, and should be copied to source:
 			 */
-			 error_log("$sourcePath created, now copying files from the root");
+			 error_log("  $sourcePath created, now copying files from the root");
 			
 			$files = scandir($source = JPATH_SITE . $imagesPath);
 			$destination = JPATH_SITE . $sourcePath;
@@ -117,7 +116,7 @@ class pkg_littlehelperInstallerScript
 				}
 			}
 			$application = JFactory::getApplication();
-			error_log(var_export($copiedFiles,true));
+			
 			if ($copiedFiles) {
 				$application->enqueueMessage(sprintf("Little Helper update: %s files where copied to %s",$copiedFiles,$sourcePath));
 			}
