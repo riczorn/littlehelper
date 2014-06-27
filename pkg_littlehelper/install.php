@@ -34,17 +34,17 @@ class pkg_littlehelperInstallerScript
 				// <version>1.8.6</version>
 				$manifestContents = file_get_contents($manifest);
 				$matches = array();
-				$version = preg_match('@<version>([0-9\.]</version>@',$manifestContents,$matches);
+				$version = preg_match('@<version>([0-9\.]+)</version>@',$manifestContents,$matches);
 				if (count($matches)>0) {
 					error_log("matches\n\n".var_export($matches,true));
 				}
 
-				// this fails to load... have no idea why.
-				$reg = new JRegistry();
+				// this fails to load... no idea why.
+				/*$reg = new JRegistry();
 				$reg->loadFile($manifest, 'xml');
 				error_log(var_export($reg,true));
 				error_log('found version2 '.$reg->get('extension.version'));
-				
+				*/
 	
 			} else {
 				error_log('apparently a fresh installation, proceed');
