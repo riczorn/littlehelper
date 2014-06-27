@@ -90,7 +90,7 @@ class pkg_littlehelperInstallerScript
 			return true;
 		} 
 
-		$imagesPath = '/images/'.$imagesPath;
+		$imagesPath = '/images/'.$imagesPath.'/';
 		error_log($imagesPath);
 		error_log(JPATH_SITE);
 		
