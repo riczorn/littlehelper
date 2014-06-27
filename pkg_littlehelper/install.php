@@ -73,7 +73,7 @@ class pkg_littlehelperInstallerScript
 			return true;
 		} else {
 			$imagesPath = $params->favicons_sourcepath;
-			error_log('Images Path found: ' . $imagesPath);
+			// error_log('Images Path found: ' . $imagesPath);
 		}
 
 
