@@ -6,6 +6,7 @@
  * @license    GNU/GPL v2
  */
 
+error_reporting(E_ALL);
 
 defined('_JEXEC') or die;
 // http://docs.joomla.org/J2.5:Managing_Component_Updates_%28Script.php%29
