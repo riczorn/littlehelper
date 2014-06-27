@@ -128,7 +128,7 @@ class pkg_littlehelperInstallerScript
 			}
 			$application = JFactory::getApplication();
 			if ($copiedFiles) {
-				$application->enqueueMessage(sprintf("%s files where copied to %s",$copiedFiles,self::$sourcePath));
+				$application->enqueueMessage(sprintf("%s files where copied to %s",$copiedFiles,$sourcePath));
 			}
 		}
 	}
