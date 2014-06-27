@@ -31,7 +31,7 @@ class pkg_littlehelperInstallerScript
 			if (file_exists($manifest)) {
 				error_log('manifest exists');
 				$reg = new JRegistry();
-				$reg->loadFile($manifest);
+				$reg->loadFile($manifest, 'xml');
 				error_log(var_export($reg,true));
 				error_log('found version2 '.$reg->get('extension.version'));
 				$regExt = new JRegistry($reg->get('extension'));
