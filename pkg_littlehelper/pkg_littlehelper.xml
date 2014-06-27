@@ -21,7 +21,7 @@
 		<language tag="en-GB">en-GB/en-GB.pkg_littlehelper.sys.ini</language>
 		<language tag="it-IT">it-IT/it-IT.pkg_littlehelper.sys.ini</language>
 	</languages>		
-
+	<scriptfile>install.php</scriptfile>
     <updateservers>
         <server name="FasterJoomla.com Little Helper Update Site" type="collection" priority="1" >http://www.fasterjoomla.com/files/extensions/littlehelper.xml</server>
    </updateservers>
