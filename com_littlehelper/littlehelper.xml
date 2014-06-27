@@ -42,7 +42,7 @@
 			<folder>views</folder>
 		</files>
  	</administration>
- 	<scriptfile>install.php</scriptfile>
+ 	
 	<fields name="params" addpath="/administrator/components/com_littlehelper/elements" />
 	<updateservers>
 		<!-- Note: No spaces or linebreaks allowed between the server tags -->
