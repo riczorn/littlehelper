@@ -30,7 +30,7 @@ class pkg_littlehelperInstallerScript
 			$manifest = JPATH_ADMINISTRATOR.'/components/com_littlehelper/littlehelper.xml';
 			if (file_exists($manifest)) {
 				error_log('manifest exists');
-				$reg = JRegistry::getInstance();
+				$reg = new JRegistry();
 				$reg->loadFile($manifest);
 				error_log('found version '.$reg->get('version'));
 
