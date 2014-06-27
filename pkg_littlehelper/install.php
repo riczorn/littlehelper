@@ -7,11 +7,12 @@
  */
 
 error_reporting(E_ALL);
+error_log('loading installer');
 
 defined('_JEXEC') or die;
 // http://docs.joomla.org/J2.5:Managing_Component_Updates_%28Script.php%29
 
-class com_littlehelperInstallerScript
+class pkg_littlehelperInstallerScript
 {
 	/**
 	 * Littlehelper 1.x uses the folder /icons by default (or a user-set folder) to 
