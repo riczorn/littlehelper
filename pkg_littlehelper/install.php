@@ -35,8 +35,18 @@ class pkg_littlehelperInstallerScript
 				$manifestContents = file_get_contents($manifest);
 				$matches = array();
 				$version = preg_match('@<version>([0-9\.]+)</version>@',$manifestContents,$matches);
-				if (count($matches)>0) {
+				if (count($matches)>1) {
 					error_log("matches\n\n".var_export($matches,true));
+					$oldRelease = $matches[1];
+					error_log('Identified currently installed version: ' . $oldRelease);
+
+					error_log('Release to install: ' . $this->release);
+					
+
+				} else {
+					error_log("Could not find version in $manifest");
+					// still return true, this is not really mandatory!
+					return true;
 				}
 
 				// this fails to load... no idea why.
@@ -50,6 +60,9 @@ class pkg_littlehelperInstallerScript
 				error_log('apparently a fresh installation, proceed');
 			}
 			return true;
+
+/* commented out */
+
 			$oldRelease = $this->getParam('version');
 			$rel = $oldRelease . ' to ' . $this->release;
 			error_log($rel);
@@ -70,13 +83,27 @@ class pkg_littlehelperInstallerScript
 		}
 	}
 	
+	private function 
+
 	/**
 	 * if basepath is not set or it doesn't exist, exit;
 	 * else copy the images to the source folder (cannot move: the images could have been used elsewhere on the site)
 	 * @param unknown $basepath
 	 * @return boolean
 	 */
-	private function moveFolders($imagesPath) {
+	private function moveFolders() {
+		$mparams = JComponentHelper::getParams( 'com_littlehelper' );
+		$params = $mparams->get('params');
+		if (empty($params->favicons_sourcepath)) {
+			// no favicons path set, nothing to move!
+			error_log('favicons_sourcepath is not set, nothing to move');
+			return true;
+		} else {
+			$imagesPath = $params->favicons_sourcepath;
+			error_log('Images Path: ' . $imagesPath);
+		}
+
+
 		if (empty($imagesPath) || !file_exists(JPATH_SITE . $imagesPath)) {
 			return true;
 		}
