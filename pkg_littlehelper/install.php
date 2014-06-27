@@ -40,14 +40,10 @@ class pkg_littlehelperInstallerScript
 					$oldRelease = $matches[1];
 					error_log('Identified currently installed version: ' . $oldRelease);
 
-					error_log('Release to install: ' . $this->release);
-					
-
 					if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 						// update the folder structure:
 						error_log('updating');
-						return $this->moveFolders( $params->favicons_sourcepath);
-						
+						return $this->moveFolders();
 					} else {error_log('already 2');}
 
 
@@ -90,9 +86,13 @@ class pkg_littlehelperInstallerScript
 		}
 
 
-		if (empty($imagesPath) || !file_exists(JPATH_SITE . $imagesPath)) {
+		if (empty($imagesPath) || !file_exists(JPATH_SITE . '/images/'. $imagesPath)) {
 			return true;
-		}
+		} 
+
+		$imagesPath = '/images/'.$imagesPath;
+		error_log($imagesPath);
+		error_log(JPATH_SITE);
 		
 		$croppedPath = $imagesPath.'cropped/';
 		$resizedPath = $imagesPath.'resized/';
