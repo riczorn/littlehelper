@@ -4,7 +4,7 @@ die();
  * @package     Little Helper
  * @copyright   Copyright (C) 2013-2014 Riccardo Zorn. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
- * @author      Riccardo Zorn <support@tmg.it> - http://www.fasterjoomla.com/littlehelper
+ * @author      Riccardo Zorn <support@fasterjoomla.com> - http://www.fasterjoomla.com/littlehelper
  */
 
 ?>

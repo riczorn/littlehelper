@@ -60,45 +60,19 @@ class LittleHelperHelperFavicon
 		
 		if (!self::$imagesPathIsSet) return; // otherwise we'd create folders under /images !
 		
-		//@TODO: SPOSTARE NEL POSTFLIGHT DELL'INSTALLER
-		//SPOSTARE QUESTO NEL POSTFLIGHT DELL'INSTALLER!!!'
-		$resizedCreated = false; // this is a flag to determine if it's an upgrade and we need to copy files for 2.0 compatibility
+		if (!file_exists(JPATH_SITE . self::$imagesPath)) {
+			mkdir(JPATH_SITE . self::$imagesPath,0755);
+		}
 		
 		if (!file_exists(JPATH_SITE . self::$thumbsPath)) {
 			mkdir(JPATH_SITE . self::$thumbsPath,0755);
-			$resizedCreated = true;
 		}
 		
 		if (!file_exists(JPATH_SITE . self::$croppedPath)) {
 			mkdir(JPATH_SITE . self::$croppedPath,0755);
-			$resizedCreated = true;
 		}
 		if (!file_exists(JPATH_SITE . self::$sourcePath)) {
 			mkdir(JPATH_SITE . self::$sourcePath,0755);
-			/* Up until version 1.8.5 the inner workings were simpler, with uploaded images in the
-			 * /images/icons and resized images in /images/resized.
-			* With the advent of version 2.0 and its fancy upload functionality, a new folder is necessary:
-			* /images/icons/source where users upload the files.
-			* We can assume that any images present in the /images/icons folder now was uploaded
-			* by the user during her pre-2.0 usage, and should be copied to source:
-			*/
-			if (!$resizedCreated) {
-			// we can assume that if $resizedCreated, the /images/icons was totally
-				// unrelated to littlehelper or favicons;
-				// otherwise we make a copy:
-				$files = scandir($source = JPATH_SITE . self::$imagesPath);
-				$destination = JPATH_SITE . self::$sourcePath;
-				$copiedFiles = 0;
-				foreach ($files as $file) {
-					if (is_file($source.$file))
-						if (copy($source.$file, $destination.$file)) {
-						$copiedFiles++;
-					}
-				}
-				if ($copiedFiles) {
-				JError::raiseNotice(100,sprintf("%s files where copied to %s",$copiedFiles,self::$sourcePath));
-				}
-			}
 		}		
 	}	
 	

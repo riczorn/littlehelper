@@ -1,16 +1,13 @@
 <?php
 /**
- * @version		$Id: helper.php 20541 2011-02-03 21:12:06Z dextercowley $
- * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package    LittleHelper
+ * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
+ * @author     Created on 22-Dec-2011
+ * @license    GNU/GPL v2
  */
 
 defined('_JEXEC') or die;
 
-/**
- * @package		Joomla.Administrator
- * @subpackage	mod_littlehelper
- */
 abstract class modLittleHelperHelper
 {
 	

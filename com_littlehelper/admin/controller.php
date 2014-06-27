@@ -2,12 +2,11 @@
 /**
  * Main controller, will just display the first page; all others are handled by 
  * subcontrollers in the controllers directory. 
- * 
- * @version SVN: $Id$
+ *
  * @package    LittleHelper
  * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
  * @author     Created on 22-Dec-2011
- * @license    GNU/GPL
+ * @license    GNU/GPL v2
  */
 
 // No direct access
