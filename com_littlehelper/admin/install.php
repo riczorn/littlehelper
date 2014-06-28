@@ -82,19 +82,14 @@ class pkg_littlehelperInstallerScript
 
 		$imagesPath = '/images/'.$imagesPath.'/';
 		
-		$croppedPath = $imagesPath.'cropped/';
-		$resizedPath = $imagesPath.'resized/';
+		$thumbsPath = $imagesPath.'resized/';
 		$sourcePath = $imagesPath.'source/';
 		
-		if (!file_exists(JPATH_SITE . $resizedPath)) {
-			mkdir(JPATH_SITE . $resizedPath,0755);
+		if (!file_exists(JPATH_SITE . $thumbsPath)) {
+			mkdir(JPATH_SITE . $thumbsPath,0755);
 			$resizedCreated = true; 
 		}
 				
-		if (!file_exists(JPATH_SITE . $croppedPath)) {
-			mkdir(JPATH_SITE . $croppedPath,0755);
-		}
-
 		if (!file_exists(JPATH_SITE . $sourcePath)) {
 			mkdir(JPATH_SITE . $sourcePath,0755);
 			/* Up until version 1.8.6 the inner workings were simpler, with uploaded images in the

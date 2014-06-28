@@ -96,12 +96,15 @@ class LittleHelperViewFavicon extends JViewLegacy
 		$link = JRoute::_(JURI::base().$link,false);
 		// behaviour modal is already available
 		?>
+		
+	
 		<form class="uploadform" action="<?php echo $link;?>"
 		 		 id="uploadForm" name="uploadForm" method="post" 
 		 		  enctype="multipart/form-data">
 		 			<input type="hidden" value="<?php echo $fiPath; ?>" name="folder" />
 		 			<fieldset id="uploadform" >
 		 				<legend><?php echo $this->config->get('upload_maxsize')=='0' ? JText::_('COM_MEDIA_UPLOAD_FILES_NOLIMIT') : JText::sprintf('COM_MEDIA_UPLOAD_FILES', $this->config->get('upload_maxsize')); ?></legend>
+		 				<div class='dropAltHolder'><?php echo JText::_("COM_LITTLEHELPER_FAVICONS_DROPHERE"); ?></div>
 		 					<input type="file" id="upload-file" name="Filedata[]" multiple />
 		 					<input type="submit" id="upload-submit" class="fancybutton" value="<?php echo JText::_('COM_MEDIA_START_UPLOAD'); ?>"/>
 		 				<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_littlehelper&task=favicon.clearResized'); ?>" />

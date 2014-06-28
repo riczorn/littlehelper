@@ -1,4 +1,4 @@
-/*!
+/**
  * jQuery rixxCropper
  * http://fasterjoomla.com/
  *
@@ -29,6 +29,7 @@
 				previewContainer:'#preview-pane .preview-container',
 				previewContainerImage:'#preview-pane .preview-container img',
 				jCropHolder:'.jcrop-holder', 		// the outer container JCrop dynamically creates
+				jDropAltHolder:'.dropAltHolder', 		// the outer container JCrop dynamically creates
 				
 				// options to pass on to JCrop
 				cropOptions: {
@@ -69,6 +70,7 @@
 			pcnt:null,
 			pimg:null,
 			holder:null,		// drop target
+			holder2:null,		// drop alternative target
 			pasteCatcher:null,	// alternative paste dropbox for browsers that don't support pasting i.e. FF
 		},
 
@@ -134,7 +136,16 @@
 				// Move the preview into the jcrop container for css positioning
 				me.elems.preview.appendTo(me.jcrop_api.ui.holder);
 				me.elems.pcnt = $(me.settings.previewContainer);
-				me.loadDrop();
+				
+				me.elems.holder = $(me.settings.jCropHolder).get(0);
+				me.loadDrop(me.elems.holder);
+				
+				// also load a drop handler in the toolbox if appropriate;
+				me.elems.holder2 = $(me.settings.jDropAltHolder).get(0);
+				
+				if (typeof me.elems.holder2 == "object") {
+					me.loadDrop(me.elems.holder2);
+				}				
 				
 				// Now run any user-defined callbacks;
 				if (me.settings.jCropLoaded)
@@ -157,11 +168,11 @@
 			var rx = me.xsize / c.w;
 			var ry = me.ysize / c.h;
 			me.elems.pimg.css({
-			width: Math.round(rx * me.boundx) + 'px',
-			height: Math.round(ry * me.boundy) + 'px',
-			marginLeft: '-' + Math.round(rx * c.x) + 'px',
-			marginTop: '-' + Math.round(ry * c.y) + 'px'
-			});
+				width: Math.round(rx * me.boundx) + 'px',
+				height: Math.round(ry * me.boundy) + 'px',
+				marginLeft: '-' + Math.round(rx * c.x) + 'px',
+				marginTop: '-' + Math.round(ry * c.y) + 'px'
+				});
 			me.imageData = c;
 		}
 		},
@@ -171,11 +182,11 @@
 		*/
 		releaseSelection: function() {
 			me.elems.pimg.css({
-			width: Math.round(me.xsize) + 'px',
-			height: Math.round(me.ysize) + 'px',
-			marginLeft: '0px',
-			marginTop: '0px'
-			});
+				width: Math.round(me.xsize) + 'px',
+				height: Math.round(me.ysize) + 'px',
+				marginLeft: '0px',
+				marginTop: '0px'
+				});
 
 			me.imageData = {
 				x:0,y:0,
@@ -209,7 +220,7 @@
 			reader.readAsDataURL(file);
 			
 		}  else {
-			me.elems.holder.innerHTML += '<p>Uploaded ' + file.name + ' ' + (file.size ? (file.size/1024|0) + 'K' : '');
+			me.elems.holder2.innerHTML += '<p>Uploaded ' + file.name + ' ' + (file.size ? (file.size/1024|0) + 'K' : '');
 			console.log('error: the browser does not support file drop.');
 		}
 		},
@@ -271,14 +282,11 @@
 			/**
 			* Drop: Initialize the Drop functionality
 			*/
-			loadDrop:function(){
+			loadDrop:function(holder){
 				/*
 				* makes use of the brilliant initialization script from https://github.com/remy/html5demos
 				*/
 				if (!me.settings.enableDrop) return;
-
-				me.elems.holder = $(me.settings.jCropHolder).get(0);
-					
 					me.dropper.tests = {
 					filereader: typeof FileReader != 'undefined',
 					dnd: 'draggable' in document.createElement('span'),
@@ -293,18 +301,36 @@
 
 					progress = document.getElementById(me.settings.progressId);
 					fileupload = document.getElementById(me.settings.progressFile);
-					me.elems.holder.addEventListener('drop', function(event) {
+					holder.addEventListener('drop', function(event) {
 						event.preventDefault();
 						me.readfiles(event.dataTransfer.files);
-					}, false);
-					me.elems.holder.addEventListener('dragover', function(event) {
-						event.preventDefault();},false);
-			},
+						if (me.settings.fileDropped)
+						{
+							me.settings.fileDropped();
+						}
 
-				/**
-				* Paste data into canvas; 
-				*/
-				loadPaste: function () {
+					}, false);
+					
+					holder.addEventListener('dragover', function(event) {
+						holder.addClass('over');
+						event.preventDefault();
+					}, false);
+					
+					// this is not working reliably
+//					holder.addEventListener('dragenter', function(event) {
+//						holder.addClass('over');
+//					}, false);
+//					
+//					holder.addEventListener('dragleave', function(event) {
+//						holder.removeClass('over');
+//					}, false);
+					
+					},
+
+			/**
+			* Paste data into canvas; 
+			*/
+			loadPaste: function () {
 				/*
 				* References:
 				* http://joelb.me/blog/2011/code-snippet-accessing-clipboard-images-with-javascript/

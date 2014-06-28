@@ -21,7 +21,6 @@ class LittleHelperHelperFavicon
 	public static $imagesPath = "";
 	public static $thumbsPath = "";
 	public static $sourcePath = "";
-	public static $croppedPath = "";
 	public static $templatePath = "";
 	public static $templatePathAdmin = "";
 	public static $imagesPathIsSet = false;
@@ -44,7 +43,6 @@ class LittleHelperHelperFavicon
 		self::$params = $params;
 		$basepath = "/images/".$params->favicons_sourcepath.'/';
 		self::$imagesPath = $basepath;
-		self::$croppedPath = $basepath.'cropped/';
 		self::$thumbsPath = $basepath.'resized/';
 		self::$sourcePath = $basepath.'source/';
 		
@@ -68,12 +66,17 @@ class LittleHelperHelperFavicon
 			mkdir(JPATH_SITE . self::$thumbsPath,0755);
 		}
 		
-		if (!file_exists(JPATH_SITE . self::$croppedPath)) {
-			mkdir(JPATH_SITE . self::$croppedPath,0755);
-		}
 		if (!file_exists(JPATH_SITE . self::$sourcePath)) {
 			mkdir(JPATH_SITE . self::$sourcePath,0755);
-		}		
+		}	
+		// let's see if there are any images in the source folder, just to be on the safe side:
+		jimport('joomla.filesystem.folder');
+		$files = JFolder::files(JPATH_SITE.self::$sourcePath,'.',false,false,array('^.+','~$','.html$'));
+		if (!count($files)) {
+			// no images, copy a sample there:
+			copy(JPATH_ADMINISTRATOR.'/components/com_littlehelper/assets/images/fasterjoomla.png',JPATH_SITE . self::$sourcePath.'/sample.png');
+			JError::raiseWarning(1040,JText::_("COM_LITTLEHELPER_FILE_ERROR_COPIED_SAMPLE"));
+		}
 	}	
 	
 	/**
@@ -86,7 +89,7 @@ class LittleHelperHelperFavicon
 		if (!self::$imagesPathIsSet)
 			return array();
 		$images = array();
-		$basepath = self::$croppedPath;
+		$basepath = self::$thumbsPath;
 		jimport('joomla.filesystem.folder');
 		$files = JFolder::files(JPATH_SITE.$basepath,'.',false,false);
 		// $files could be empty, but findSizeBestMatches will add an original if necessary
@@ -161,7 +164,7 @@ class LittleHelperHelperFavicon
 	 */
 	public static function getImageInfo($imagePath, $image) {
 		if (!file_exists(JPATH_SITE.$imagePath.$image)) {
-			JError::raiseWarning(100, JText::_("COM_LITTLEHELPER_FILE_ERROR_MISSING_SOURCE") . $imagePath.$image);
+			//JError::raiseWarning(100, JText::_("COM_LITTLEHELPER_FILE_ERROR_MISSING_SOURCE") . $imagePath.$image);
 			error_log("COM_LITTLEHELPER_FILE_ERROR_MISSING_SOURCE:" . $imagePath.$image);
 			return false;
 		}

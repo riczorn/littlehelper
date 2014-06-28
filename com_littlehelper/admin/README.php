@@ -54,19 +54,14 @@ Version 2.0.0 (2013/10/2)
 		/images/icons/source	where uploaded and uncut files are stored
 			Any images in the /images/icons, should images/icons/source 
 			not exist, are copied to images/icons/source.
-		/images/icons/cropped	where temporary selections are stored; these are 
-			generated as the user chooses crop regions;
-			at least one must be filled in automatically during upload.
-		/images/icons/resized	still contains the final resized images
+		/images/icons/resized	contains the final resized images
+			and cropped selections 
 			Do not place any files here, the contents will be overwritten
 
 	2. Scenarios.
 		2.a. No icons basepath set: shows button "set default path";
 		2.b. Icons basepath set: all folders are created; go to 3;
-		2.c. Icons present in /cropped: those are used for generating resized images; 
-			go to 3;
-		2.d. Icons NOT present in /cropped: the first in /source is used; go to 3;
-
+		
 	3. Manage (Crop/Upload)
 		3.   Loads with the largest cropped image available OR with the latest uploaded;
 		Screen:

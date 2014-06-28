@@ -364,7 +364,7 @@ div#step1 fieldset {
 	border-radius:5px;box-shadow:0 1px 0 #F1F1F1 inset;
 	text-shadow:0 1px 0 #FFFFFF;border-style:solid; border-width:1px;
 }
-div.chosenImages ul {list-style-type:none;display:block;padding:0;width:75%}
+div.chosenImages ul {list-style-type:none;display:block;padding:0;}
 div.chosenImages ul li {
 	display:inline-block;
 	text-align:center;
@@ -372,9 +372,14 @@ div.chosenImages ul li {
 	padding:4px;margin:6px;
 	box-shadow:2px 2px 2px #E0E0E0;
 	border-radius:0 15px;}
-div.chosenImages div.chktransp {float:right;width:20%; padding:10px; 
+div.chktransp.box {float:right;width:20%; padding:10px; 
 	background:url(../images/res/top_eq.png) scroll 50% 0% no-repeat white;
 }
+
+.sa_favicon_main {
+	width:75%;
+}
+
 /*img.thumb {max-width:100px;max-height:100px;}*/		
 input#upload-file {clear:both;}
 input#upload-submit {
@@ -445,3 +450,8 @@ div#gallery > img {
 	max-width:100px;max-height:100px;cursor:pointer;
 }
 div#gallery > img:hover {box-shadow:2px 2px 5px rgba(50,50,50,0.4);}
+
+.smaller {
+	font-size:80%;
+	font-style:oblique;
+}

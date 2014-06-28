@@ -8,7 +8,9 @@
   A better method for styling can be seen below with .jcrop-light
   (Add a class to the holder and style elements for that extended class)
 */
-.jcrop-holder {
+
+.jcrop-holder,
+.dropAltHolder {
   direction: ltr;
   text-align: left;
   /* IE10 touch compatibility */

@@ -35,10 +35,48 @@ $document->addStyleSheet($assetDir . "css/jquery.rixxcropper.css");
 $document->addScriptDeclaration(
 		$src = file_get_contents(JPATH_SITE . $assetDir . "js/favicon_inlined.js")
 	);
-error_log(JPATH_SITE . $assetDir . "js/favicon_inlined.js");
+
+if (!empty($this->params->favicons_sourcepath))
+	$fiPath = $this->params->favicons_sourcepath . "/source";
+else
+	$fiPath = null;
 
 
 ?>
+
+<?php 	 
+// toolbox
+if (!empty($fiPath)) { 
+
+	echo "
+		<div class='chktransp box'>
+		<h3>".JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_BOX_TITLE")."</h3> <br>";
+	
+	
+	echo $this->getUploadForm($fiPath);
+		
+	if (!empty($this->images)) {
+		echo "
+			<a href='javascript:changeBackground();' class='fancybutton testtransp'>".JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_TEST_TRANSPARENCY")."</a>
+			<br>";
+		
+		echo '<a href="index.php?option=com_littlehelper&task=favicon.publish" class="fancybutton save">'. JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_SAVE")."</a>";
+		/**
+		 * Here we propose the markup and we have one button to save it.
+		 * The button enables the plugin if necessary, and saves its parameters.
+		 * a second button takes to the plugin administration to disable it.
+		 * The params are saved to the plugin as getting them from the component would be slower.
+		 * 7
+		 * The following buttons are now in the toolbar:
+		 */
+		// echo "<a href='index.php?option=com_littlehelper&task=favicon.enablePlugin' class='fancybutton enableplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_ENABLE")."</a>";
+		// echo "<a href='index.php?option=com_littlehelper&task=favicon.disablePlugin' class='fancybutton disableplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_DISABLE")."</a>";
+		// echo "<a href='index.php?option=com_plugins&view=plugins&filter_search=Little+Helper' class='fancybutton manageplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_MANAGE")."</a>";
+	}
+	echo "</div>";
+} 
+?>
+
 <div class='sa_favicon_main'>
 	<h3 class="step"><?php echo JText::_("COM_LITTLEHELPER_FAVICON_TITLE_GALLERY"); ?></h3>
 	<div id="gallery">
@@ -98,10 +136,6 @@ error_log(JPATH_SITE . $assetDir . "js/favicon_inlined.js");
 	<div id="step1">
 		<div class="folder">
 	 <?php 
-	 if (!empty($this->params->favicons_sourcepath))
-	 	$fiPath = $this->params->favicons_sourcepath . "/source";
-	 else
-	 	$fiPath = null;
 	 if (empty($fiPath)) {
 		echo "<span class='warn'>";
 	 	echo JText::_("COM_LITTLEHELPER_FAVICONS_NO_SOURCE_PATH");
@@ -111,66 +145,47 @@ error_log(JPATH_SITE . $assetDir . "js/favicon_inlined.js");
 			
 			echo "<div class='chosenImages' ><div class='topList'>";
 			
-			echo "
-				<div class='chktransp box'>
-				<h3>".JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_BOX_TITLE")."</h3> <br>";
-			echo $this->getUploadForm($fiPath);
 			
-		if (!empty($this->images)) {
-			
-			echo "
-				<a href='javascript:changeBackground();' class='fancybutton testtransp'>".JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_TEST_TRANSPARENCY")."</a>
-				<br>";
-
-		echo '<a href="index.php?option=com_littlehelper&task=favicon.publish" class="fancybutton save">'. JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_SAVE")."</a>";
-		/**
-		 * Here we propose the markup and we have one button to save it.
-		 * The button enables the plugin if necessary, and saves its parameters.
-		 * a second button takes to the plugin administration to disable it.
-		 * The params are saved to the plugin as getting them from the component would be slower.
-		 * 7
-		 * The following buttons are now in the toolbar:
-		 */
-			// echo "<a href='index.php?option=com_littlehelper&task=favicon.enablePlugin' class='fancybutton enableplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_ENABLE")."</a>";
-			// echo "<a href='index.php?option=com_littlehelper&task=favicon.disablePlugin' class='fancybutton disableplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_DISABLE")."</a>";
-			// echo "<a href='index.php?option=com_plugins&view=plugins&filter_search=Little+Helper' class='fancybutton manageplugin'>".JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_MANAGE")."</a>";
-		
-			echo "</div>";
 			if (!empty($this->images)) {
-					
-				echo "<ul id='chosenImages'>";
-				$basepath = ltrim(dirname(JUri::base(true)),"/") ;
 				
-				foreach ($this->images as $image) {	
-					if (empty($image->name) || empty($image->path)) continue;
-					$resizedText = $image->resized?JText::_("COM_LITTLEHELPER_FAVICON_RESIZED"):"<i>".JText::_("COM_LITTLEHELPER_FAVICON_ORIGINAL")."</i>";	
-					echo sprintf("
-						<li>%s<br><img src='%s%s%s' class='thumb %s' /><br>
-							<span class='size'>%sx%s</span><br>
-							<span class='notes'>%s</span>
-							</li>",$image->description,
-								$basepath, $image->path , $image->name."?rand=". rand(120120,990390),
-								$image->size,
-								$image->width, $image->height,
-								$resizedText);
+			
+				if (!empty($this->images)) {
+						
+					echo "<ul id='chosenImages'>";
+					$basepath = ltrim(dirname(JUri::base(true)),"/") ;
+					
+					foreach ($this->images as $image) {	
+						if (empty($image->name) || empty($image->path)) continue;
+						$resizedText = $image->resized?JText::_("COM_LITTLEHELPER_FAVICON_RESIZED"):"<i>".JText::_("COM_LITTLEHELPER_FAVICON_ORIGINAL")."</i>";	
+						echo sprintf("
+							<li>%s<br><img src='%s%s%s' class='thumb %s' /><br>
+								<span class='size'>%sx%s</span><br>
+								<span class='notes'>%s</span>
+								</li>",$image->description,
+									$basepath, $image->path , $image->name."?rand=". rand(120120,990390),
+									$image->size,
+									$image->width, $image->height,
+									$resizedText);
+					}
+					echo "</ul>";
 				}
-				echo "</ul>";
+				echo "</div>";
+			
+			
+				//echo "<span class='warn'>".JText::_("COM_LITTLEHELPER_FAVICON_QUALITY_NOTICE")."</span></div>";
+			} else {
+				echo "</div></div>";
 			}
-			echo "</div>";
-			
-			
-			//echo "<span class='warn'>".JText::_("COM_LITTLEHELPER_FAVICON_QUALITY_NOTICE")."</span></div>";
-		} else {
-			echo "</div></div>";
-		}
- 	?>
- 	</div>
-	</div>
-	<?php 
- } // here ends the if (empty($fiPath)) {...} else { 
+	 	?>
+	 	</div>
+		</div>
+		<?php 
+	 } // here ends the if (empty($fiPath)) {...} else { 
  ?>
  
 </div>
+
+
 <form
 	action="<?php echo JRoute::_('index.php?option=com_littlehelper'); ?>"
 	method="post" name="adminForm" id="adminForm">

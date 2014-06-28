@@ -20,7 +20,6 @@
 .jcrop-holder #preview-pane>div {
 	display:inline-block;
 }
-xxx.jcrop-holder {width:50%;max-width:50%;}
 
 #dcrop {display:none;
 	min-height:230px;}
@@ -63,6 +62,12 @@ a.button {
 	background:linear-gradient(#FFFFCC,#D0D0D0);
 }
 a:hover {text-decoration:none;}
+
+.jcrop-holder {
+    min-height: 144px;
+    min-width: 144px;    
+}
+
 .rixxmessage {
 	z-index:100000;
 	display:none;
@@ -89,4 +94,25 @@ a:hover {text-decoration:none;}
 }
 .rixxmessage > div img {
 	max-width:100%;
+}
+
+.dropAltHolder {
+	padding:15px 10px;
+	font-style:oblique;
+	background-color:#CFCFCF;
+	text-shadow:none;
+	border-radius:5px;
+	border:1px solid #AAAAAA;
+	margin-bottom:6px;
+}
+
+.dropAltHolder.over {
+	background-color:#4285f4;
+	color:white;
+	/*animation:0.67s ease-in-out 0s normal none infinite pulsate;*/
+	transition:all 0.6s ease;
+}
+
+legend {
+	margin-bottom:0;
 }

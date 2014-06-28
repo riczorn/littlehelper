@@ -95,7 +95,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 	/**
 	 * This is sent from the favicon view when a user saves an image or a crop:
 	 * if it contains an image, the image is uploaded to "images/icons/source"
-	 * if a crop area is set, a cropped version is saved to images/icons/cropped;
+	 * if a crop area is set, a cropped version is saved to images/icons/resized;
 	 * then the resized images are deleted.
 	 * @param unknown_type $cachable
 	 * @param unknown_type $urlparams
@@ -319,8 +319,14 @@ class LittleHelperControllerFavicon extends JControllerForm
 		
 		$cropped = LittleHelperHelperFavicon::createThumb(
 				$targetSize,
-				LittleHelperHelperFavicon::$croppedPath,
+				LittleHelperHelperFavicon::$thumbsPath,
 				$x1,$y1,$w,$h,$scaleWidth);
+		
+		if ($targetBelow) {
+			// recreate the favicons
+			LittleHelperHelperFavicon::getImages();
+		}
+		
 		// we can assume the $imageFile exists and is an image; this was all tested in saveImage!
 		return $cropped->path . $cropped->name;
 	}
@@ -336,7 +342,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 		foreach(LittleHelperHelperFavicon::$favicons as $key=>$favicon) {
 			error_log('key '.$key . "; size:$size; ");
 			if ($key<=$size) {
-				if (file_exists($file = JPATH_SITE . LittleHelperHelperFavicon::$croppedPath . $key . "x" . $key . ".png")) {
+				if (file_exists($file = JPATH_SITE . LittleHelperHelperFavicon::$thumbsPath . $key . "x" . $key . ".png")) {
 					if ($file==$excludedFile) {
 						error_log('File '.$file.' not deleted as it\'s the original to crop');
 					} else {

@@ -27,6 +27,7 @@ var currColor = 1;
 		 */
 		function switchImage(elem) {
 			cropper.load(elem.src);
+			jQuery('#gallery').slideUp("fast");
 			jQuery('#dcrop').slideDown("slow");
 		}
 		
@@ -142,9 +143,11 @@ var currColor = 1;
 						console.log("Length not computable.");
 					}
 				},
-				
+				fileDropped: function() {
+					jQuery('#dcrop').slideDown("slow");
+				},
 				jCropLoaded: function() {
-					console.log('jCrop was loaded');
+					//console.log('jCrop was loaded');
 				},
 
 			});

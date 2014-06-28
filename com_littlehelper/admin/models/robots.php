@@ -32,7 +32,8 @@ class LittleHelperModelRobots extends JModelLegacy {
 		if (file_exists($filename)) {
 			$robotstxt = file_get_contents($filename);
 		} else {
-			$filename = dirname(dirname(__FILE__))."/assets/txt/robots.txt";
+			$filename = JPATH_SITE."/robots.txt.dist";
+			error_log($filename);
 			if (file_exists($filename)) {
 				$robotstxt = file_get_contents($filename);
 			} else {
