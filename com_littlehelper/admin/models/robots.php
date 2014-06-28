@@ -34,6 +34,7 @@ class LittleHelperModelRobots extends JModelLegacy {
 		} else {
 			$filename = JPATH_SITE."/robots.txt.dist";
 			error_log($filename);
+			JError::raiseWarning(1013,JText::_("COM_LITTLEHELPER_ROBOTS_NOROBOTS")); 
 			if (file_exists($filename)) {
 				$robotstxt = file_get_contents($filename);
 			} else {

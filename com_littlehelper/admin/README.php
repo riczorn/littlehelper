@@ -117,6 +117,13 @@ Version 2.0.0 (2013/10/2)
 2.0.14 (2014/05/12)
 	Correct styles of the statusbar on Joomla 3
 	 
-2.0.16 (2014/06/27)
+2.0.16 (2014/06/20)
 	Added preflight for migration of 1.x versions
-	
+
+2.1.1 (2014/06/28)
+	Copy a sample image to the newly created folder source
+	Fix size of jCrop
+	Add extra upload field in the toolbox, moved toolbox to the right;
+	Removed cropped folder (just using resized now)
+	Fixed robots dist
+
