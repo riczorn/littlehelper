@@ -13,4 +13,5 @@ webpage="http://www.fasterjoomla.com/en/extensions/joomla-little-helper"
 download="http://www.fasterjoomla.com/en/download/little-helper"
 jed="http://extensions.joomla.org/extensions/administration/admin-performance/24016"
 
-VERSION=2.0.14
+VERSION=2.1.2
+VERSION=2.1.3

@@ -27,7 +27,7 @@
 <head>
 	<meta charset="utf-8" />
     <base href="http://www.fasterjoomla.com/" />
-    <title>Little Helper 2.0.14</title>
+    <title>Little Helper 2.1.2</title>
 	<style>
 		body {
 			background:linear-gradient(120deg, #EBF1F6 0%, #ABD3EE 50%, #89C3EB 51%, #D5EBFB 100%) no-repeat scroll 0 0 #D5EBFB;
@@ -57,7 +57,7 @@
 	</style>
 </head>
 <body>
-<h1>Current Version: 2.0.14</h1>
+<h1>Current Version: 2.1.2</h1>
 <p><a href="http://www.fasterjoomla.com/en/download/little-helper" target="_blank">Download</a> ★ <a href="http://www.fasterjoomla.com/en/extensions/joomla-little-helper" target="_blank">Docs</a>
 <h2>Info on Little Helper</h2>
 <p>
@@ -65,10 +65,10 @@
 </p>
 <h2>News from <a href="http://www.fasterjoomla.com/" target="_blank">FasterJoomla!</a></h2>
 <p>
-24/05/2014 <a href="http://www.fasterjoomla.com/en/extensions/stripe-joomla-payment-plugin" target="_blank">Stripe Payment plugin</a> released<br>28/05/2014 <a href="http://www.fasterjoomla.com/en/extensions/spritz-your-text-with-faster-content" target="_blank">Faster Content with Spritz</a> released<br>
+28/06/2014 <a href="http://www.fasterjoomla.com/extensions/joomla-little-helper/97-apple-touch-icons-and-favicons" target="_blank">Little helper 2.1.2 release</a> with <b>favicon Crop </b>function and fixes for J3<br>24/06/2014 <a href="http://www.fasterjoomla.com/extensions/faster-translate-quick-access-to-falang-translations" target="_blank">FasterTranslate</a> for Falang released<br>18/06/2014 <a href="http://www.fasterjoomla.com/extensions/email2contact" target="_blank">Email2Contact</a> released<br>
 </p>
 
 <div class="fasterlogo">
 <a href="http://extensions.joomla.org/extensions/administration/admin-performance/24016" target="_blank">Show us your ♥: Review on the JED</a><br>
-<a href="http://www.fasterjoomla.com/" target="_blank"><img src="http://www.fasterjoomla.com/images/fasterjoomla/headerlogo.png" style="max-width:230px" /></a></div>
+<a href="http://www.fasterjoomla.com/" target="_blank"><img src="http://www.fasterjoomla.com/images/fasterjoomla/headerlogo.png" style="max-width:225px" /></a></div>
 </body></html>

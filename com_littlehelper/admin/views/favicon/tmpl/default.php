@@ -81,7 +81,6 @@ if (!empty($fiPath)) {
 	<h3 class="step"><?php echo JText::_("COM_LITTLEHELPER_FAVICON_TITLE_GALLERY"); ?></h3>
 	<div id="gallery">
 		<?php 
-			
 			$files = scandir($source = JPATH_SITE . LittleHelperHelperFavicon::$sourcePath);
 			foreach ($files as $file) {
 				if (is_file($source.$file)) {

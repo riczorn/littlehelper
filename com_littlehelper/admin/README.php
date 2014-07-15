@@ -1,4 +1,5 @@
 <?php
+defined('_JEXEC') or die();
 die();
 /**
  * @package     Little Helper
@@ -126,4 +127,10 @@ Version 2.0.0 (2013/10/2)
 	Add extra upload field in the toolbox, moved toolbox to the right;
 	Removed cropped folder (just using resized now)
 	Fixed robots dist
+
+2.1.2 (2014/06/28) 
+	First v.2 released
+	
+2.1.3 (2014/07/12) 
+	Fixed some notices and errors
 
