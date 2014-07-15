@@ -49,7 +49,24 @@ else
 
 ?>
 
+<form
+	action="<?php echo JRoute::_('index.php?option=com_littlehelper'); ?>"
+	method="post" name="adminForm" id="adminForm">
+	<input type="hidden" name="task" value="" />
+</form>
+
 <?php 	 
+
+if (empty($fiPath)) {
+	echo "<span class='warn'>";
+	echo JText::_("COM_LITTLEHELPER_FAVICONS_NO_SOURCE_PATH");
+	echo "</span>";
+	echo "<br><a href='index.php?option=com_littlehelper&task=favicon.createDefault' class='fancybutton foldercreate'>".JText::_("COM_LITTLEHELPER_FAVICONS_CREATE")."</a>";
+	return;
+}
+
+
+
 // toolbox
 if (!empty($fiPath)) { 
 
@@ -140,13 +157,7 @@ if (!empty($fiPath)) {
 	<div id="step1">
 		<div class="folder">
 	 <?php 
-	 if (empty($fiPath)) {
-		echo "<span class='warn'>";
-	 	echo JText::_("COM_LITTLEHELPER_FAVICONS_NO_SOURCE_PATH");
-	 	echo "</span>";
-	 	echo "<br><a href='index.php?option=com_littlehelper&task=favicon.createDefault' class='fancybutton foldercreate'>".JText::_("COM_LITTLEHELPER_FAVICONS_CREATE")."</a>";
-	 } else {
-			
+	 if (!empty($fiPath)) {
 			echo "<div class='chosenImages' ><div class='topList'>";
 			
 			
@@ -190,8 +201,3 @@ if (!empty($fiPath)) {
 </div>
 
 
-<form
-	action="<?php echo JRoute::_('index.php?option=com_littlehelper'); ?>"
-	method="post" name="adminForm" id="adminForm">
-	<input type="hidden" name="task" value="" />
-</form>
