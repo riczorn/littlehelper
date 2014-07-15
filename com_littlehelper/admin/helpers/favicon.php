@@ -1,4 +1,5 @@
 <?php
+use Joomla\Application\Cli\Output\Stdout;
 /**
  * LittleHelper component helper.
  * Favicon helper: bridge to the thumnbail and php-ico libraries, expose the needed functionalities
@@ -34,6 +35,9 @@ class LittleHelperHelperFavicon
 	public static function initPaths() {
 		$mparams = JComponentHelper::getParams( 'com_littlehelper' );
 		$params = $mparams->get('params');
+		if ($params == null) {
+			$params = new stdClass();
+		}
 		if (empty($params->favicons_sourcepath))
 			$params->favicons_sourcepath='';
 		else

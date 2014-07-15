@@ -16,7 +16,12 @@ $document = JFactory::getDocument();
 /*
  * Let's see if we need to add jQuery, and load all libraries:
  */
-$defaultImage = LittleHelperHelperFavicon::$master->path . LittleHelperHelperFavicon::$master->name;
+if (LittleHelperHelperFavicon::$master) {
+	$defaultImage = LittleHelperHelperFavicon::$master->path . LittleHelperHelperFavicon::$master->name;
+} else {
+	// first installation
+	$defaultImage = null;
+}
 $assetDir = '/administrator/components/com_littlehelper/assets/';
 if(version_compare(JVERSION,'2.9.99','lt')) {
 	$document->addScript($assetDir . "js/jquery-1.10.2.min.js");
