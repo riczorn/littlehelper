@@ -17,5 +17,7 @@ $language->load('com_littlehelper', $langpath, null, true);
 JHtml::_('behavior.modal');
  
 require_once dirname(__FILE__).'/helper.php';
+if (modLittleHelperHelper::excludeK2())
+	return;
 $toolbar = modLittleHelperHelper::getButtons($module->position);
 require JModuleHelper::getLayoutPath('mod_littlehelper', $params->get('layout', 'default'));

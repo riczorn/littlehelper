@@ -112,4 +112,18 @@ abstract class modLittleHelperHelper
 		$result = str_replace('icon-32-','icon-'.$iconsize.'-',$result);
 		return $result;
 	}	
+	
+	/**
+	 * K2 throws an ugly error "item must have a title" on its Item view.
+	 * so we'll just prevent execution there for now. 
+	 */
+	public function excludeK2() {
+		$input = JFactory::getApplication()->input;
+		if ($input->get('option')=='com_k2') {
+			if ($input->get('view'=='item')) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
