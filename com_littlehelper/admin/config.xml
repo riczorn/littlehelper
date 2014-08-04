@@ -18,6 +18,7 @@
 			
 		<field
 			name="button_cache"
+			class="btn-group btn-group-yesno"
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_CACHE"
@@ -30,6 +31,7 @@
 			name="button_recycle"
 			type="radio"
 			default="1"
+			class="btn-group btn-group-yesno"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_DESC">
 			<option value="0">JHIDE</option>
@@ -52,9 +54,10 @@
 
 		<field
 			name="favicons_forcepreview"
-			type="list"
+			type="radio"
 			label="COM_LITTLEHELPER_OPTIONS_FAVICONS_FORCE_PREVIEW"
 			description="COM_LITTLEHELPER_OPTIONS_FAVICONS_FORCE_PREVIEW_DESC"
+			class="btn-group btn-group-yesno"
 			default="1">
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
@@ -108,6 +111,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTENT"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTENT_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -117,6 +121,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MENUITEMS"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MENUITEMS_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -126,6 +131,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MODULES"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MODULES_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -135,6 +141,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_DB_FEATURED"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_DB_FEATURED_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -150,6 +157,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_BANNERS"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_BANNERS_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -159,6 +167,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CATEGORIES"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CATEGORIES_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -168,6 +177,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTACTS"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_CONTACTS_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -177,6 +187,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_WEBLINKS"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_WEBLINKS_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -186,6 +197,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_MESSAGES"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_MESSAGES_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -195,6 +207,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_NEWSFEEDS"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_NEWSFEEDS_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>
@@ -204,6 +217,7 @@
 			type="radio"
 			default="1"
 			label="COM_LITTLEHELPER_OPTIONS_RECYCLE_REDIRECT"
+			class="btn-group btn-group-yesno"
 			description="COM_LITTLEHELPER_OPTIONS_RECYCLE_REDIRECT_DESC">
 			<option value="0">JNo</option>
 			<option value="1">JYes</option>

@@ -8,8 +8,11 @@
 
 defined('_JEXEC') or die;
 
+
 $langpath =JPATH_ADMINISTRATOR.'/components/com_littlehelper';
 $language = JFactory::getLanguage();
+// this is not working in J3+, go figure!
+// the required strings have been copied to the mod_littlehelper/language files.
 $language->load('com_littlehelper', $langpath, 'en-GB', true);
 $language->load('com_littlehelper', $langpath, null, true);
 

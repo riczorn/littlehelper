@@ -9,7 +9,7 @@
 	</license>
 	<authorEmail>support@fasterjoomla.com</authorEmail>
 	<authorUrl>www.fasterjoomla.com</authorUrl>
-	<version>2.1.4</version>
+	<version>2.1.5</version>
 	<description>MOD_LITTLEHELPER_XML_DESC</description>
 	<files>
 		<filename module="mod_littlehelper">mod_littlehelper.php</filename>
@@ -26,7 +26,6 @@
 				<field title="MOD_LITTLEHELPER_INFO_TITLE" header="MOD_LITTLEHELPER_INFO_HEADER"
 					body="MOD_LITTLEHELPER_INFO_BODY" footer="MOD_LITTLEHELPER_INFO_FOOTER"
 					type="zzinfo" />
-
 			</fieldset>
 
 			<fieldset name="advanced">

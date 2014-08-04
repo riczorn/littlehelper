@@ -120,10 +120,10 @@ abstract class modLittleHelperHelper
 	public static function excludeK2() {
 		$input = JFactory::getApplication()->input;
 		if ($input->get('option')=='com_k2') {
-			if ($input->get('view'=='item')) {
-				return false;
+			if ($input->get('view')=='item') {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }
