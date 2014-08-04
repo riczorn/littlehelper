@@ -46,7 +46,7 @@
 	<fields name="params" addpath="/administrator/components/com_littlehelper/elements" />
 	<updateservers>
 		<!-- Note: No spaces or linebreaks allowed between the server tags -->
-		<server type="extension" priority="1" name="LittleHelper Update Site">http://www.fasterjoomla.com/files/extensions/littlehelper.xml</server>
+		<server type="extension" priority="1" name="LittleHelper Update Site">http://www.fasterjoomla.com/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=3&amp;dummy=littlehelper.xml</server>
 	</updateservers>
 </extension>
 
