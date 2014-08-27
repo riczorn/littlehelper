@@ -102,7 +102,9 @@
 		},
 				
 		destroyCrop: function () {
-			me.jcrop_api.destroy();
+			if (me.jcrop_api)
+				if (me.jcrop_api.destroy)
+					me.jcrop_api.destroy();
 		},
    
 		loadCrop: function () {

@@ -17,12 +17,12 @@ $document = JFactory::getDocument();
  * Let's see if we need to add jQuery, and load all libraries:
  */
 if (LittleHelperHelperFavicon::$master) {
-	$defaultImage = LittleHelperHelperFavicon::$master->path . LittleHelperHelperFavicon::$master->name;
+	$defaultImage = JUri::base(true).LittleHelperHelperFavicon::$master->path . LittleHelperHelperFavicon::$master->name;
 } else {
 	// first installation
 	$defaultImage = null;
 }
-$assetDir = '/administrator/components/com_littlehelper/assets/';
+$assetDir = 'components/com_littlehelper/assets/';
 if(version_compare(JVERSION,'2.9.99','lt')) {
 	$document->addScript($assetDir . "js/jquery-1.10.2.min.js");
 } else {
@@ -38,8 +38,13 @@ $document->addStyleSheet($assetDir . "css/jquery.rixxcropper.css");
  * This loads the initialization scripts; all scripts are placed in this file for ease of editing.
  */
 $document->addScriptDeclaration(
-		$src = file_get_contents(JPATH_SITE . $assetDir . "js/favicon_inlined.js")
+		$src = file_get_contents(JPATH_SITE .'/administrator/'. $assetDir . "js/favicon_inlined.js")
 	);
+
+// won't work for sites in subfolders: $sitepath = ltrim(dirname(JUri::base(true)),"/") ;
+$sitepath = JUri::base(true);
+$sitepath = str_replace('/administrator','',$sitepath);
+
 
 if (!empty($this->params->favicons_sourcepath))
 	$fiPath = $this->params->favicons_sourcepath . "/source";
@@ -106,7 +111,8 @@ if (!empty($fiPath)) {
 			$files = scandir($source = JPATH_SITE . LittleHelperHelperFavicon::$sourcePath);
 			foreach ($files as $file) {
 				if (is_file($source.$file)) {
-					printf("<img src='%s' class='galleryimage' onclick='switchImage(this);' />", LittleHelperHelperFavicon::$sourcePath.$file);
+					printf("<img src='%s' class='galleryimage' onclick='switchImage(this);' />", 
+						$sitepath.LittleHelperHelperFavicon::$sourcePath.$file);
 				}
 			}
 		?>
@@ -165,10 +171,8 @@ if (!empty($fiPath)) {
 				
 			
 				if (!empty($this->images)) {
-						
 					echo "<ul id='chosenImages'>";
-					$basepath = ltrim(dirname(JUri::base(true)),"/") ;
-					
+						
 					foreach ($this->images as $image) {	
 						if (empty($image->name) || empty($image->path)) continue;
 						$resizedText = $image->resized?JText::_("COM_LITTLEHELPER_FAVICON_RESIZED"):"<i>".JText::_("COM_LITTLEHELPER_FAVICON_ORIGINAL")."</i>";	
@@ -177,7 +181,7 @@ if (!empty($fiPath)) {
 								<span class='size'>%sx%s</span><br>
 								<span class='notes'>%s</span>
 								</li>",$image->description,
-									$basepath, $image->path , $image->name."?rand=". rand(120120,990390),
+									$sitepath, $image->path , $image->name."?rand=". rand(120120,990390),
 									$image->size,
 									$image->width, $image->height,
 									$resizedText);

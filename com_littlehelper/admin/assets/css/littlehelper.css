@@ -349,7 +349,7 @@ iframe#rht_preview {
 	list-style-type:none;
 }
 #rht_buttons_info {
-	font-weight:bold;font-size:120%;font-color:red;
+	font-weight:bold;font-size:120%;color:red;
 }
 #testrunning {background-image:url(../images/res/loading.gif);width:170px;height:19px;display:inline-block;}
 
@@ -388,7 +388,7 @@ input#upload-submit {
     text-align:left;
 	clear:both;width:177px;font-size:12px;border:0;margin-bottom:2px}
 input#upload-submit:hover {background-color:gray;
-	transition:all 0.3s easeinout;}
+	transition:all 0.3s ease-in-out;}
 
 #adminForm table.adminlist tbody tr td:first-child {
 	padding-left:22px;
