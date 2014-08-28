@@ -134,3 +134,7 @@ Version 2.0.0 (2013/10/2)
 2.1.3 (2014/07/12) 
 	Fixed some notices and errors
 
+2.1.6 (2014/08/28)
+	Support for Joomla installed in a subfolder of the root
+	Prevented some errors which were blocking the interface
+	
