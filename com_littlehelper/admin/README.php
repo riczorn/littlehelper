@@ -130,11 +130,20 @@ Version 2.0.0 (2013/10/2)
 
 2.1.2 (2014/06/28) 
 	First v.2 released
+	Added Drag and drop support, Crop, Paste for favicons
+	All image editing with Ajax for quick view
+	Support for uppercase image extensions
 	
 2.1.3 (2014/07/12) 
 	Fixed some notices and errors
+	
+2.1.4 (2014/07/19)
+	Styles improved for Joomla 3
+	
+2.1.5 (2014/08/04)
+	Fixed issue with K2
 
 2.1.6 (2014/08/28)
 	Support for Joomla installed in a subfolder of the root
-	Prevented some errors which were blocking the interface
+	Prevented a few js error cases
 	
