@@ -68,6 +68,19 @@ abstract class modLittleHelperHelper
 					padding: 0 7px;
 					line-height:12px;
 				}
+				/*j3.3/isis*/
+				
+				#trashncacheForm i {
+					text-indent:-9000px;overflow:hidden;
+				}
+				
+				#trashncacheForm i.icon-trash {
+					background-image:url(components/com_littlehelper/assets/images/bin16.png);
+				}
+				#trashncacheForm i.icon-ccfs {
+					background-image:url(components/com_littlehelper/assets/images/cachefs16.png);
+				}
+				
 				','text/css');
 		if (version_compare(JVERSION, '3.0.0', 'lt')) {
 			$document->addStyleDeclaration(

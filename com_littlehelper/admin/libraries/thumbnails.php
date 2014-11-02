@@ -20,12 +20,26 @@ class gimmeImage
 {
 	public static function getImageInfo($imagePath,$image) {
 		$originalImageFilename  = JPATH_SITE.$imagePath.$image;
-		if (preg_match("/\.jpg|\.jpeg/i",$image)){$src_img=imagecreatefromjpeg($originalImageFilename);}
-		elseif (preg_match("/\.gif/i", $image)){$src_img=imagecreatefromgif($originalImageFilename);}
-		elseif (preg_match("/\.png/i", $image)){$src_img=imagecreatefrompng($originalImageFilename);}
-		else
+		if (!file_exists($originalImageFilename)) {
 			return NULL;
-		if (!$src_img) {
+		}
+		if (!function_exists('imagecreatefrompng')) {
+			if (!DEFINED('MISSINGFUNCTIONERROR')) {
+				DEFINE('MISSINGFUNCTIONERROR',1);
+				JFactory::getApplication()->enqueueMessage('imagecreatefrompng is not available! This could be an issue with the PHP GD library installation','error');
+			}
+		} else
+		try {
+			if (preg_match("/\.jpg|\.jpeg/i",$image)){$src_img=imagecreatefromjpeg($originalImageFilename);}
+			elseif (preg_match("/\.gif/i", $image)){$src_img=imagecreatefromgif($originalImageFilename);}
+			elseif (preg_match("/\.png/i", $image)){$src_img=imagecreatefrompng($originalImageFilename);}
+			else
+				return NULL;
+		} catch (Exception $e) {
+			JFactory::getApplication()->enqueueMessage('Error decoding file '.$e,'error');
+			return NULL;
+		}
+		if (!isset($src_img)) {
 			//error_log('cannot open image '.$originalImageFilename);
 			return NULL;
 		}
@@ -33,7 +47,6 @@ class gimmeImage
 		$res['width'] =imageSX($src_img) ;
 		$res['height'] =imageSY($src_img) ;
 		return $res;
-		
 	}
 
 /*

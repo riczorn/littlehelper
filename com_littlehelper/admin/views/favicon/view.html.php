@@ -35,12 +35,22 @@ class LittleHelperViewFavicon extends JViewLegacy
 		$fiPath = "";
 		if (!empty($this->params->favicons_sourcepath)) {
 			$fiPath = $this->params->favicons_sourcepath;
+			if (version_compare(JVERSION, '3.0.0', 'lt')) {
+				$mediaClass ='media';
+				$pluginClass ='plugin';
+				$saveClass = 'saveicons';
+			} else {
+				$mediaClass ='images';
+				$pluginClass ='power-cord';
+				$saveClass = 'save';
+			}
+			
 			JToolBarHelper::custom(
 				"mediamanager_favicon",
-				'media','media',JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_MEDIA"),false);
+				$mediaClass,'media',JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_MEDIA"),false);
 			JToolBarHelper::custom(
 			"pluginmanager_sak",
-			'plugin','plugin',JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_MANAGE"),false);
+				$pluginClass,'plugin',JText::_("COM_LITTLEHELPER_FAVICONS_PLUGIN_MANAGE"),false);
 		}
 		// JToolBarHelper , I can't find how to add an url instead of a task. So here goes...
 
@@ -65,7 +75,8 @@ class LittleHelperViewFavicon extends JViewLegacy
 				    }
 				");
 
-		JToolBarHelper::custom('favicon.publish','saveicons','saveicons',JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_SAVE"),false);
+		
+		JToolBarHelper::custom('favicon.publish',$saveClass,'saveicons',JText::_("COM_LITTLEHELPER_FAVICON_BUTTON_SAVE"),false);
 		JToolBarHelper::preferences('com_littlehelper');
 
 		require_once(JPATH_COMPONENT."/helpers/littlehelper.php");

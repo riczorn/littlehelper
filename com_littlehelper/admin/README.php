@@ -147,3 +147,10 @@ Version 2.0.0 (2013/10/2)
 	Support for Joomla installed in a subfolder of the root
 	Prevented a few js error cases
 	
+2.2.0 (2014/11/01)
+	Support for custom admin login logo;
+	Support for administrator favicons; (same as frontend)
+	Fix the sitemap syntax in robots.txt
+	Fixed status icons on J3;
+
+	

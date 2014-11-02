@@ -25,6 +25,7 @@ class LittleHelperViewRobots extends JViewLegacy
 		
 		JToolBarHelper::save('robots.save');
 		JToolBarHelper::custom('robots.fix','fix','fix',JText::_("COM_LITTLEHELPER_CMD_FIX"),false);
+		JToolBarHelper::custom('robots.fixsitemap','fix','fix',JText::_("COM_LITTLEHELPER_CMD_FIX_SITEMAP"),false);
 		JToolBarHelper::cancel('robots.cancel');
 		
 		require_once(JPATH_COMPONENT."/helpers/littlehelper.php");
@@ -37,6 +38,7 @@ class LittleHelperViewRobots extends JViewLegacy
 	 * display the correct syntax for a robots.txt file's sitemap line.
 	 */
 	protected function getSyntax() {
-		return "<pre>Sitemap: /index.php?option=com_xmap&view=xml&tmpl=component&id=1</pre>";
+		return "<pre>Sitemap: ".
+			JUri::root(false). "index.php?option=com_xmap&view=xml&tmpl=component&id=1</pre>";
 	}
 }

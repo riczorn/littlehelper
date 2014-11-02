@@ -33,7 +33,6 @@ class LittleHelperModelRobots extends JModelLegacy {
 			$robotstxt = file_get_contents($filename);
 		} else {
 			$filename = JPATH_SITE."/robots.txt.dist";
-			error_log($filename);
 			JError::raiseWarning(1013,JText::_("COM_LITTLEHELPER_ROBOTS_NOROBOTS")); 
 			if (file_exists($filename)) {
 				$robotstxt = file_get_contents($filename);
@@ -78,5 +77,30 @@ class LittleHelperModelRobots extends JModelLegacy {
 			return false;
 		}
 	}
-		
+	
+	
+	public function fixsitemap($robots) {
+		$robotsLines = explode("\n",$robots);
+		// make sure the Sitemap: entry contains the site url:
+		foreach($robotsLines as $key=>$line) {
+			if (preg_match("@^Sitemap[ \t]*:[ \t]*@i", $line)) {
+				$sitemapUrl = preg_replace("@^Sitemap[ \t]*:[ \t]*(.*)[ \t]*$@i","$1",$line);
+				if (strpos($sitemapUrl,'//')===false) {
+					$sitemapUrl = JUri::root(false). ltrim($sitemapUrl,'/');
+					$robotsLines[$key] = "#littlehelper: commented the next line as it didn't contain the hostname\n".
+						"#".$line."\n".
+						"Sitemap: ".$sitemapUrl;
+				}
+			}
+		}
+		$robots = implode("\n",$robotsLines);
+		$filename = JPATH_SITE."/robots.txt";
+		if (file_put_contents($filename, $robots)) {
+			return true;
+		} else {
+			JError::raiseWarning(100, "Could not save to $filename");
+			return false;
+		}
+	}
+	
 }

@@ -22,7 +22,7 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.plugin.plugin');
+//jimport('joomla.plugin.plugin');
 
 /**
  * This plugin has two events, 
@@ -41,7 +41,6 @@ class plgSystemLittleHelper extends JPlugin
 	public function onAfterRender() {
 		if ($this->isAllowed()) {
 			$body = JResponse::getBody();
- 			
  			// Here I have the chance to pick up all leftover resources which never entered the JDocument Headers.
  			$body = $this->removeIcons($body);
  			 			
@@ -49,6 +48,24 @@ class plgSystemLittleHelper extends JPlugin
 			$replace = $this->renderIcons()."</head>";
  			
  			$body = str_replace($find,$replace,$body);
+ 			if (JPATH_BASE == JPATH_ADMINISTRATOR) {
+				if ($this->params->get('admin_logo','0')=='1') {
+					$input = JFactory::getApplication()->input;
+					// the next condition is just to save some time in non-login pages
+					if ($input->get('option')=='com_login') {
+						$logo = $this->params->get('admin_custom_logo','');
+						$body = preg_replace('@administrator/templates/[a-zA-Z0-9_/-]+joomla.png@i',$logo, $body);
+						$body = str_replace('<div id="lock"></div>',
+								"<div><img src='/".
+								$logo . "' /></div>", 
+								$body);
+						// en-GB: Joomla! Administration Login; it-IT: Accedi al pannello amministrativo di joomla!
+						$body = str_replace(JText::_('COM_LOGIN_JOOMLA_ADMINISTRATION_LOGIN'),
+								'',$body);
+					}					
+				}
+			}
+			
 			JResponse::setBody($body);
 		}
 
@@ -61,11 +78,12 @@ class plgSystemLittleHelper extends JPlugin
 	private function isAllowed() {
 		
 		$document	= JFactory::getDocument();
+		$input = JFactory::getApplication()->input;
 		
-		if (JPATH_BASE == JPATH_ADMINISTRATOR) {
-			// do administrators deserve fancy touch icons? do they care? are they using a phone?
-		 	return false;
-		}
+// 		if (JPATH_BASE == JPATH_ADMINISTRATOR) {
+// 			// do administrators deserve fancy touch icons? do they care? are they using a phone?
+// 		 	return false;
+// 		}
 
 		if ( $document->getType() != 'html' ) { 
 			return false; 

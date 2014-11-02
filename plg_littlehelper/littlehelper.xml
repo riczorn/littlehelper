@@ -8,7 +8,7 @@
 	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
 	<authorEmail>support@fasterjoomla.com</authorEmail>
 	<authorUrl>www.fasterjoomla.com</authorUrl>
-	<version>2.1.7</version>
+	<version>2.2.0</version>
 	<description>PLG_SYSTEM_LITTLEHELPER_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="littlehelper">littlehelper.php</filename>
@@ -23,8 +23,17 @@
 				<field title="PLG_LITTLEHELPER_INFO_TITLE" header="PLG_LITTLEHELPER_INFO_HEADER"
 					body="PLG_LITTLEHELPER_INFO_BODY" footer="PLG_LITTLEHELPER_INFO_FOOTER"
 					logo="/administrator/components/com_littlehelper/assets/images/logo.png" type="zzinfo" />
+				<field name="admin_logo" type="radio" default="0" label="PLG_LITTLEHELPER_ADMIN_LOGIN" 
+					description="PLG_LITTLEHELPER_ADMIN_LOGIN_DESC">
+					<option value="0">PLG_LITTLEHELPER_ADMIN_LOGIN_DEFAULT</option>
+					<option value="1">PLG_LITTLEHELPER_ADMIN_LOGIN_CUSTOM</option>
+				</field>
+				<field name="admin_custom_logo" type="media" label="PLG_LITTLEHELPER_ADMIN_LOGIN_CUSTOM_LOGO" 
+					description="PLG_LITTLEHELPER_ADMIN_LOGIN_CUSTOM_LOGO_DESC" />
+				
 				<field name="markup" type="textarea" label="PLG_LITTLEHELPER_MARKUP" 
-					description="PLG_LITTLEHELPER_MARKUP_DESC" rows="10" cols="55" filter="raw"/>
+					description="PLG_LITTLEHELPER_MARKUP_DESC" rows="5" cols="75" filter="raw"/>
+
 			</fieldset>
 		</fields>
 	</config>

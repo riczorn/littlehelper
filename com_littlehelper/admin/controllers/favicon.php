@@ -295,7 +295,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 		//error_log('NOW DELETE THUMBS below targetSize?'.var_export($targetBelow,true));
 		if ($targetSize<16)
 			$targetSize = 144;
-		error_log('$targetSize '. $targetSize);
+		//error_log('$targetSize '. $targetSize);
 		if ($targetBelow) {
 			$this->deleteFilesBelow($targetSize,$imageFile);
 		}
@@ -337,10 +337,9 @@ class LittleHelperControllerFavicon extends JControllerForm
 	 * @param unknown_type $excludedFile: if the source is one of the files, we need to keep it!
 	 */
 	private function deleteFilesBelow($size,$excludedFile) {
-		error_log('12');
 		require_once(JPATH_COMPONENT."/helpers/favicon.php");
 		foreach(LittleHelperHelperFavicon::$favicons as $key=>$favicon) {
-			error_log('key '.$key . "; size:$size; ");
+			//error_log('key '.$key . "; size:$size; ");
 			if ($key<=$size) {
 				if (file_exists($file = JPATH_SITE . LittleHelperHelperFavicon::$thumbsPath . $key . "x" . $key . ".png")) {
 					if ($file==$excludedFile) {

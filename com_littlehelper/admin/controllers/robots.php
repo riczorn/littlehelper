@@ -65,4 +65,17 @@ class LittleHelperControllerRobots extends JControllerForm
 		}
 		$this->redirect();		
 	}
+	
+	/**
+	 * Update the sitemap path with the current hostname/protocol
+	 */
+	 public function fixsitemap() {
+	 	$robots = JFactory::getApplication()->input->get('robots','','string');
+	 	if ($this->getModel()->fixsitemap($robots)) {
+	 		$this->setRedirect(JRoute::_('index.php?option=com_littlehelper&view=robots', false),JText::_("COM_LITTLEHELPER_ROBOTS_MSG_FIXED_SITEMAP"));
+	 	} else {
+	 		$this->setRedirect(JRoute::_('index.php?option=com_littlehelper&view=robots', false));
+	 	}
+	 	$this->redirect();	 	
+	 }
 }

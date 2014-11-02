@@ -455,3 +455,23 @@ div#gallery > img:hover {box-shadow:2px 2px 5px rgba(50,50,50,0.4);}
 	font-size:80%;
 	font-style:oblique;
 }
+
+.icon-trash {
+	background-image:url("../images/bin16.png");
+	text-indent:-9000px; overflow:hidden;
+}
+.icon-ccfs {
+	background-image:url("../images/cachefs16.png");
+	text-indent:-9000px; overflow:hidden;
+}
+
+.icon-fix {
+	background-image: url(../images/fix16.png);
+		text-indent:-9000px; overflow:hidden;
+}
+
+.container-title .page-title .icon-littlehelper {
+	background-image: url(../images/logo16.png);
+	height:16px;
+	width:16px;
+}

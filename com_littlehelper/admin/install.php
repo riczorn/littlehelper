@@ -51,7 +51,7 @@ class pkg_littlehelperInstallerScript
 				*/
 	
 			} else {
-				error_log('apparently a fresh installation, proceed');
+				//error_log('apparently a fresh installation, proceed');
 			}
 			return true;
 		}
