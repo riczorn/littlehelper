@@ -46,6 +46,15 @@ class LittleHelperControllerTrash_n_Cache extends JControllerForm
 		parent::display();
 	}
 	
+	public function clearAdministratorCache()
+	{
+		$model = $this->getModel();
+		$model->clearAdministratorCache(true);
+		$this->additionalInit();
+		parent::display();
+	}
+	
+	
 	/** 
 	 * Invoked from the toolbar or the module, clean the cache
 	 * will delete all folders and display errors as appropriate.

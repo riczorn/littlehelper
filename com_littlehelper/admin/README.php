@@ -157,4 +157,4 @@ Version 2.0.0 (2013/10/2)
 	Added plugin configuration button to the intro page
 	Clean Admin Cache on plugin configuration!!
 	Can now change the interface icon as well
-	
+	Added the clear admin cache button to the main component's interface

@@ -36,11 +36,13 @@ class pkg_littlehelperInstallerScript
 
 					if ( version_compare( $oldRelease, '1.9', '<' ) ) {
 						return $this->moveFolders();
-					} else {error_log('  Already version 2+, nothing to do');}
+					} else {
+						//error_log('  Already version 2+, nothing to do');
+					}
 
 
 				} else {
-					error_log("  Could not find version in $manifest");
+					error_log("  LittleHelper Install ERROR Could not find version in $manifest");
 					// still return true, this is not really mandatory!
 				}
 
@@ -69,7 +71,7 @@ class pkg_littlehelperInstallerScript
 		$params = $mparams->get('params');
 		if (empty($params->favicons_sourcepath)) {
 			// no favicons path set, nothing to move!
-			error_log('  favicons_sourcepath is not set yet, nothing to move');
+			// error_log('  favicons_sourcepath is not set yet, nothing to move');
 			return true;
 		} else {
 			$imagesPath = $params->favicons_sourcepath;

@@ -38,6 +38,8 @@ class LittleHelperViewtrash_n_cache extends JViewLegacy
 			}
 		}
 
+		JToolBarHelper::custom( 'trash_n_cache.clearAdministratorCache','ccjoomla','ccjoomla',JText::_("COM_LITTLEHELPER_CMD_ADMIN_CACHE"), false);
+		
 		JToolBarHelper::preferences('com_littlehelper');
 		require_once JPATH_COMPONENT.'/helpers/littlehelper.php';
 		LittleHelperHelper::addStyles();
