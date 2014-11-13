@@ -13,8 +13,14 @@ defined('_JEXEC') or die;
 <img src="components/com_littlehelper/assets/images/logo.png" class="leftimage"/>
 <div class="right" style="text-align:right">
 <?php 
-echo "<a class='fancybutton moduleconfig' href='$this->adminModulesUrl'>"
+// link to modules page with filter set
+echo "<a class='fancybutton moduleconfig large' href='$this->adminModulesUrl'>"
  		.JText::_("COM_LITTLEHELPER_MODULE_OPEN_CONFIG")."</a><br>";
+
+// link to plugin page with filter set
+echo "<a class='fancybutton pluginconfig large' href='$this->adminPluginsUrl'>"
+ 		.JText::_("COM_LITTLEHELPER_PLUGIN_OPEN_CONFIG")."</a><br>";
+
 echo $this->faqlink;
 ?>
 <br>

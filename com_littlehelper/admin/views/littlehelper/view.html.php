@@ -15,6 +15,7 @@ class LittleHelperViewLittlehelper extends JViewLegacy
 {
 	public $componentsUrl = "index.php?option=com_littlehelper";
 	public $adminModulesUrl = "index.php?option=com_modules&amp;filter_module=mod_littlehelper&amp;filter_client_id=1";
+	public $adminPluginsUrl = "index.php?option=com_plugins&amp;filter_search=little+helper";
 	public $adminModuleConfig = "index.php?option=com_modules&amp;view=module&amp;layout=edit&amp;id=";
 	
 	function display($tpl = null)
@@ -22,7 +23,9 @@ class LittleHelperViewLittlehelper extends JViewLegacy
 		$data = $this->get('Data');
 		$this->assignRef('data',$data);
 
-		$faqlink = sprintf("<a href='%s' target='_blank' class='fancybutton faq'>%s</a>",JText::_("COM_LITTLEHELPER_FAQ_URL"), JText::_("COM_LITTLEHELPER_INTRO_THEFAQ"));
+		$faqlink = sprintf("<a href='%s' target='_blank' class='fancybutton faq large'>%s</a>",
+				JText::_("COM_LITTLEHELPER_FAQ_URL"), 
+				JText::_("COM_LITTLEHELPER_INTRO_THEFAQ"));
 		$this->assignRef('faqlink',$faqlink);
 		JToolBarHelper::title(   JText::_("COM_LITTLEHELPER"),'littlehelper' );	
 		//JToolBarHelper::custom( 'default','default','default',JText::_("COM_LITTLEHELPER_CMD_DEFAULT"), false);

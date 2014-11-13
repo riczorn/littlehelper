@@ -153,4 +153,8 @@ Version 2.0.0 (2013/10/2)
 	Fix the sitemap syntax in robots.txt
 	Fixed status icons on J3;
 
+2.2.1 (2014/11/13)
+	Added plugin configuration button to the intro page
+	Clean Admin Cache on plugin configuration!!
+	Can now change the interface icon as well
 	

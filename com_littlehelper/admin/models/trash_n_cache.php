@@ -255,6 +255,35 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$this->saveBackup($backup);
 		JError::raiseNotice(200,JText::_("COM_LITTLEHELPER_TRASH_DONE"));
 	}
+	
+	/**
+	 * Clean the administrator's cache.
+	 * This function is invoked by the custom field in the plugin to
+	 * ensure that the admin cache will be cleaned when a user chooses the
+	 * custom logos for the admin.
+	 */
+	public function clearAdministratorCache() {
+		//$adminCacheFolder = JPATH_ADMINISTRATOR . '/cache/*';
+		$adminCacheFolder = '/home/fasterjoomla/public_html/administrator/cache';
+		$cachesToClean = scandir($adminCacheFolder);
+		foreach($cachesToClean as $key=>$singleCacheItem) {
+			if (count_chars($singleCacheItem)==0
+					|| $singleCacheItem[0]=='.'
+					|| $singleCacheItem[0]=='*'
+					|| $singleCacheItem[0]=='?'
+					|| $singleCacheItem=='index.html')
+						unset($cachesToClean[$key]);
+		}
+		$res = '';
+		$total = 0;
+		foreach ( $cachesToClean as $i=>$cacheFolder ) {
+			$cache_dir = JPATH_ADMINISTRATOR.'/cache/'.$cacheFolder;
+		 	list($res,$errormessage) = $this->removeFolder($cache_dir);
+		 	$total += $res;
+		}
+		
+		return ($total == count($cachesToClean));
+	}
 
 	/**
 	 * Export a dump of the records and assets which will be deleted in .sql format (UTF-8).
@@ -478,9 +507,8 @@ SET time_zone = \"+00:00\";
 		 // there won't be anything to clear, so we're not adding overhead,
 		 // we use this unconditionally.  Of course, we're losing $res but
 		 // do we really care?
-		 require_once JPATH_COMPONENT.'/helpers/trash_n_cache.php';
+		 require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
 		 $res = LittleHelperHelperTrash_n_Cache::removeFolderPHP($folder);
-	
 		 return array($res,$buff);
 	}
 
@@ -508,9 +536,9 @@ SET time_zone = \"+00:00\";
 		} else {
 		 	$cache_dir = dirname(JPATH_BASE).'/cache/'.$cacheFolder;
 		 	list($res,$errormessage) = $this->removeFolder($cache_dir);
-
-	 	// values are: 0 = ok; else !ok
+		 	// values are: 0 = ok; else !ok
 		}
+		
 		if ($res != 0) {
 	 		echo "<div class='result'><span class='folder'>$cacheFolder</span><span class='value'>".JText::_("COM_LITTLEHELPER_OK")."</span></div>";
 		}
@@ -520,7 +548,6 @@ SET time_zone = \"+00:00\";
 		 		echo "<br>".JText::_("COM_LITTLEHELPER_SYSTEMOUTPUT")."<pre>".join("<br>",$output)."</pre>";
 		 	}
 		 	echo "</div>";
-
 		}
 		return $res==0?0:1;
 	}

@@ -53,16 +53,38 @@ class plgSystemLittleHelper extends JPlugin
 					$input = JFactory::getApplication()->input;
 					// the next condition is just to save some time in non-login pages
 					if ($input->get('option')=='com_login') {
-						$logo = $this->params->get('admin_custom_logo','');
-						$body = preg_replace('@administrator/templates/[a-zA-Z0-9_/-]+joomla.png@i',$logo, $body);
-						$body = str_replace('<div id="lock"></div>',
-								"<div><img src='/".
-								$logo . "' /></div>", 
-								$body);
-						// en-GB: Joomla! Administration Login; it-IT: Accedi al pannello amministrativo di joomla!
-						$body = str_replace(JText::_('COM_LOGIN_JOOMLA_ADMINISTRATION_LOGIN'),
-								'',$body);
-					}					
+						$logo = $this->params->get('admin_custom_logo_login','');
+							
+						if (file_exists(JPATH_SITE.'/'.$logo)) {
+							// isis
+							$body = preg_replace('@administrator/templates/[a-zA-Z0-9_/-]+joomla.png@i',$logo, $body);
+							// bluestork
+							$body = str_replace('<div id="lock"></div>',
+									"<div><img src='/".
+									$logo . "' /></div>", 
+									$body);
+							// testi
+							// en-GB: Joomla! Administration Login; it-IT: Accedi al pannello amministrativo di joomla!
+							$body = str_replace(JText::_('COM_LOGIN_JOOMLA_ADMINISTRATION_LOGIN'),
+									'',$body);
+						}
+					} else {
+						// administrator control panel, image in the top-right handside.
+						$logo = $this->params->get('admin_custom_logo_interface','');
+							
+						if (file_exists(JPATH_SITE.'/'.$logo)) {
+							// isis: <img alt="Joomla tips and htaccess, SEF, favicons, trash and cache extensions" 
+							// 			class="logo" src="/administrator/templates/isis/images/logo.png">
+							// bluestork: <img alt="Joomla!" src="templates/bluestork/images/logo.png">
+							$body = preg_replace('@administrator/templates/[a-zA-Z0-9_/-]+logo.png@i',$logo, $body);
+							// attention: can't use JDocument->addStyleDeclaration, it's too late now!
+							$newstyle = 
+							'		<style>
+										.container-logo {overflow:hidden;max-height:43px;}
+									</style>';
+							$body = str_replace('</head>',$newstyle.'</head>',$body);
+						}
+					}				
 				}
 			}
 			

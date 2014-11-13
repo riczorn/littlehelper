@@ -224,8 +224,13 @@ i.icon-saveicons {
 	background-image:	url(../images/icons/ico-delete.png);
 	
 }
+.fancybutton.large {
+	min-height:36px;
+	padding-left:55px;
+	vertical-align:center;
+}
 .fancybutton.faq {
-	background-image:	url(../images/icons/ico-faq.png);
+	background-image:	url(../images/icons/ico-faq3.png);
 }
 .fancybutton.module {
 	background-image:	url(../images/icons/ico-module.png);
@@ -234,7 +239,10 @@ i.icon-saveicons {
 	background-image:	url(../images/icons/ico-modulecreate.png);
 }
 .fancybutton.moduleconfig {
-	background-image:	url(../images/icons/ico-moduleconfig.png);
+	background-image:	url(../images/icons/ico-moduleconfig3.png);
+}
+.fancybutton.pluginconfig {
+	background-image:	url(../images/icons/ico-pluginconfig3.png);
 }
 .fancybutton.foldercreate {
 	background-image:	url(../images/icons/ico-folder-create.png);
