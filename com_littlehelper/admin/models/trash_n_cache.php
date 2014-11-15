@@ -263,8 +263,8 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 	 * custom logos for the admin.
 	 */
 	public function clearAdministratorCache() {
-		//$adminCacheFolder = JPATH_ADMINISTRATOR . '/cache/*';
-		$adminCacheFolder = '/home/fasterjoomla/public_html/administrator/cache';
+		$adminCacheFolder = JPATH_ADMINISTRATOR . '/cache';
+		// i.e. $adminCacheFolder = '/home/fasterjoomla/public_html/administrator/cache';
 		$cachesToClean = scandir($adminCacheFolder);
 		foreach($cachesToClean as $key=>$singleCacheItem) {
 			if (count_chars($singleCacheItem)==0
