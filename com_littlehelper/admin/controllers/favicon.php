@@ -355,6 +355,13 @@ class LittleHelperControllerFavicon extends JControllerForm
 		}
 	}
 
+	/**
+	 * Create the json response object for ajax interaction
+	 * 
+	 * @param unknown $message
+	 * @param number $error
+	 * @param string $content
+	 */
 	private function respond($message,$error=25007,$content="") {
 		$respondObj = new stdClass();
 		$respondObj->error = $error;

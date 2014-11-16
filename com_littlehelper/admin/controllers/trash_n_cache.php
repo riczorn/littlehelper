@@ -46,6 +46,9 @@ class LittleHelperControllerTrash_n_Cache extends JControllerForm
 		parent::display();
 	}
 	
+	/**
+	 * This clears the administrator's cache. Might only be useful for developers
+	 */
 	public function clearAdministratorCache()
 	{
 		$model = $this->getModel();

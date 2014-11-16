@@ -32,18 +32,23 @@ JHtml::_('behavior.formvalidation');
 
 <?php
 //COM_LITTLEHELPER_ROBOTS_SITEMAP_REMINDER="Make sure you include a sitemap in the robots.txt. 
-//...  The syntax is:%sYou can use %sxmap</a> or one of the %sother extensions</a> on the JED"
+//...  The syntax is:%sYou can use %sjSitemap</a>, %sxmap</a> or one of the %sother extensions</a> on the JED"
  $xmapUrl='http://extensions.joomla.org/extensions/structure-a-navigation/site-map/3066';
+ $jSitemapUrl='http://extensions.joomla.org/extensions/structure-a-navigation/site-map/24063';
  $extUrl = 'http://extensions.joomla.org/extensions/structure-a-navigation/site-map';
+ $jSitemapBtn = "<a href='$jSitemapUrl' target='_blank'>";
  $xmapBtn = "<a href='$xmapUrl' target='_blank'>";
  $extBtn = "<a href='$extUrl' target='_blank'>";
  echo sprintf(JText::_("COM_LITTLEHELPER_ROBOTS_SITEMAP_REMINDER"),
-	$this->getSyntax(),
-	$xmapBtn,$extBtn	
+		$this->getSyntax(),
+		$jSitemapBtn,
+	 	$xmapBtn,
+	 	$extBtn	
 	);
 ?>
 
 <br>
+
 <br>
 <form action="<?php echo JRoute::_('index.php?option=com_littlehelper'); ?>" method="post" name="adminForm" id="robots-form">
 	<input type="hidden" name="task" value="" />

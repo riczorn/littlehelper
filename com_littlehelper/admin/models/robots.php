@@ -67,6 +67,12 @@ class LittleHelperModelRobots extends JModelLegacy {
 			if (preg_match("@^Disallow:[ \t]*/images/[ \t]*@", $line)) {
 				$robotsLines[$key] = "#littlehelper: commented the next line so google news can show article images\n#".$line;
 			}
+			if (preg_match("@^Disallow:[ \t]*/templates/[ \t]*@", $line)) {
+				$robotsLines[$key] = "#littlehelper: commented the next line so google can determine the site's responsiveness\n#".$line;
+			}
+			if (preg_match("@^Disallow:[ \t]*/media/[ \t]*@", $line)) {
+				$robotsLines[$key] = "#littlehelper: commented the next line so google can determine the site's responsiveness\n#".$line;
+			}			
 		}
 		$robots = implode("\n",$robotsLines);
 		$filename = JPATH_SITE."/robots.txt";
@@ -78,12 +84,46 @@ class LittleHelperModelRobots extends JModelLegacy {
 		}
 	}
 	
+	/**
+	 * Will return the sitemap url of any known sitemap extensions:
+	 * or false if no extensions were found
+	 * 
+	 * Supported extensions: 
+	 * 
+	 * - xmap
+	 * - jsitemap (currently waiting for actual code from developer)
+	 */
+	public function getSitemapUrl() {
+		
+		if (file_exists(JPATH_SITE.'/components/com_xmap/index.html')) {
+			// attempt to find xmap url:
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('id')->from('#__xmap_sitemap')->where('is_default>0')->where('state>0');
+			try {
+				$xmapId = $db->setQuery($query)->loadResult();
+			} catch (Exception $e) {
+				// xmap not installed?	
+			}
+	
+			if ($xmapId) {
+				return "index.php?option=com_xmap&view=xml&tmpl=component&id=".$xmapId;
+			}	
+		}
+		// attempt to find the jsitemap url: 		index.php?option=com_jmap&view=sitemap&format=xml
+		if (file_exists(JPATH_SITE.'/components/com_jmap/index.html')) {
+			return "index.php?option=com_jmap&view=sitemap&format=xml";
+		}
+		return false;
+	}
 	
 	public function fixsitemap($robots) {
 		$robotsLines = explode("\n",$robots);
 		// make sure the Sitemap: entry contains the site url:
+		$sitemapFound = false;
 		foreach($robotsLines as $key=>$line) {
 			if (preg_match("@^Sitemap[ \t]*:[ \t]*@i", $line)) {
+				$sitemapFound = true;
 				$sitemapUrl = preg_replace("@^Sitemap[ \t]*:[ \t]*(.*)[ \t]*$@i","$1",$line);
 				if (strpos($sitemapUrl,'//')===false) {
 					$sitemapUrl = JUri::root(false). ltrim($sitemapUrl,'/');
@@ -93,8 +133,14 @@ class LittleHelperModelRobots extends JModelLegacy {
 				}
 			}
 		}
-		$robots = implode("\n",$robotsLines);
-		$filename = JPATH_SITE."/robots.txt";
+		if (!$sitemapFound) {
+			$sitemapUrl = $this->getSitemapUrl();
+			$sitemapUrl = JUri::root(false) . ltrim($sitemapUrl,'/');
+			$robotsLines[] = "Sitemap: ". $sitemapUrl;
+		}
+		
+		$robots = implode("\n", $robotsLines);
+		$filename = JPATH_SITE . "/robots.txt";
 		if (file_put_contents($filename, $robots)) {
 			return true;
 		} else {

@@ -156,5 +156,12 @@ Version 2.0.0 (2013/10/2)
 2.2.1 (2014/11/13)
 	Added plugin configuration button to the intro page
 	Clean Admin Cache on plugin configuration!!
+	Added the clear admin cache button to the main component's interface	
 	Can now change the interface icon as well
-	Added the clear admin cache button to the main component's interface
+	
+2.2.2 (2014/11/16)
+	Fixed robots.txt as per http://joomla-seo.net/Blog/robots-txt-do-not-block-css-and-javascript
+	  and added a link to the page in the configuration.
+	Added support for jSitemap
+	More responsive interface
+	

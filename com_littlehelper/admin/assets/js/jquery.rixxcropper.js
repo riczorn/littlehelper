@@ -318,7 +318,14 @@
 						event.preventDefault();
 					}, false);
 					
-					// this is not working reliably
+					document.addEventListener('dragover', function(event) {
+						//?not working jQuery(holder).show();
+						holder.addClass('over');
+						//event.preventDefault();
+					}, false);
+					
+					// this is not working reliably, leave here so I don't try to fix it
+					// this way again.
 //					holder.addEventListener('dragenter', function(event) {
 //						holder.addClass('over');
 //					}, false);

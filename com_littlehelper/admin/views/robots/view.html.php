@@ -35,10 +35,17 @@ class LittleHelperViewRobots extends JViewLegacy
 	}
 	
 	/** 
-	 * display the correct syntax for a robots.txt file's sitemap line.
+	 * Display the correct syntax for a robots.txt file's sitemap line.
+	 * Please note: this will see if jSitemap or xMap are installed, and propose the suggested change.
 	 */
 	protected function getSyntax() {
-		return "<pre>Sitemap: ".
-			JUri::root(false). "index.php?option=com_xmap&view=xml&tmpl=component&id=1</pre>";
+		$model = $this->getModel();
+		if ($sitemapUrl = $model->getSitemapUrl()) {
+		
+			return "<pre>Sitemap: ". JUri::root(false). $sitemapUrl. "</pre>";
+		} else {
+			return "No sitemap software detected; find out your sitemap url; the syntax is as shown below:<pre>"
+						.JUri::root(false).'sitemap.xml</pre>';
+		}
 	}
 }

@@ -152,7 +152,6 @@ textarea.textbox {width:auto;}
 		0 no-repeat;
 	padding-left: 32px;
 	min-height: 16px;
-	display: inline-block;
 	color: #dd5500;
 }
 
@@ -472,7 +471,10 @@ div#gallery > img:hover {box-shadow:2px 2px 5px rgba(50,50,50,0.4);}
 	background-image:url("../images/cachefs16.png");
 	text-indent:-9000px; overflow:hidden;
 }
-
+.icon-ccjoomla {
+	background-image:url("../images/cachejoomla16.png");
+	text-indent:-9000px; overflow:hidden;
+}
 .icon-fix {
 	background-image: url(../images/fix16.png);
 		text-indent:-9000px; overflow:hidden;
@@ -482,4 +484,20 @@ div#gallery > img:hover {box-shadow:2px 2px 5px rgba(50,50,50,0.4);}
 	background-image: url(../images/logo16.png);
 	height:16px;
 	width:16px;
+}
+
+/*isis responsiveness */
+@media (max-width: 767px)  {
+	.m #submenu li, .sidebar-nav #submenu li {
+		background-image:none !important;
+	}
+	.sidebar-nav #submenu li {
+		display: inline-block;
+    	padding: 0 5px;
+    	margin: 0 5px;
+	}
+}
+textarea.textbox {width:100%;}
+.dropAltHolder {
+	 width: calc(100% - 40px);
 }
