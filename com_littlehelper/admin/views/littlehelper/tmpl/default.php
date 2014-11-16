@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 	?>
 	<br>
 	<span class="news" style="font-weight:bold">News from fasterjoomla</span><br>
-	<iframe style="width:250px;height:300px;border:0" noborder src="http://www.fasterjoomla.com/files/extensions/littlehelper/littlehelper_news.php"></iframe>
+	<iframe style="width:250px;height:300px;border:0" noborder src="https://www.fasterjoomla.com/files/extensions/littlehelper/littlehelper_news.php"></iframe>
 </div>
 <div class="left">
 	<h2><?php echo JText::_("COM_LITTLEHELPER_INTRO_TITLE"); ?></h2>
