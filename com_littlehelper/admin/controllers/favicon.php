@@ -54,9 +54,16 @@ class LittleHelperControllerFavicon extends JControllerForm
 	 * @param unknown_type $urlparams
 	 */
 	public function publish($cachable = false, $urlparams = false) {
-		if ($message = $this->getModel()->publish()) {
-			$message .= " " . $this->getModel()->saveConfiguration();
-			$this->getModel()->setPluginState(true);
+		$model = $this->getModel();
+		if ($message = $model->publish()) {
+			$message .= " " . $model->saveConfiguration();
+			
+			if (! $this->getModel('trash_n_cache')->clearAdministratorCache()) {
+				$message .= JText::_("COM_LITTLEHELPER_TRASH_ERROR_ADMIN");
+			}
+			
+			
+			$model->setPluginState(true);
 				
 			$this->setRedirect(JRoute::_('index.php?option=com_littlehelper&view=favicon', false),
 					$message);

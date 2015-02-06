@@ -115,15 +115,16 @@ class LittleHelperHelperFavicon
 	
 	public static function getHeadFavicon($admin = false) {
 		$random = "";
-		if (self::$params->favicons_forcepreview)
+		if (!isset(self::$params->favicons_forcepreview) || self::$params->favicons_forcepreview) {
 			$random = "?random=".rand(1000,1000000);
+		}
 		
 		$path = "/templates/{template_path}/favicon.ico";
 		if ($admin) {
 			$path = '..'. self::$imagesPath . 'admin/favicon.ico';
 		}
 		
-		return '<link href="'.$path.'" rel="shortcut icon" type="image/vnd.microsoft.icon" />';
+		return '<link href="'.$path.$random.'" rel="shortcut icon" type="image/vnd.microsoft.icon" />';
 	}
 	
 	/**
@@ -230,13 +231,18 @@ class LittleHelperHelperFavicon
 		
 		// now draw a rectangle with gd! Joomla doesn't support it?
 		$image = imagecreatefrompng($adminImagePath);
-		$col[0]=imagecolorallocate($image,150,0,0);
-		$col[1]=imagecolorallocate($image,255,0,0);
-		$col[2]=imagecolorallocate($image,255,50,50);
+		$brown=imagecolorallocate($image,150,20,20);
+		$red=imagecolorallocate($image,255,0,0);
+		$white=imagecolorallocate($image,255,255,255);
 		
-		imagerectangle($image,0, 0, $jImage->getWidth()-1, $jImage->getHeight()-1, $col[0]);
-		imagerectangle($image,1, 1, $jImage->getWidth()-2, $jImage->getHeight()-2, $col[1]);
-		imagerectangle($image,2, 2, $jImage->getWidth()-3, $jImage->getHeight()-3, $col[2]);
+		imagerectangle($image,0, 0, $jImage->getWidth()-1, $jImage->getHeight()-1, $brown);
+		// red outer top and left
+		imageline($image,0, 0, $jImage->getWidth()-2, 0, $red);
+		imageline($image,0, 0, 0, $jImage->getHeight()-2, $red);
+		imagerectangle($image,1, 1, $jImage->getWidth()-2, $jImage->getHeight()-2, $red);
+		// white inner top and left
+		imageline($image,1, 1, $jImage->getWidth()-2, 1, $white);
+		imageline($image,1, 1, 1, $jImage->getHeight()-2, $white);
 		if (!imagepng($image, $adminImagePath, 0)) {
 			error_log('Error saving image with rectangle');
 		}
