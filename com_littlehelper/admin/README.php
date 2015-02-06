@@ -7,7 +7,6 @@ die();
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @author      Riccardo Zorn <support@fasterjoomla.com> - http://www.fasterjoomla.com/littlehelper
  */
-
 ?>
 
 Little Helper for Joomla Admin
@@ -179,7 +178,7 @@ Version 2.0.0 (2013/10/2)
 	
 	
 	
--- notes for .htaccess improvements:
+-- notes for future .htaccess improvements:
 
 #enable keepalive: (http://www.feedthebot.com/pagespeed/keep-alive.html / https://alicoding.com/how-to-enable-keepalive-in-apache-for-centos-6-4/) 
 <ifModule mod_headers.c> 

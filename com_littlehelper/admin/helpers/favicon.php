@@ -289,7 +289,6 @@ class LittleHelperHelperFavicon
 				return false;// and getImages returns "No images found" error.
 			else {
 				// an image was found
-				// error_log(var_export(self::$master,true));
 			}
 		}
 		$widestImageKey = 0;

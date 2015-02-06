@@ -106,7 +106,7 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		}
 		
 		// K2
-		if ($k2_items = $this->buildTrashModelItem('k2', 'k2', 'k2_items', null, "trash", "`#__k2_items` WHERE trash>0")) {
+		if ($k2_items = $this->buildTrashModelItem('k2', null, 'k2_items', null, "trash", "`#__k2_items` WHERE trash>0")) {
 			$k2_items->valuePublishUp = 0;
 			$k2_items->valuePublishDown = 1;
 			//$k2_items->valueDirection = array('>','<');
@@ -218,6 +218,9 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 	 * @param unknown_type $componentName	// can be null or component name i.e. "content": in the latter case
 	 * 										// Joomla's Table model for the given component is invoked for deletion,
 	 * 										// and sqlPart is used only for getting the count of items.
+	 * 										// ATTENTION! if you haven't ensured the right classes exist for the 
+	 * 										// component and table, simply pass null and the sql will be executed
+	 * 										// instead.
 	 * @param unknown_type $tableName
 	 * @param unknown_type $publishField
 	 * @param unknown_type $sqlPart			// if componentName = null, sqlPart must be filled in
