@@ -165,3 +165,24 @@ Version 2.0.0 (2013/10/2)
 	Added support for jSitemap
 	More responsive interface
 	
+2.3.1 (2015/02/06)
+	Added support for the tags recycle bin
+
+	Added support for slighly modified administrator icons
+	(sketchy filter + red rectangle): this way it will be easier to
+	discriminate admin from frontend icon
+	
+	Bugfix: custom admin icons are not overwritten by the "save configuration" button
+
+	
+	
+	
+	
+	
+-- notes for .htaccess improvements:
+
+#enable keepalive: (http://www.feedthebot.com/pagespeed/keep-alive.html / https://alicoding.com/how-to-enable-keepalive-in-apache-for-centos-6-4/) 
+<ifModule mod_headers.c> 
+	Header set Connection keep-alive 
+</ifModule>
+

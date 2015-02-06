@@ -50,8 +50,9 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$this->trashes[] = $this->buildTrashModelItem('modules', 'modules','modules','module','published');
 		$this->trashes[] = $this->buildTrashModelItem('menuitems',   'menus',  'menu','menu',   'published');
 		$this->trashes[] = $this->buildTrashItem('content','content', '`#__content_frontpage` WHERE content_id in (select id from #__content where `{publishField}`=-2)');
-		$this->trashes[] = $this->buildTrashModelItem('content2',null,'content','content','state');
-
+		$this->trashes[] = $content = $this->buildTrashModelItem('content2',null,'content','content','state');
+		//$content->tableObjectPrefix = "ContentTable";
+		
 		// now we'll delete the unused featured items.
 		if (!empty($this->params->recycle_featured_keep)) {
 			$startfromOrdering=(int)($this->params->recycle_featured_keep);
@@ -74,20 +75,42 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$contacts->tableObjectPrefix = "ContactTable";
 		
 		//WeblinksTableWeblink
-		$this->trashes[] = $weblinks = $this->buildTrashModelItem('weblinks','weblinks','weblinks','weblink',$defaultPublishedColumnName);
-		$weblinks->tableObjectPrefix = "WeblinksTable";
+		if ($weblinks = $this->buildTrashModelItem('weblinks','weblinks','weblinks','weblink',$defaultPublishedColumnName)) {
+			$weblinks->tableObjectPrefix = "WeblinksTable";
+			$this->trashes[] = $weblinks;
+		}
 		
 		//MessagesTableMessage
-		$this->trashes[] = $messages = $this->buildTrashModelItem('messages','messages','messages','message',$defaultPublishedColumnName);
-		$messages->tableObjectPrefix = "MessagesTable";
+		if ($messages = $this->buildTrashModelItem('messages','messages','messages','message',$defaultPublishedColumnName)) {
+			  $messages->tableObjectPrefix = "MessagesTable";
+			  $this->trashes[] = $messages;
+		}
 		
 		// NewsfeedsTableNewsfeed
-		$this->trashes[] = $newsfeeds = $this->buildTrashModelItem('newsfeeds','newsfeeds','newsfeeds','newsfeed','published');
-		$newsfeeds->tableObjectPrefix = "NewsfeedsTable";
+		if ($newsfeeds = $this->buildTrashModelItem('newsfeeds','newsfeeds','newsfeeds','newsfeed','published')) {
+			$newsfeeds->tableObjectPrefix = "NewsfeedsTable";
+			$this->trashes[] = $newsfeeds;
+		}
 		
 		//RedirectTableLink
-		$this->trashes[] = $weblinks = $this->buildTrashModelItem('redirect','redirect','redirect_links','Link',$defaultPublishedColumnName);
-		$weblinks->tableObjectPrefix = "RedirectTable";
+		if ($weblinks = $this->buildTrashModelItem('redirect','redirect','redirect_links','Link',$defaultPublishedColumnName)) {
+			$weblinks->tableObjectPrefix = "RedirectTable";
+			$this->trashes[] = $weblinks;
+		}
+
+		//Tags
+		if ($tags = $this->buildTrashModelItem('tags','tags','tags','Tag',$defaultPublishedColumnName)) {
+			$tags->tableObjectPrefix = "TagsTable";
+			$this->trashes[] = $tags;
+		}
+		
+		// K2
+		if ($k2_items = $this->buildTrashModelItem('k2', 'k2', 'k2_items', null, "trash", "`#__k2_items` WHERE trash<>0")) {
+			$k2_items->valuePublishUp = 0;
+			$k2_items->valuePublishDown = 1;
+			$k2_items->valueDirection = array('>','<');
+			$this->trashes[] = $k2_items;
+		}
 		
 		$this->_data=array();  // this will hold the results (items count for display)
 	}
@@ -213,28 +236,38 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$result->kind = $kind;
 		$result->tableName = $tableName = $tableName?$tableName:$componentName;
 		$result->tableObject = $tableObject?$tableObject:$tableName;
+		$result->valuePublishUp = 1; // 1 and up is published;
+		$result->valueTrash = -2;
+		$result->valueDirection = array('<','>');
+		
 
 		$db = JFactory::getDbo();
-		
-		// query table and fix $publishField if necessary!
-		$columnNames = $db->getTableColumns("#__$tableName");
-		if (!empty($publishField) && array_key_exists($publishField,$columnNames))
-			$result->publishField = $publishField;
-		else if (array_key_exists('state',$columnNames))
-			$result->publishField = 'state';
-		else if (array_key_exists('published',$columnNames))
-			$result->publishField = 'published';
-		else {
-			$result->publishField = $publishField;
-			if ($publishField != null) {
-				// content_frontpage and other non-standard-joomla-cms-model queries are not required
-				// to have a $publishField
-				JError::raiseWarning(514,"Cannot determine the name of the published/state field for #__$tableName");
+		try {
+			// query table and fix $publishField if necessary!
+			$columnNames = $db->getTableColumns("#__$tableName");
+			if (!empty($publishField) && array_key_exists($publishField,$columnNames))
+				$result->publishField = $publishField;
+			else if (array_key_exists('state',$columnNames))
+				$result->publishField = 'state';
+			else if (array_key_exists('published',$columnNames))
+				$result->publishField = 'published';
+			else {
+				$result->publishField = $publishField;
+				if ($publishField != null) {
+					// content_frontpage and other non-standard-joomla-cms-model queries are not required
+					// to have a $publishField
+					JError::raiseWarning(514,"Cannot determine the name of the published/state field for #__$tableName");
+				}
 			}
+		} catch (Exception $e) {
+			return false; // component not installed;
+		} 
+		if ($sqlPart) {
+			$sqlPart = str_replace("{publishField}", $result->publishField, $sqlPart);
+			$sqlPart = str_replace("{valuePublishUp}", $result->valuePublishUp, $sqlPart);
+			$sqlPart = str_replace("{valueTrash}", $result->valuePublishUp, $sqlPart);
+			$result->sqlPart = $sqlPart;
 		}
-		
-		if ($sqlPart)
-			$result->sqlPart = str_replace("{publishField}", $result->publishField, $sqlPart);
 		else
 			$result->sqlPart = "`#__$tableName` WHERE `$result->publishField`=-2";
 		return $result;

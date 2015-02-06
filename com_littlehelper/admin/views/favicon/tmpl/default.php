@@ -115,6 +115,8 @@ if (!empty($fiPath)) {
 						$sitepath.LittleHelperHelperFavicon::$sourcePath.$file);
 				}
 			}
+			/* admin favicons: */
+			// @TODO show admin favicons.
 		?>
 </div>
 

@@ -30,6 +30,6 @@ defined('_JEXEC') or die("<html><head>
 $document = JFactory::getDocument();
 $document->setMetaData('robots', 'noindex, nofollow');
 ?>
-<h1>LittleHelper Knife for Joomla Admin</h1>
-You may or may not be here.
-<?php exit; ?>
+<h1>LittleHelper for Joomla Admin</h1>
+You may or may not be here, depending on the .htaccess file's compatibility with your system.
+<?php exit;?>

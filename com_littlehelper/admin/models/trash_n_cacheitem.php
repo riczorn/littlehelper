@@ -29,6 +29,9 @@ class LittleHelperModelTrash_n_CacheItem extends JObject {
 	public $tableObject;	// this is the suffix of the JTable class i.e. "content" for JTableContent
 	public $tableObjectPrefix='JTable'; // this is optional, not in the constructor.
 	public $publishField;
+	public $valuePublishUp;
+	public $valueTrash;
+	public $valueDirection;
 	public $viewParams;
 	public $sqlPart;			// if componentName = null, sqlPart must be filled in
 	// the following are calculated fields:

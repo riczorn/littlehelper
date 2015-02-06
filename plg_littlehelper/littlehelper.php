@@ -41,6 +41,7 @@ class plgSystemLittleHelper extends JPlugin
 	public function onAfterRender() {
 		if ($this->isAllowed()) {
 			$body = JResponse::getBody();
+ 			
  			// Here I have the chance to pick up all leftover resources which never entered the JDocument Headers.
  			$body = $this->removeIcons($body);
  			 			
@@ -148,6 +149,10 @@ class plgSystemLittleHelper extends JPlugin
 	 * In case no markup is set, then the above function removeIcons won't remove any markup as well.
 	 */
 	private function renderIcons() {
-		return $this->params->get('markup');
+		if (JPATH_BASE == JPATH_ADMINISTRATOR) {
+			return $this->params->get('markupadmin');
+		} else {
+			return $this->params->get('markup');
+		}
 	}
 }

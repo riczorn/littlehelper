@@ -32,7 +32,7 @@ $doc->addScriptDeclaration('
 <?php 
 	$arr = $this->data;
 	echo "<table class='adminlist table table-striped table-condensed'>";
-	echo sprintf("<thead><tr><th>%s</th><th>%s</th></tr></thead><tbody>",
+	echo sprintf("<thead><tr><th>%s</th><th class='right w20'>%s</th></tr></thead><tbody>",
 		JText::_("COM_LITTLEHELPER_RECYCLED_DESC"),
 		JText::_("COM_LITTLEHELPER_RECYCLED_COUNT")
 		);

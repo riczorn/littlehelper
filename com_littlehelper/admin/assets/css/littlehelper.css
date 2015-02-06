@@ -501,3 +501,6 @@ textarea.textbox {width:100%;}
 .dropAltHolder {
 	 width: calc(100% - 40px);
 }
+
+th.w20 {width:20%;}
+th.right {text-align:right;}

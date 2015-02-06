@@ -47,7 +47,10 @@ class LittleHelperModelFavicon extends JModelLegacy {
 	 * Copy the resized images to the final apple precomposed items
 	 * with proper naming;
 	 * Create the favicon;
-	 * Copy it to template and administrator;
+	 * Copy it to frontend template;
+	 * Create the admin favicon;
+	 * Copy to self::$imagesPath.'admin/favicon.ico' for admin
+	 * Save markup (frontend and backend) to the plugin
 	 * 
 	 * @return string|boolean
 	 */
@@ -74,7 +77,8 @@ class LittleHelperModelFavicon extends JModelLegacy {
 		}
 		if ($copied==4) $returnMessage .= JText::_("COM_LITTLEHELPER_FAVICON_APPLE_COPIED")." $destFolder;";
 		
-		$result = LittleHelperHelperFavicon::createFavicon();
+		$result = LittleHelperHelperFavicon::createFavicon(false);
+		$result .= LittleHelperHelperFavicon::createFavicon(true);
 		$returnMessage .= " " . $result;
 		return "$returnMessage";
 	}
@@ -107,7 +111,23 @@ class LittleHelperModelFavicon extends JModelLegacy {
 		$db->setQuery($query);
 		return $db->query();
 	}
-	
+	private function loadParams($extensionName, $type='component') {
+		$db = JFactory::getDBO();
+		$query = $db->getQuery(true);
+		$query->select('a.params')->from('#__extensions AS a');
+		$query->where(sprintf('a.element = %s AND a.%s = %s',
+				$db->quote($extensionName),
+				$db->quoteName('type'),
+				$db->quote($type)
+		));
+		$params = $db->setQuery($query)->loadResult();
+		if ($params) {
+			$params = json_decode($params);
+		} else {
+			$params = new stdClass();
+		}
+		return $params;
+	}	
 	/**
 	 * Save the plugin configuration 
 	 * @return mixed
@@ -116,8 +136,10 @@ class LittleHelperModelFavicon extends JModelLegacy {
 		require_once(JPATH_ADMINISTRATOR."/components/com_littlehelper/helpers/favicon.php");
 		LittleHelperHelperFavicon::initPaths();
 		$head = LittleHelperHelperFavicon::getHead(true);
-		$params = new stdClass();
+		$params = $this->loadParams('littlehelper', 'plugin');
 		$params->markup = $head;
+		$adminhead = LittleHelperHelperFavicon::getHeadAdmin();
+		$params->markupadmin = $adminhead;
 		
 		$jsonparams = json_encode($params);
 		if ($this->saveParams($jsonparams, 'littlehelper', 'plugin'))

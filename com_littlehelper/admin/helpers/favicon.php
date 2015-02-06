@@ -16,8 +16,11 @@ defined('_JEXEC') or die;
 class LittleHelperHelperFavicon
 {
 	public static $extension = 'com_littlehelper';
+	
+	//see getImageInfo for $favicons;
 	public static $favicons = array(
 			144=>false,114=>false,72=>false,57=>false,48=>false,32=>false,24=>false,16=>false);
+
 	public static $master = false;
 	public static $imagesPath = "";
 	public static $thumbsPath = "";
@@ -110,55 +113,135 @@ class LittleHelperHelperFavicon
 		return self::$favicons;
 	}
 	
-	/**
-	 * Return all the headers that should be added to the template <HEAD> section.
-	 */
-	public static function getHead($removeComments = false) {
-		$headDeclarations = array();
+	public static function getHeadFavicon($admin = false) {
 		$random = "";
 		if (self::$params->favicons_forcepreview)
 			$random = "?random=".rand(1000,1000000);
-		$headDeclarations[] = '<link href="/templates/template_path/favicon.ico'.$random.'" rel="shortcut icon" type="image/vnd.microsoft.icon" />';
+		
+		$path = "/templates/{template_path}/favicon.ico";
+		if ($admin) {
+			$path = '..'. self::$imagesPath . 'admin/favicon.ico';
+		}
+		
+		return '<link href="'.$path.'" rel="shortcut icon" type="image/vnd.microsoft.icon" />';
+	}
+	
+	/**
+	 * Return all the headers that should be added to the template <HEAD> section.
+	 * {template_path} is a placeholder replaced at the end;
+	 */
+	public static function getHead($removeComments = false) {
+		$headDeclarations = array();
+		
+		$headDeclarations[] = self::getHeadFavicon(false); 
 		if (!$removeComments)
 			$headDeclarations[] = '<!-- For third-generation iPad with high-resolution Retina display: -->';
-		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/templates/template_path/apple-touch-icon-144x144-precomposed.png" />';
+		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/templates/{template_path}/apple-touch-icon-144x144-precomposed.png" />';
 		if (!$removeComments)
 			$headDeclarations[] = '<!-- For iPhone with high-resolution Retina display: -->';
-		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/templates/template_path/apple-touch-icon-114x114-precomposed.png" />';
+		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/templates/{template_path}/apple-touch-icon-114x114-precomposed.png" />';
 		if (!$removeComments)
 			$headDeclarations[] = '<!-- For first- and second-generation iPad: -->';
-		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/templates/template_path/apple-touch-icon-72x72-precomposed.png" />';
+		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/templates/{template_path}/apple-touch-icon-72x72-precomposed.png" />';
 		if (!$removeComments)
 			$headDeclarations[] = '<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->';
-		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" href="/templates/template_path/apple-touch-icon-precomposed.png" />';
+		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" href="/templates/{template_path}/apple-touch-icon-precomposed.png" />';
 
 		$template = LittleHelperHelperFavicon::$templatePath;
 		
-		$head = str_replace("/templates/template_path/", $template, join("\n", $headDeclarations));
+		$head = str_replace("/templates/{template_path}/", $template, join("\n", $headDeclarations));
 		return $head;
 	}
 
+	public static function getHeadAdmin() {
+		$headDeclarations = array();
+	
+		$headDeclarations[] = self::getHeadFavicon(true);
+		
+		$template = LittleHelperHelperFavicon::$templatePath;
+	
+		$head = str_replace("/templates/{template_path}/", $template, join("\n", $headDeclarations));
+		return $head;
+	}
 	
 	/**
 	 * Create the multiresolution favicon using PHP-ICO
+	 * If $sideAdmin, then a new icon set will be generated for the admin
 	 * @param unknown_type $sideAdmin
 	 * @return string|boolean
 	 */
 	public static function createFavicon($sideAdmin=false) {
-		require( dirname(dirname( __FILE__ )) . '/libraries/php-ico-master/class-php-ico.php' );
-		$faviconNameAdmin = JPATH_SITE.self::$templatePathAdmin."favicon.ico";
-		$faviconNameSite = JPATH_SITE.self::$templatePath."favicon.ico";
+		require_once( dirname(dirname( __FILE__ )) . '/libraries/php-ico-master/class-php-ico.php' );
+		if ($sideAdmin) 
+		{
+			$faviconName = JPATH_SITE . self::$imagesPath.'admin/favicon.ico';
+			// we don't want to save to /administrator/templates/isis/favicon
+			// as an update package will overwrite the icon.
+			// $faviconName = JPATH_SITE.self::$templatePathAdmin."favicon.ico";
+		} else 
+		{
+			$faviconName = JPATH_SITE . self::$templatePath . "favicon.ico";
+		}
 		$ico_lib = new PHP_ICO();
-		foreach(array(16,24,32,48) as $size) {
+		foreach(array(16,24,32,48) as $size) 
+		{
 			$image = self::$favicons[$size];
+			if ($sideAdmin) {
+				// apply transformation for admin favicon;
+				$image->fullpath = self::applyAdminStyle($image);
+			}
 			$ico_lib->add_image( $image->fullpath, array( array( $size, $size ) ) );
 		}
-		if ($result = $ico_lib->save_ico( $faviconNameSite )) {
-			return JText::_("COM_LITTLEHELPER_FAVICON_FAVICON_SAVEDTO")." " .$faviconNameSite;
+		if ($result = $ico_lib->save_ico( $faviconName )) {
+			return JText::_("COM_LITTLEHELPER_FAVICON_FAVICON_SAVEDTO")." " .$faviconName."; ";
 		} else {
-			JError::raiseWarning(110,JText::_("COM_LITTLEHELPER_FAVICON_FAVICON_ERROR_SAVE")." $faviconNameSite");
+			JError::raiseWarning(110,JText::_("COM_LITTLEHELPER_FAVICON_FAVICON_ERROR_SAVE")." $faviconName");
 			return false;
 		}
+	}
+	
+	/**
+	 * Apply some "random" changes to the image so we will be able to differentiate
+	 * 	the admin icon from the site's;
+	 * Save the new icon under the same path + '/admin', and return the new path
+	 * @param unknown $image
+	 * @return string
+	 */
+	private static function applyAdminStyle(&$sourceImage) {
+		jimport('joomla.image.image');
+		$jImage = new Jimage($sourceImage->fullpath);
+		if (!$jImage->isLoaded()) {
+			return false;
+		}
+// 		if ($jImage->isTransparent()) {
+// 			// replace transparent with Red;
+// 			$jImage = $jImage->filter('negate');
+// 		} else {
+ 			$jImage = $jImage->filter('sketchy');
+// 		}
+		
+		// change the file name adding an admin folder under /icon
+		$adminImagePath = str_replace(self::$imagesPath, self::$imagesPath.'admin/', $sourceImage->fullpath);
+		if (!JFolder::exists(dirname($adminImagePath))) {
+			JFolder::create(dirname($adminImagePath),0755);
+		}
+		
+		$jImage->toFile($adminImagePath, IMAGETYPE_PNG);
+		
+		// now draw a rectangle with gd! Joomla doesn't support it?
+		$image = imagecreatefrompng($adminImagePath);
+		$col[0]=imagecolorallocate($image,150,0,0);
+		$col[1]=imagecolorallocate($image,255,0,0);
+		$col[2]=imagecolorallocate($image,255,50,50);
+		
+		imagerectangle($image,0, 0, $jImage->getWidth()-1, $jImage->getHeight()-1, $col[0]);
+		imagerectangle($image,1, 1, $jImage->getWidth()-2, $jImage->getHeight()-2, $col[1]);
+		imagerectangle($image,2, 2, $jImage->getWidth()-3, $jImage->getHeight()-3, $col[2]);
+		if (!imagepng($image, $adminImagePath, 0)) {
+			error_log('Error saving image with rectangle');
+		}
+		imagedestroy($image);
+		return $adminImagePath;
 	}
 	
 	/**

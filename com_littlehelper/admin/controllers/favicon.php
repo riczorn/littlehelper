@@ -55,7 +55,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 	 */
 	public function publish($cachable = false, $urlparams = false) {
 		if ($message = $this->getModel()->publish()) {
-			$message .= "; " . $this->getModel()->saveConfiguration();
+			$message .= " " . $this->getModel()->saveConfiguration();
 			$this->getModel()->setPluginState(true);
 				
 			$this->setRedirect(JRoute::_('index.php?option=com_littlehelper&view=favicon', false),
@@ -101,7 +101,6 @@ class LittleHelperControllerFavicon extends JControllerForm
 	 * @param unknown_type $urlparams
 	 */
 	public function saveImageCrop($cachable = false, $urlparams = false) {
-		error_log('saveImageCrop');
 		if (! $this->testUploadErrors() ) { // which handles writing the response by itself
 			if ($sourceImage = $this->saveImage()) {
 				
@@ -114,7 +113,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 					'" />');
 			}
 		} else {
-			error_log('some errors found!');
+			error_log('saveImageCrop: errors found!');
 		}
 		exit;
 	}
@@ -169,7 +168,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 			// no file was uploaded
 			if ($input->getBool('noimage',false) && ($src = $input->getString('imagesrc'))) {
 				// no image uploaded purposefully, but an image was selected for cropping:
-				error_log('No image was uploaded, only crop requested;');
+				// error_log('No image was uploaded, only crop requested;');
 				return false;
 			} else {
 				$this->respond('Error: I could not retrieve the uploaded file',0);
@@ -184,7 +183,6 @@ class LittleHelperControllerFavicon extends JControllerForm
 	 * @return boolean|string
 	 */
 	private function saveImage() {
-		error_log('saveImage');
 		$input = JFactory::getApplication()->input;
 		$maxFileSize = 15*1024*1024;
 		require_once(JPATH_COMPONENT."/helpers/favicon.php");
