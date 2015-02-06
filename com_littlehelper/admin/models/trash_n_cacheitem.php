@@ -31,7 +31,7 @@ class LittleHelperModelTrash_n_CacheItem extends JObject {
 	public $publishField;
 	public $valuePublishUp;
 	public $valueTrash;
-	public $valueDirection;
+	//public $valueDirection;
 	public $viewParams;
 	public $sqlPart;			// if componentName = null, sqlPart must be filled in
 	// the following are calculated fields:

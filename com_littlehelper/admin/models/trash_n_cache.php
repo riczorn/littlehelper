@@ -49,7 +49,8 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		// breaks on weblinks: published Field is wrong?
 		$this->trashes[] = $this->buildTrashModelItem('modules', 'modules','modules','module','published');
 		$this->trashes[] = $this->buildTrashModelItem('menuitems',   'menus',  'menu','menu',   'published');
-		$this->trashes[] = $this->buildTrashItem('content','content', '`#__content_frontpage` WHERE content_id in (select id from #__content where `{publishField}`=-2)');
+		$this->trashes[] = $this->buildTrashItem('content','content', 
+				'`#__content_frontpage` WHERE content_id in (select id from #__content where `{publishField}`={valueTrash})');
 		$this->trashes[] = $content = $this->buildTrashModelItem('content2',null,'content','content','state');
 		//$content->tableObjectPrefix = "ContentTable";
 		
@@ -105,10 +106,10 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		}
 		
 		// K2
-		if ($k2_items = $this->buildTrashModelItem('k2', 'k2', 'k2_items', null, "trash", "`#__k2_items` WHERE trash<>0")) {
+		if ($k2_items = $this->buildTrashModelItem('k2', 'k2', 'k2_items', null, "trash", "`#__k2_items` WHERE trash>0")) {
 			$k2_items->valuePublishUp = 0;
 			$k2_items->valuePublishDown = 1;
-			$k2_items->valueDirection = array('>','<');
+			//$k2_items->valueDirection = array('>','<');
 			$this->trashes[] = $k2_items;
 		}
 		
@@ -238,7 +239,7 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$result->tableObject = $tableObject?$tableObject:$tableName;
 		$result->valuePublishUp = 1; // 1 and up is published;
 		$result->valueTrash = -2;
-		$result->valueDirection = array('<','>');
+		//$result->valueDirection = array('<','>');
 		
 
 		$db = JFactory::getDbo();
@@ -265,11 +266,13 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		if ($sqlPart) {
 			$sqlPart = str_replace("{publishField}", $result->publishField, $sqlPart);
 			$sqlPart = str_replace("{valuePublishUp}", $result->valuePublishUp, $sqlPart);
-			$sqlPart = str_replace("{valueTrash}", $result->valuePublishUp, $sqlPart);
+			$sqlPart = str_replace("{valueTrash}", $result->valueTrash, $sqlPart);
+// 			$sqlPart = str_replace("{valueDirectionTrash}", $result->valueDirection[0], $sqlPart);
+// 			$sqlPart = str_replace("{valueDirectionPublished}", $result->valueDirection[1], $sqlPart);
 			$result->sqlPart = $sqlPart;
 		}
 		else
-			$result->sqlPart = "`#__$tableName` WHERE `$result->publishField`=-2";
+			$result->sqlPart = "`#__$tableName` WHERE `$result->publishField`='$result->valueTrash'";
 		return $result;
 	}
 
