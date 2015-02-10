@@ -6,7 +6,7 @@
  * These are sometimes marked as viral, so this file needs to be submitted to 
  * anvirus companies for manual exclusion after each change.
  * 
- * @version    2.3.2
+ * @version    2.3.3
  * @package    LittleHelper
  * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
  * @copyright  Riccardo Zorn

@@ -179,6 +179,9 @@ Version 2.0.0 (2013/10/2)
 	an exclusion.
 	
 	Added error handling for the sketchy filter 
+2.3.3 (2015/02/10)
+	Fixed a few error messages
+
 	
 	
 -- notes for future .htaccess improvements:
