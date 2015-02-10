@@ -59,7 +59,7 @@ class LittleHelperControllerFavicon extends JControllerForm
 			$message .= " " . $model->saveConfiguration();
 			
 			if (! $this->getModel('trash_n_cache')->clearAdministratorCache()) {
-				$message .= JText::_("COM_LITTLEHELPER_TRASH_ERROR_ADMIN");
+				$message .= "; " . JText::_("COM_LITTLEHELPER_TRASH_ERROR_ADMIN");
 			}
 			
 			

@@ -303,7 +303,7 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 	 */
 	public function clearAdministratorCache() {
 		$adminCacheFolder = JPATH_ADMINISTRATOR . '/cache';
-		// i.e. $adminCacheFolder = '/home/fasterjoomla/public_html/administrator/cache';
+		// i.e. $adminCacheFolder = '/home/your_site/html/administrator/cache';
 		$cachesToClean = scandir($adminCacheFolder);
 		foreach($cachesToClean as $key=>$singleCacheItem) {
 			if (count_chars($singleCacheItem)==0
@@ -315,14 +315,17 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		}
 		$res = '';
 		$total = 0;
+		require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
 		foreach ( $cachesToClean as $i=>$cacheFolder ) {
 			$cache_dir = JPATH_ADMINISTRATOR.'/cache/'.$cacheFolder;
-			require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
 			list($res,$errormessage) = LittleHelperHelperTrash_n_Cache::removeFolder($cache_dir);
 		 	$total += $res;
 		}
+		// $total+2 as _system and possibly com_plugins folders will be recreated 
+		// while we're cleaning the folder!
+		$result = $total+2 >= count($cachesToClean);
 		
-		return ($total == count($cachesToClean));
+		return ($result);
 	}
 
 	/**

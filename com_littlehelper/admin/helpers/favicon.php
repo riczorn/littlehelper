@@ -216,7 +216,10 @@ class LittleHelperHelperFavicon
 		}
 
 		try {
-			$jImage = $jImage->filter('sketchy');	
+			if (!defined('LH_ERR_FILTER_WARNED')) {
+				// if we ran into a filter error already, let's not raise more!
+				$jImage = $jImage->filter('sketchy');
+			}	
 			// 		if ($jImage->isTransparent()) {
 			// 			// replace transparent with Red;
 			// 			$jImage = $jImage->filter('negate');
@@ -225,7 +228,11 @@ class LittleHelperHelperFavicon
 				
 			// 		}		
 		} catch(Exception $e) {
-			JFactory::getApplication()->enqueueMessage('Error applying admin image filter '.$e,'error');
+			if (!defined('LH_ERR_FILTER_WARNED')) {
+				// The image filter already enqueues a message
+				// JFactory::getApplication()->enqueueMessage('Error applying admin image filter sketchy','error');
+				define('LH_ERR_FILTER_WARNED','1');
+			}
 			// there is no action required, the user will do without the filter!
 		}
 		
