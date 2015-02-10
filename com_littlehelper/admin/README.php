@@ -173,7 +173,10 @@ Version 2.0.0 (2013/10/2)
 	
 	Bugfix: custom admin icons are not overwritten by the "save configuration" button
 
-	
+2.3.2 (2015/02/10)
+	Moved the shell functions to a dedicated helper. This allows to reduce the necessity
+	of changing such file, so it can be submitted to Antivirus sites to be added as 
+	an exclusion.
 	
 	
 	

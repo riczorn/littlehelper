@@ -317,7 +317,8 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		$total = 0;
 		foreach ( $cachesToClean as $i=>$cacheFolder ) {
 			$cache_dir = JPATH_ADMINISTRATOR.'/cache/'.$cacheFolder;
-		 	list($res,$errormessage) = $this->removeFolder($cache_dir);
+			require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
+			list($res,$errormessage) = LittleHelperHelperTrash_n_Cache::removeFolder($cache_dir);
 		 	$total += $res;
 		}
 		
@@ -470,86 +471,7 @@ SET time_zone = \"+00:00\";
 				echo "<div class='result global error'>".JText::_("COM_LITTLEHELPER_ERROR")." ".JText::_("COM_LITTLEHELPER_TIP_SELECT_OPTIONS")."</div>";
 		}
 	}
-	/**
-	 * Request removal of the $folder (which could also be a file!)
-	 * @param unknown_type $folder
-	 * res = 1: success
-	 * res = 0: failure
-	 * @return array(result, errormessage)
-	 */
-	private function removeFolder($folder) {
-		$errormessage = "";
-		$output = "";
-		$res = 1;
-		if (file_exists($folder)) {
-			list($res,$output)=$this->shellrmdir($folder);
-			$errormessage = $output;
-		} else {
-			// default res = 1 
-			$errormessage =sprintf(JText::_("COM_LITTLEHELPER_ERROR_NOEXIST"),"<b>$folder</b>");
-			echo "<div class='result gray'>$errormessage</div>";
-		}
-		return (array($res,$errormessage));
-	}
-	
-	/**
-	 * Attempt to remove the $folder with shell (linux) commands, which should be faster.
-	 * Several attempts are made, hoping to find a way to invoke system commands. This
-	 * depends on the webserver configuration and its users' privileges.
-	 * After this is done, regardless of output, a php-recursive function is invoked.
-	 * The latter should clean all leftover files in case any of the system
-	 * commands were successful.
 
-	 * @param unknown_type $folder
-	 * @return multitype:Ambigous <string, unknown> boolean
-	 */
-	private function shellrmdir($folder)
-	{
-		 $cmd = "rm -rf ".escapeshellarg("$folder") . " 2>&1";
-		 $res = false;
-		 if(function_exists('system'))
-		 {
-		 	@ob_start();
-		 	@system($cmd,$res);
-		 	$buff = @ob_get_contents();
-		 	@ob_end_clean();
-	
-		 }
-		 elseif(function_exists('exec'))
-		 {
-		 	@exec($cmd,$results,$res);
-		 	$buff = "";
-		 	foreach($results as $result)
-		 	{
-		 		$buff .= $result;
-		 	}
-	
-		 }
-		 elseif(function_exists('passthru'))
-		 {
-		 	@ob_start();
-		 	@passthru($cmd,$res);
-		 	$buff = @ob_get_contents();
-		 	@ob_end_clean();
-	
-		 }
-		 elseif(function_exists('shell_exec'))
-		 {
-		 	$buff = @shell_exec($cmd);
-		 	$res = 1;
-		 } else {
-		 	// most likely none of the passthru system exec are available:
-		 	// thus we need to use a php recursion:
-		 }
-		 // instead, since we're not running risks, and this is also
-		 // handling wrong file permissions, and if any of the above worked
-		 // there won't be anything to clear, so we're not adding overhead,
-		 // we use this unconditionally.  Of course, we're losing $res but
-		 // do we really care?
-		 require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
-		 $res = LittleHelperHelperTrash_n_Cache::removeFolderPHP($folder);
-		 return array($res,$buff);
-	}
 
 	/**
 	 * Generic function to clean a single folder of cache,
@@ -574,7 +496,8 @@ SET time_zone = \"+00:00\";
 		 	$res = $cache->clean()?1:0;
 		} else {
 		 	$cache_dir = dirname(JPATH_BASE).'/cache/'.$cacheFolder;
-		 	list($res,$errormessage) = $this->removeFolder($cache_dir);
+		 	require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
+		 	list($res,$errormessage) = LittleHelperHelperTrash_n_Cache::removeFolder($cache_dir);
 		 	// values are: 0 = ok; else !ok
 		}
 		

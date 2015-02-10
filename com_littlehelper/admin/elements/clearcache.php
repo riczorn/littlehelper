@@ -1,6 +1,7 @@
 <?php
 /**
  * Custom form element to automatically clear the administration cache on show.
+ * This is used in favicon generation.
  * 
  * @version SVN: $Id$
  * @package    LittleHelper
@@ -32,9 +33,5 @@ class JFormFieldClearCache extends JFormField
     	else {
     		return "Error clearing cache";
     	}  
-    	//require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
-		// $res = LittleHelperHelperTrash_n_Cache::removeFolderPHP($folder);
-		
-		//return "Clearing admin cache...";
 	}
 }
