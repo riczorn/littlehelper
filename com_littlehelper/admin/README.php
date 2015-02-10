@@ -178,7 +178,7 @@ Version 2.0.0 (2013/10/2)
 	of changing such file, so it can be submitted to Antivirus sites to be added as 
 	an exclusion.
 	
-	
+	Added error handling for the sketchy filter 
 	
 	
 -- notes for future .htaccess improvements:
