@@ -214,12 +214,21 @@ class LittleHelperHelperFavicon
 		if (!$jImage->isLoaded()) {
 			return false;
 		}
-// 		if ($jImage->isTransparent()) {
-// 			// replace transparent with Red;
-// 			$jImage = $jImage->filter('negate');
-// 		} else {
- 			$jImage = $jImage->filter('sketchy');
-// 		}
+
+		try {
+			$jImage = $jImage->filter('sketchy');	
+			// 		if ($jImage->isTransparent()) {
+			// 			// replace transparent with Red;
+			// 			$jImage = $jImage->filter('negate');
+			// 		} else {
+			
+				
+			// 		}		
+		} catch(Exception $e) {
+			JFactory::getApplication()->enqueueMessage('Error applying admin image filter '.$e,'error');
+			// there is no action required, the user will do without the filter!
+		}
+		
 		
 		// change the file name adding an admin folder under /icon
 		$adminImagePath = str_replace(self::$imagesPath, self::$imagesPath.'admin/', $sourceImage->fullpath);
