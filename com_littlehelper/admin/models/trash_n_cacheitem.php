@@ -158,8 +158,12 @@ class LittleHelperModelTrash_n_CacheItem extends JObject {
 				// Most likely we are trying to empty the trash of an element which should have assets but doesn't.
 				// so we shall proceed with $this->emptyTrashDb();
 				$this->emptyTrashDb();
+				error_log("COM_LITTLEHELPER_TRASH_ERROR_ASSETS_FAILOVER_DB");
+				error_log(var_export($errMsgId, true));
 				$errMsg[] = sprintf(JText::_("COM_LITTLEHELPER_TRASH_ERROR_ASSETS_FAILOVER_DB"),
-					$this->kind, implode(",",$errMsgId));
+						$this->kind, 'Details saved in Server logs');
+				// $errMsg[] = sprintf(JText::_("COM_LITTLEHELPER_TRASH_ERROR_ASSETS_FAILOVER_DB"),
+				//	$this->kind, implode(",",$errMsgId));
 			}
 			if (is_callable(array($table, 'getErrors') )) {
 				$errors = $table->getErrors();

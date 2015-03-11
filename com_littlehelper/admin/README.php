@@ -191,3 +191,7 @@ Version 2.0.0 (2013/10/2)
 	Header set Connection keep-alive 
 </ifModule>
 
+Note: Antivirus false positives on
+https://www.gdata.it/security-labs
+https://support.avast.com/index.php?/Tickets/Ticket/View/MGV-610-85018
+http://esupport.trendmicro.com/app/threatservice/inquire.aspx?UDkmSWiz5BGxuQAbIUlYwA

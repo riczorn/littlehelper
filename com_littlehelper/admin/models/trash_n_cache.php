@@ -496,7 +496,7 @@ SET time_zone = \"+00:00\";
 		$output = null;
 		if ($useJoomla) {
 		 	$cache = JFactory::getCache($cacheFolder,'');
-		 	$res = $cache->clean()?1:0;
+		 	$res = $cache->clean()?0:1;
 		} else {
 		 	$cache_dir = dirname(JPATH_BASE).'/cache/'.$cacheFolder;
 		 	require_once JPATH_ADMINISTRATOR.'/components/com_littlehelper/helpers/trash_n_cache.php';
@@ -504,7 +504,7 @@ SET time_zone = \"+00:00\";
 		 	// values are: 0 = ok; else !ok
 		}
 		
-		if ($res != 0) {
+		if ($res == 0) {
 	 		echo "<div class='result'><span class='folder'>$cacheFolder</span><span class='value'>".JText::_("COM_LITTLEHELPER_OK")."</span></div>";
 		}
 		else {
@@ -514,7 +514,7 @@ SET time_zone = \"+00:00\";
 		 	}
 		 	echo "</div>";
 		}
-		return $res==0?0:1;
+		return $res==0?1:0;
 	}
 }
 
