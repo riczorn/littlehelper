@@ -118,7 +118,7 @@ class LittleHelperModelLittleHelper extends JModelLegacy {
 		$app->enqueueMessage('Sending email to '.$mailrecipients);
 		$recipient = explode(',',$mailrecipients);
 		if (empty($recipient)) {
-			$app->enqueueMessage('No recipient set (could not retrieve your user\'s email address)');
+			$app->enqueueMessage(JText::_("COM_LITTLEHELPER_MAIL_NO_RECIPIENT"));
 			return false;
 		}
 		$mailer->addRecipient($recipient);
@@ -130,34 +130,60 @@ class LittleHelperModelLittleHelper extends JModelLegacy {
 		$message = array();
 		$message[] = sprintf(JText::_("COM_LITTLEHELPER_MAIL_MESSAGE"),$sitename);
 		$message[] = "\n\n";
-		$message[] = $data;
-		$message[] = "\n\n";
 		$message[] =("Server mail configuration");
 		
-		$message[] = ("mailer:    ".$config->get( 'mailer' ));
-		$message[] = ("mailfrom:    ".$config->get( 'mailfrom' ));
-		$message[] = ("fromname:    ".$config->get( 'fromname' ));
-		$message[] = ("sendmail:    ".$config->get( 'sendmail' ));
-		$message[] = ("smtpauth:    ".$config->get( 'smtpauth' ));
-		$message[] = ("smtpuser:    ".$config->get( 'smtpuser' ));
-		$message[] = ("smtphost:    ".$config->get( 'smtphost' ));
-		$message[] = ("smtpsecure:    ".$config->get( 'smtpsecure' ));
-		$message[] = ("smtpport:    ".$config->get( 'smtpport' ));
+		$message[] = $this->echoParam($config, 'mailer');
+		$message[] = $this->echoParam($config, 'mailfrom');
+		$message[] = $this->echoParam($config, 'fromname');
+		$message[] = $this->echoParam($config, 'sendmail');
+		$message[] = $this->echoParam($config, 'smtpauth');
+		$message[] = $this->echoParam($config, 'smtpuser');
+		// I won't echo the password, but I want to test it for whitespace:
+		$this->echoParam($config, 'smtppass');
+		$message[] = $this->echoParam($config, 'smtphost');
+		$message[] = $this->echoParam($config, 'smtpsecure');
+		$message[] = $this->echoParam($config, 'smtpport');
+		$message[] = $this->echoParam($config, 'mailonline');
 		
-		
+		$message[] = "\n\n";
+		$message[] = $data;
 		
 		$body   = join("\n", $message);
 
 		$mailer->setSubject(JText::_("COM_LITTLEHELPER_MAIL_SUBJECT"));
 		$mailer->setBody($body);
 
+		try {
+			$result = $mailer->Send();
+		} catch (Exception $e) {
+			$app->enqueueMessage($e->message,'warning');
+			$result = false;
+		}
 		
-		$result = $mailer->Send();
 		
-		$app->enqueueMessage("Message: ".str_replace("\n","\n<br>",$body));
+		$app->enqueueMessage("Message: <pre>".str_replace("\n","<br>",$body)."</pre>");
 		
 
 		
 		return $result;
+	}
+	
+	/**
+	 * Used to build the configuration part of the test email
+	 * @param unknown $paramName
+	 */
+	private function echoParam($config, $paramName) {
+		$languageConstant = "COM_CONFIG_FIELD_".strtoupper($paramName)."_LABEL";
+		$label = JText::_($languageConstant);
+		if ($label == $languageConstant) {
+			$label = ucfirst($paramName);
+		}
+		$value = $config->get( $paramName );
+		if ($value !== trim($value," \n\r\f\t")) {
+			$label .= ' *';
+			$app = JFactory::getApplication(); 
+			$app->enqueueMessage($paramName . ' * '. JText::_("COM_LITTLEHELPER_MAIL_CONFIG_EMPTY"),'warning');
+		}
+		return  (str_pad($label,11).": '".$value."'");
 	}
 }
