@@ -94,4 +94,70 @@ class LittleHelperModelLittleHelper extends JModelLegacy {
 
 		return true;
 	}	
+	
+	/**
+	 * Send a very basic simple email message to the current user, 
+	 * including the configuration
+	 * of the website's mail functions.
+	 * @return boolean|mixed
+	 */
+	public function sendemail() {
+
+		$data = 'Courtesy of Fasterjoomla.com, keeping your sites tidy since 1994.';
+		$error = '';
+		// now let's send an email to the admin users
+		$mailer = JFactory::getMailer();
+		$config = JFactory::getConfig();
+		$sender = array(
+				$config->get( 'mailfrom' ),
+				$config->get( 'fromname' ) );
+	
+		$mailer->setSender($sender);
+		$app = JFactory::getApplication();
+		$mailrecipients = JFactory::getUser()->get('email');
+		$app->enqueueMessage('Sending email to '.$mailrecipients);
+		$recipient = explode(',',$mailrecipients);
+		if (empty($recipient)) {
+			$app->enqueueMessage('No recipient set (could not retrieve your user\'s email address)');
+			return false;
+		}
+		$mailer->addRecipient($recipient);
+		$error = "\n\n".$data."\n\n".$error;
+	
+		$user = JFactory::getUser();
+		$sitename = $config->get('sitename');
+		
+		$message = array();
+		$message[] = sprintf(JText::_("COM_LITTLEHELPER_MAIL_MESSAGE"),$sitename);
+		$message[] = "\n\n";
+		$message[] = $data;
+		$message[] = "\n\n";
+		$message[] =("Server mail configuration");
+		
+		$message[] = ("mailer:    ".$config->get( 'mailer' ));
+		$message[] = ("mailfrom:    ".$config->get( 'mailfrom' ));
+		$message[] = ("fromname:    ".$config->get( 'fromname' ));
+		$message[] = ("sendmail:    ".$config->get( 'sendmail' ));
+		$message[] = ("smtpauth:    ".$config->get( 'smtpauth' ));
+		$message[] = ("smtpuser:    ".$config->get( 'smtpuser' ));
+		$message[] = ("smtphost:    ".$config->get( 'smtphost' ));
+		$message[] = ("smtpsecure:    ".$config->get( 'smtpsecure' ));
+		$message[] = ("smtpport:    ".$config->get( 'smtpport' ));
+		
+		
+		
+		$body   = join("\n", $message);
+
+		$mailer->setSubject(JText::_("COM_LITTLEHELPER_MAIL_SUBJECT"));
+		$mailer->setBody($body);
+
+		
+		$result = $mailer->Send();
+		
+		$app->enqueueMessage("Message: ".str_replace("\n","\n<br>",$body));
+		
+
+		
+		return $result;
+	}
 }
