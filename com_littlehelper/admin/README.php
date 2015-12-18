@@ -182,8 +182,7 @@ Version 2.0.0 (2013/10/2)
 2.3.3 (2015/02/10)
 	Fixed a few error messages
 
-2.3.5 (2015/04/07)
-	Quickly send a mail message, just to make sure the mail configuration is correct. 
+	
 	
 -- notes for future .htaccess improvements:
 

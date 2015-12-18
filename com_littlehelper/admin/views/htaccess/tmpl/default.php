@@ -51,6 +51,12 @@ $document = JFactory::getDocument();
 		}
 	
 </script>
+<div id="exploitbox">
+<?php echo JText::_("COM_LITTLEHELPER_EXPLOIT_DESC"); ?>
+<a class="button popup" href="index.php?option=com_littlehelper&task=htaccess.findExploits">
+<?php echo JText::_("COM_LITTLEHELPER_EXPLOIT_LABEL"); ?>
+</a>
+</div>
 <?php echo JText::_("COM_LITTLEHELPER_HTACCESS_DESC"); ?><br><br>
 <table class="adminlist htfiles table table-striped table-condensed">
 <tr><th><?php echo JText::_("COM_LITTLEHELPER_HTACCESS_TYPE"); ?></th><th>.htaccess</th><th>index.html</th></tr>

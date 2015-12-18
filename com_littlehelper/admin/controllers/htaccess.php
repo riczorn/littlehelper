@@ -136,4 +136,14 @@ class LittleHelperControllerHtaccess extends JControllerForm
 		}
 	}
 
+	/**
+	 * Search for common exploits, and return the list of issues with the filenames.
+	 */
+	public function findExploits() {
+		$model = $this->getModel();
+		$model->findExploits();
+		$input = JFactory::getApplication()->input;
+		
+		//exit;
+	}
 }

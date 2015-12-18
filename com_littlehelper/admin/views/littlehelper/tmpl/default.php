@@ -36,12 +36,6 @@ defined('_JEXEC') or die;
 	</span></p>
 	<p><?php 
 	echo JText::_("COM_LITTLEHELPER_INTRO_RELAX"); ?></p>
-	<p>
-	<p>
-	<a class="fancybutton" href="index.php?option=com_littlehelper&task=littlehelper.sendemail"
-	title="<?php echo JText::_("COM_LITTLEHELPER_MAIL_BUTTON_TIP")?>"
-	><?php echo JText::_("COM_LITTLEHELPER_MAIL_BUTTON")?></a>
-	</p>
 </div>
 <div class='availablemodules'>
 <?php 

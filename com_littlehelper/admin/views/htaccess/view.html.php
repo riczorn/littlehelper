@@ -29,7 +29,19 @@ class LittleHelperViewHtaccess extends JViewLegacy
 		JToolBarHelper::title( "<em>".  JText::_("COM_LITTLEHELPER")."</em> ".JText::_("COM_LITTLEHELPER_HTACCESS"),'littlehelper' );		
 		//JToolBarHelper::custom( 'default','default','default',JText::_("COM_LITTLEHELPER_CMD_DEFAULT"), false);
 		JToolBarHelper::preferences('com_littlehelper');
-				
+
+		$bar = JToolbar::getInstance('toolbar');
+		
+		// Add a preview button.
+		//	public function fetchButton($type = 'Modal', $name = '', $text = '',
+		//		$url = '', $width = 640, $height = 480, $top = 0, $left = 0,
+		//		$onClose = '', $title = '', $footer = null)
+		
+		$bar->appendButton('popup', 'process', 'COM_LITTLEHELPER_EXPLOIT_LABEL',
+				'index.php?option=com_littlehelper&task=htaccess.findExploits&tmpl=component',
+				640,480,0,0,'','Now processing...','Click anywhere to close');
+		
+		
 		require_once(JPATH_COMPONENT."/helpers/littlehelper.php");
 		LittleHelperHelper::addStyles();
 		

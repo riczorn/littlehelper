@@ -44,14 +44,14 @@ abstract class modLittleHelperHelper
 				'.
 				// joomla 30
 				'
-				#littlehelpermoduletoolbar-status button i.icon-cog:before,
-				#littlehelpermoduletoolbar-cpanel button i.icon-cog:before {content:""}
-				#littlehelpermoduletoolbar-status-popup-ccfs button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/cachefs16.png);}
-				#littlehelpermoduletoolbar-cpanel-popup-ccfs button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/cachefs16.png);}
-				#littlehelpermoduletoolbar-status-popup-ccjoomla button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/cachecc16.png);}
-				#littlehelpermoduletoolbar-cpanel-popup-ccjoomla button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/cachecc16.png);}
-				#littlehelpermoduletoolbar-status-popup-trash button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);}
-				#littlehelpermoduletoolbar-cpanel-popup-trash button i.icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);} 					
+				#littlehelpermoduletoolbar-status button .icon-cog:before,
+				#littlehelpermoduletoolbar-cpanel button .icon-cog:before {content:""}
+				#littlehelpermoduletoolbar-status-popup-ccfs button .icon-cog {background-image:url(components/com_littlehelper/assets/images/cachefs16.png);}
+				#littlehelpermoduletoolbar-cpanel-popup-ccfs button .icon-cog {background-image:url(components/com_littlehelper/assets/images/cachefs16.png);}
+				#littlehelpermoduletoolbar-status-popup-ccjoomla button .icon-cog {background-image:url(components/com_littlehelper/assets/images/cachecc16.png);}
+				#littlehelpermoduletoolbar-cpanel-popup-ccjoomla button .icon-cog {background-image:url(components/com_littlehelper/assets/images/cachecc16.png);}
+				#littlehelpermoduletoolbar-status-popup-trash button .icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);}
+				#littlehelpermoduletoolbar-cpanel-popup-trash button .icon-cog {background-image:url(components/com_littlehelper/assets/images/bin16.png);} 					
 
 				#trashncacheForm {
 					float:right;
@@ -70,14 +70,14 @@ abstract class modLittleHelperHelper
 				}
 				/*j3.3/isis*/
 				
-				#trashncacheForm i {
+				#trashncacheForm i,#trashncacheForm span {
 					text-indent:-9000px;overflow:hidden;
 				}
 				
-				#trashncacheForm i.icon-trash {
+				#trashncacheForm .icon-trash {
 					background-image:url(components/com_littlehelper/assets/images/bin16.png);
 				}
-				#trashncacheForm i.icon-ccfs {
+				#trashncacheForm .icon-ccfs {
 					background-image:url(components/com_littlehelper/assets/images/cachefs16.png);
 				}
 				

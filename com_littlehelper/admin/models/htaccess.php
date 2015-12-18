@@ -247,4 +247,110 @@ class LittleHelperModelHtaccess extends JModelLegacy {
 		}
 		return $filepath;
 	}
+	
+	/**
+	 * Fix the output of a system command i.e. grep to show on an html page
+	 * @param unknown $buff
+	 */
+	private function printBufferHtml($res, $buff) {
+		
+		if ($res) {
+			echo "Result: $res <span class='ok'>No matching files found, which is good.</span>";
+		} else {
+			echo "<span class='warn'>".count($buff). " matching files found.</span>";
+			return "<pre>" . join("<br>",explode("\n",str_replace('<','&lt;',$buff))) ."</pre>";
+		}
+	}
+	
+	public function findExploits() {
+		echo "<p>Please note, this is an <b>experimental</b> function: no harm can come to you, but the results may be incomplete</p>";
+		echo "<h1>" . JText::_("COM_LITTLEHELPER_EXPLOIT_TITLE_SEARCH") . "</h1>";
+		echo "<style>.warn {color:red}</style>";
+		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_FILES") ."</h3>";
+		$array = ['libraries/joomla/exporter.php','libraries/simplepie/simplepie.lib.php'];
+		$list = array();
+		foreach ($array as $file) {
+			if (file_exists(JPATH_SITE.'libraries/joomla/exporter.php')) {
+				$list[] = sprintf( "<li>%s %s</li>",$file , JText::_("COM_LITTLEHELPER_EXPLOIT_FILE_EXISTS"));
+			}			
+		}
+		echo (count($list)) ? ("<ul>".join("\n",$list)."</ul>") : JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_NOTFOUND");
+
+		
+		
+		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_GARBLED_CALLS") ."</h3>";
+		$calls = ['\\043\\056\\052\\043\\145', '\\145\\166\\141\\154', '\\142\\141\\163\\145\\066\\064\\137\\144\\145\\143\\157\\144\\145'];
+		$cd = 'cd '.escapeshellarg(JPATH_SITE).';';
+		foreach($calls as $call) {
+			$command = $cd.' grep -r \'' . $call  . '\' .';
+			echo "<hr>Command: $command<br>";
+			$buff = false;
+			list($res,$buff) = $this->shellExec($command);
+			echo $this->printBufferHtml($res, $buff);
+		}
+		
+		
+		
+		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_UNSAFE_CALLS") ."</h3>";
+		$calls = ['eval', 'assert', 'base64_decode'];
+		foreach($calls as $call) {
+			$command = $cd.' grep -r -e \'[\n\W]' . $call . '\s*[\(]\' .';
+			$buff = false;
+			list($res,$buff) = $this->shellExec($command);
+			echo "<hr>Command: $command<br>";
+			echo $this->printBufferHtml($res, $buff);
+		}
+		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_UNSAFE_VARS") ."</h3>";
+		$vars = ['_COOKIE', '_POST', '_GET', '_SESSION'];
+		foreach($vars as $var) {
+			$command = $cd.' grep -r -e "\$[\{ ]*' . $var . '[\} ]*" .';
+			$buff = false;
+			list($res,$buff) = $this->shellExec($command);
+			echo "<hr>Command: $command<br>";
+			echo $this->printBufferHtml($res, $buff);
+		}
+		echo ('<h2>'.JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_END").'</h2>');
+		echo JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_RESULTS");
+	}
+	
+	private function shellExec($cmd) {
+	 	$cmd .= " 2>&1";
+ 		$res = false;
+ 		if(function_exists('system'))
+ 		{
+		 	@ob_start();
+		 	@system($cmd,$res);
+		 	$buff = @ob_get_contents();
+		 	@ob_end_clean();
+
+	 	}
+	 	elseif(function_exists('exec'))
+	 	{
+	 		@exec($cmd,$results,$res);
+	 		$buff = "";
+	 		foreach($results as $result)
+	 		{
+	 			$buff .= $result;
+	 		}
+
+	 	}
+	 	elseif(function_exists('passthru'))
+	 	{
+	 		@ob_start();
+	 		@passthru($cmd,$res);
+	 		$buff = @ob_get_contents();
+	 		@ob_end_clean();
+
+	 	}
+	 	elseif(function_exists('shell_exec'))
+	 	{
+	 		$buff = @shell_exec($cmd);
+	 		$res = 1;
+	 	} else {
+	 		// most likely none of the passthru system exec are available: 
+	 	}
+	 	
+	 	return array($res,$buff);
+	}
+	
 }

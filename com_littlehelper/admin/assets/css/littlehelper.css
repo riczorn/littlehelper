@@ -37,7 +37,7 @@
 	font-style: italic
 }
 
-.icon-16-ccjoomla, i.icon-ccjoomla {
+.icon-16-ccjoomla, .icon-ccjoomla {
 	background-image:
 		url(../images/cachejoomla16.png)
 }
@@ -47,7 +47,7 @@
 		url(../images/cachejoomla32.png)
 }
 
-.icon-16-ccfs, i.icon-ccfs {
+.icon-16-ccfs, .icon-ccfs {
 	background-image:
 		url(../images/cachefs16.png)
 }
@@ -61,7 +61,7 @@
 	background-image: url(../images/fix32.png)
 }
 
-.icon-16-fix, i.icon-fix {
+.icon-16-fix, .icon-fix {
 	background-image: url(../images/fix16.png)
 }
 
@@ -212,7 +212,7 @@ div#toolbar-box .m {
 	background-image:	url(../images/icons/ico-save.png);
 	
 }
-i.icon-saveicons {
+.icon-saveicons {
 	background-image:	url(../images/icons/ico-save16.png);
 }
 .fancybutton.create.test {
@@ -254,7 +254,7 @@ i.icon-saveicons {
 .fancybutton.media  {
     background-image: url("../images/icons/ico-media.png");
 }
-i.icon-media  {
+.icon-media  {
     background-image: url("../images/icons/ico-media16.png");
 }
 
@@ -272,7 +272,7 @@ i.icon-media  {
 .fancybutton.manageplugin {
 	background-image:url(../images/icons/ico-plugin-manage.png);
 }
-i.icon-plugin {
+.icon-plugin {
 	background-image:url(../images/icons/ico-plugin-manage16.png);
 }
 div.right {
