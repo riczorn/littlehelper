@@ -257,13 +257,15 @@ class LittleHelperModelHtaccess extends JModelLegacy {
 		if ($res) {
 			echo "Result: $res <span class='ok'>No matching files found, which is good.</span>";
 		} else {
-			echo "<span class='warn'>".count($buff). " matching files found.</span>";
-			return "<pre>" . join("<br>",explode("\n",str_replace('<','&lt;',$buff))) ."</pre>";
+			$arr = explode("\n",str_replace('<','&lt;',$buff));
+			echo "<span class='warn'>".count($arr). " matching files found.</span>";
+			return "<pre>" . join("<br>",$arr) ."</pre>";
 		}
 	}
 	
 	public function findExploits() {
 		echo "<p>Please note, this is an <b>experimental</b> function: no harm can come to you, but the results may be incomplete</p>";
+		echo 'Read the <a target="_blank" href="https://www.fasterjoomla.com/info/tips/117-joomla-2-5-1-5-e-vulnerabilita-code-injection-cve-2015-8562">article about the vulnerability</a> and the <a target="_blank" href="https://www.fasterjoomla.com/extensions/joomla-little-helper/118-how-to-find-exploits-and-vulnerabilities-in-joomla">notes on the new function</a> while you wait...<br>';
 		echo "<h1>" . JText::_("COM_LITTLEHELPER_EXPLOIT_TITLE_SEARCH") . "</h1>";
 		echo "<style>.warn {color:red}</style>";
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_FILES") ."</h3>";
@@ -276,6 +278,13 @@ class LittleHelperModelHtaccess extends JModelLegacy {
 		}
 		echo (count($list)) ? ("<ul>".join("\n",$list)."</ul>") : JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_NOTFOUND");
 
+		ini_set('max_execution_time',0);
+		$app = JFactory::getApplication();
+		$app->sendHeaders();
+		$app->flushAssets();
+		flush();
+		ob_flush();
+		sleep(0);
 		
 		
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_GARBLED_CALLS") ."</h3>";

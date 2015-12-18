@@ -182,16 +182,12 @@ Version 2.0.0 (2013/10/2)
 2.3.3 (2015/02/10)
 	Fixed a few error messages
 
-	
-	
--- notes for future .htaccess improvements:
+2.3.4 (2015/03/11)
+  Corrected minor issue on Joomla 3.4/3.5	
 
-#enable keepalive: (http://www.feedthebot.com/pagespeed/keep-alive.html / https://alicoding.com/how-to-enable-keepalive-in-apache-for-centos-6-4/) 
-<ifModule mod_headers.c> 
-	Header set Connection keep-alive 
-</ifModule>
+2.3.5 (2015/04/07)
+  New Send Test Mail feature
 
-Note: Antivirus false positives on
-https://www.gdata.it/security-labs
-https://support.avast.com/index.php?/Tickets/Ticket/View/MGV-610-85018
-http://esupport.trendmicro.com/app/threatservice/inquire.aspx?UDkmSWiz5BGxuQAbIUlYwA
+2.4.0 (2015/12/18)
+  New Exploit and Vulnerability search 	
+	
