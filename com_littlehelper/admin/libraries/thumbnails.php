@@ -1,7 +1,7 @@
 <?php
 /**
  * LittleHelper external library.
- * 
+ *
  * adapted for use in pressimages/littlehelper
  *	http://icant.co.uk/articles/phpthumbnails/
  *
@@ -12,7 +12,7 @@
  * @license    GNU/GPL
  */
 
-defined( '_JEXEC' ) or die( 'Restricted access' );
+!defined( '_JEXEC' ) or die( 'Restricted access' );
 	/**	Restituisce il probabile nome del thumbnail o dell'immagine in base alle dimensioni
 	 * */
 
@@ -68,12 +68,12 @@ class gimmeImage
 		//$dest_extension = $source_extension;
 		if (!empty($filename))
 			$dest_extension = pathinfo($filename, PATHINFO_EXTENSION);
-		
+
 		if (empty($dest_extension)) {
 				$dest_extension = $source_extension;
 		}
 		//echo "<br><b>Creo thumbnail</b> da $originalImageFilename <br> a $filename:  $new_w x $new_h <br>";
-		
+
 		if (!file_exists($originalImageFilename)) {
 			//echo "il file originale $originalImageFilename non esiste<br>";
 			return NULL;
@@ -81,27 +81,27 @@ class gimmeImage
 		if (file_exists($filename)) {
 			return $filename;
 		}
-		
+
 		if (preg_match("/jpg|jpeg/i",$source_extension)){$src_img=imagecreatefromjpeg($originalImageFilename);}
 		elseif (preg_match("/gif/i", $source_extension)){$src_img=imagecreatefromgif($originalImageFilename);}
 		elseif (preg_match("/png/i", $source_extension)){$src_img=imagecreatefrompng($originalImageFilename);}
 		else
 		return NULL;
-		
+
 		if (!$src_img) {
 			//error_log('gimmeImage: Cannot open image '.$originalImageFilename);
 			return false;
 		}
-		
+
 		// Dimensioni della thumbnail
 		$thumb_h_target = $new_h;
 		$thumb_w_target = $new_w;
 		$ratio_new = $new_w / $new_h;
-		
+
 		// creo l'immagine per la thumnbail con sfondo trasparente:
 		$crop = TRUE;
 		$transp = TRUE;
-		
+
 		$dst_img=imagecreatetruecolor($thumb_w_target,$thumb_h_target);
 		if ($transp) {
 			imagealphablending($dst_img, true);
@@ -109,26 +109,26 @@ class gimmeImage
 			//imagefilledrectangle($dst_img,0,0,$thumb_w_target,$thumb_h_target,$transparent);
 			imagefill($dst_img,1,1,$transparent);
 		} else $transparent = imagecolorallocate($dst_img,255,0,0);
-		
+
 		$old_w=imageSX($src_img);
 		$old_h=imageSY($src_img);
 		if ($x1+$y1+$w+$h==0) { // only if no crop selection was made:
-			
+
 			$ratio_old = $old_w/$old_h;
-			
-	
+
+
 			if ($crop) {
 				// Calcolo le dimensioni effettive dell'immagine ridimensionata che poi andr� applicata alla thumbnail.
 				if ($ratio_old>$ratio_new) {
 					// l'immagine � landscape
 					$thumb_h = $new_h;
 					$thumb_w = $new_w * ($ratio_old/$ratio_new);
-				} else 
+				} else
 				if ($ratio_old<=$ratio_new) {
 					$thumb_w = $new_w;
 					$thumb_h = $new_h * ($ratio_new/$ratio_old);
 				}
-	
+
 				// mi calcolo la posizione x e y per incollare l'immagine ridimensionata
 				$dst_img_x_offset = floor(($thumb_w_target - $thumb_w) / 2);
 				$dst_img_y_offset = floor(($thumb_h_target - $thumb_h) / 2);
@@ -138,7 +138,7 @@ class gimmeImage
 					$dst_img_x_offset,
 					$dst_img_y_offset,
 					0,0,
-					$thumb_w,$thumb_h,$old_w,$old_h);		
+					$thumb_w,$thumb_h,$old_w,$old_h);
 			}
 			else {
 				// Calcolo le dimensioni effettive dell'immagine ridimensionata che poi andr� applicata alla thumbnail.
@@ -162,13 +162,13 @@ class gimmeImage
 						$thumb_w=floor($thumb_h * $old_w / $old_h);
 					}
 				}
-	
+
 				// mi calcolo la posizione x e y per incollare l'immagine ridimensionata
 				$dst_img_x_offset = floor(($thumb_w_target - $thumb_w) / 2);
 				$dst_img_y_offset = floor(($thumb_h_target - $thumb_h) / 2);
-	
-				
-				
+
+
+
 				self::ImageCopyResampledBicubic(
 				//imagecopyresampled(
 					$dst_img,$src_img,
@@ -184,14 +184,14 @@ class gimmeImage
 			$thumb_w = $new_w;
 			//error_log("x1 $x1, y1 $y1, w $w, h $h, iWidth $iWidth, iHeight $iHeight");
 			$scale = $old_w/$scaleWidth;
-			
+
 			$x1 = (int)($x1*$scale);
 			$y1 = (int)($y1*$scale);
 			$w = (int)($w*$scale);
 			$h = (int)($h*$scale);
 			// copy and resize part of an image with resampling
 			imagecopyresampled($dst_img, $src_img, 0, 0, $x1, $y1, $iWidth, $iHeight, $w, $h);
-				
+
 		}
 		if ($thumb_w<$old_w) {
 			// the image is smaller, let's sharpen it:
@@ -199,20 +199,20 @@ class gimmeImage
 			if (!$transp)
 				imageconvolution($dst_img, $matrix, 16, 0);
 		} else {
-			// the image is larger, 
-			
+			// the image is larger,
+
 		}
 		if ($transp) {
 			// this is required by savealpha
 			imagealphablending($dst_img, false);
 			// save the alpha
 			imagesavealpha($dst_img,true);
-		} 
-		// ora tutte le immagini sono convertite in png.		
+		}
+		// ora tutte le immagini sono convertite in png.
 		if (preg_match("/png/",$dest_extension))
 		{
 			imagepng($dst_img,$filename);
-		} 
+		}
 		elseif (preg_match("/gif/",$dest_extension))
 		{
 			imagegif($dst_img,$filename);
@@ -227,7 +227,7 @@ class gimmeImage
 
 	private static function ImageCopyResampledBicubic(&$dst_image, &$src_image, $dst_x, $dst_y, $src_x, $src_y,
 		$dst_w, $dst_h, $src_w, $src_h)  {
-		if ($dst_w>$src_w) 
+		if ($dst_w>$src_w)
 			return imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
 		else
 			return imagecopyresampled($dst_image, $src_image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
