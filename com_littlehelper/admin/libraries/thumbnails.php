@@ -12,7 +12,7 @@
  * @license    GNU/GPL
  */
 
-!defined( '_JEXEC' ) or die( 'Restricted access' );
+defined( '_JEXEC' ) or die( 'Restricted access' );
 	/**	Restituisce il probabile nome del thumbnail o dell'immagine in base alle dimensioni
 	 * */
 
