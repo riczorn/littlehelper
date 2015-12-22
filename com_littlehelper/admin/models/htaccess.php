@@ -357,7 +357,7 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		$app->flushAssets();
 		ini_set('max_execution_time', 0);
 
-		echo '<link type="text/css" href="/administrator/templates/isis/css/template.css" rel="stylesheet" />';
+		echo $this->getStyle();
 
 		echo "<p>Please note, this is an <b>experimental</b> function: no harm can come to you, but the results may be incomplete</p>";
 		echo 'Read the <a target="_blank" href="https://www.fasterjoomla.com/info/tips/117-joomla-2-5-1-5-e-vulnerabilita-code-injection-cve-2015-8562">article about the vulnerability</a> and the <a target="_blank" href="https://www.fasterjoomla.com/extensions/joomla-little-helper/118-how-to-find-exploits-and-vulnerabilities-in-joomla">notes on the new function</a> while you wait...<br>';
@@ -521,5 +521,14 @@ class LittleHelperModelHtaccess extends JModelLegacy
 			JRequest::setVar('rule',$rule);
 			$JedcheckerControllerPolice->check();
 		}
+	}
+	function getStyle() {
+		$html[] = '<link type="text/css" href="/administrator/templates/isis/css/template.css" rel="stylesheet" />';
+		$html[] ='<link type="text/css" href="/administrator/components/com_littlehelper/assets/css/littlehelper.css" rel="stylesheet" />';
+
+// 		$html[] ='<style>
+
+// 		</style>';
+		return join("\n",$html);
 	}
 }

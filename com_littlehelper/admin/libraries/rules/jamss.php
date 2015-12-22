@@ -186,8 +186,8 @@ class JedcheckerRulesJamss extends JEDcheckerRule
 						'16',
 						'Detected script variations often used to inform the attackers about found vulnerable website.',),
 						array('(?:(?:eval|gzuncompress|gzinflate|base64_decode|str_rot13|strrev|preg_replace|rawurldecode' .
-						'|assert|unpack|urldecode)[\s/\*\w\W\(]*){2,}',
-						'PHP: multiple encoded, most probably obfuscated code found',
+						'|assert|unpack|urldecode)[\s/\*\W\(]+){3,}',
+						'PHP: multiple encoded, possibly obfuscated code found',
 						'17',
 						'This pattern could be used in highly encoded, malicious code hidden under a loop of code obfuscation function ' .
 						'calls. In most cases the decoded hacker code goes through an eval call to execute it. ' .
@@ -344,7 +344,7 @@ class JedcheckerRulesJamss extends JEDcheckerRule
 								$first_line = $this->calculate_line_number($match[1], $content);
 								break;
 							}
-
+							$first_code = str_replace(array('"','`'),"'", $first_code);
 							$this->jamssWarning(
 									$path,
 									JText::_('COM_JEDCHECKER_ERROR_JAMSS_PATTERN') . "#$pattern[2] - $pattern[1]",

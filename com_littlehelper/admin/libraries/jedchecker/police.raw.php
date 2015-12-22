@@ -74,14 +74,16 @@ class JedcheckerControllerPolice extends JControllerlegacy
 	 * Get the folders that should be checked
 	 * @return array
 	 */
+	protected $folders;
 	protected function getFolders()
 	{
-		$folders = array();
+		if ($this->folders) return $this->folders;
+		$this->folders = array();
 
 		// Add the folders in the "jed_checked/unzipped" folder
 		$path        = JPATH_BASE; // fasterjoomla JFactory::getConfig()->get('tmp_path') . '/jed_checker/unzipped';
 
-		$this->scanFolder($path, $folders);
+		$this->scanFolder($path, $this->folders);
 
 // 		$tmp_folders = JFolder::folders($path);
 
@@ -96,38 +98,7 @@ class JedcheckerControllerPolice extends JControllerlegacy
 		// Parse the local.txt file and parse it
 		$local = JFactory::getConfig()->get('tmp_path') . '/jed_checker/local.txt';
 
-
-		if (JFile::exists($local))
-		{
-			$content = JFile::read($local);
-
-			if (!empty($content))
-			{
-				$lines = explode("\n", $content);
-
-				if (!empty($lines))
-				{
-					foreach ($lines as $line)
-					{
-						$line = trim($line);
-
-						if (!empty($line))
-						{
-							if (JFolder::exists(JPATH_ROOT . '/' . $line))
-							{
-								$folders[] = JPATH_ROOT . '/' . $line;
-							}
-							elseif (JFolder::exists($line))
-							{
-								$folders[] = $line;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return $folders;
+		return $this->folders;
 	}
 
 	/**
@@ -158,7 +129,7 @@ class JedcheckerControllerPolice extends JControllerlegacy
 		// fasterjoomla
 		$html = $report->getHTML();
 		if (strlen(trim($html))>3) {
-			echo "<br>Folder no. ".$this->filesChecked.":".$folder;
+			echo "<br>Folder no. ".$this->filesChecked.":".$folder . "<br>";
 
 			echo '<span class="rule">'
 				. JText::_('COM_JEDCHECKER_RULE') . ' ' . JText::_($police->get('id'))

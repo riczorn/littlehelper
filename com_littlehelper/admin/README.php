@@ -202,3 +202,6 @@ Version 2.0.0 (2013/10/2)
 
 2.4.1 (2015/12/21)
   Added JAMSS and more tests
+
+2.4.2 (2015/12/22)
+  Removed hundreds of false positives
