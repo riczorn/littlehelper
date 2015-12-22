@@ -364,10 +364,9 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		echo "<h1>" . JText::_("COM_LITTLEHELPER_EXPLOIT_TITLE_SEARCH") . "</h1>";
 		echo "<style>.warn {color:#900500;}</style>";
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_FILES") . "</h3>";
-		$array = [
-				'libraries/joomla/exporter.php',
-				'libraries/simplepie/simplepie.lib.php'
-		];
+		$array[] = 'libraries/joomla/exporter.php';
+		$array[] = 'libraries/simplepie/simplepie.lib.php';
+
 		$list = array();
 		foreach ($array as $file)
 		{
