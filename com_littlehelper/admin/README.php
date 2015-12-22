@@ -205,3 +205,6 @@ Version 2.0.0 (2013/10/2)
 
 2.4.2 (2015/12/22)
   Removed hundreds of false positives
+
+2.4.2a (2015/12/23)
+  Added PHP 5.3. compatibility

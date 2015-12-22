@@ -364,9 +364,10 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		echo "<h1>" . JText::_("COM_LITTLEHELPER_EXPLOIT_TITLE_SEARCH") . "</h1>";
 		echo "<style>.warn {color:#900500;}</style>";
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_FILES") . "</h3>";
-		$array[] = 'libraries/joomla/exporter.php';
-		$array[] = 'libraries/simplepie/simplepie.lib.php';
-
+		$array = array(
+				'libraries/joomla/exporter.php',
+				'libraries/simplepie/simplepie.lib.php'
+		);
 		$list = array();
 		foreach ($array as $file)
 		{
@@ -387,11 +388,11 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		//die();
 
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_GARBLED_CALLS") . "</h3>";
-		$calls = [
+		$calls = array(
 				'\\043\\056\\052\\043\\145',
 				'\\145\\166\\141\\154',
 				'\\142\\141\\163\\145\\066\\064\\137\\144\\145\\143\\157\\144\\145'
-		];
+		);
 		$cd = 'cd ' . escapeshellarg(JPATH_SITE) . '; ';
 		foreach ($calls as $call)
 		{
@@ -405,11 +406,11 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		$this->flush();
 
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_UNSAFE_CALLS") . "</h3>";
-		$calls = [
+		$calls = array(
 				'eval',
 				'assert',
 				'base64_decode'
-		];
+		);
 		foreach ($calls as $call)
 		{
 			$command = $cd . $grep . ' -e \'[\n\W]' . $call . '\s*[\(]\' .';
@@ -422,12 +423,12 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		$this->flush();
 
 		echo "<h3>" . JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_UNSAFE_VARS") . "</h3>";
-		$vars = [
+		$vars = array(
 				'_COOKIE',
 				'_POST',
 				'_GET',
 				'_SESSION'
-		];
+		);
 		foreach ($vars as $var)
 		{
 			$command = $cd . $grep . ' -e "\$[\{ ]*' . $var . '[\} ]*" .';
@@ -509,10 +510,10 @@ class LittleHelperModelHtaccess extends JModelLegacy
 
 		$JedcheckerControllerPolice = new JedcheckerControllerPolice();
 		$input = JFactory::getApplication()->input;
-		$rules = [
+		$rules = array(
 				'errorreporting',
 				'jamss'
-		];
+		);
 		foreach ($rules as $rule)
 		{
 			echo "<h1>Testing ".$rule."</h1>";

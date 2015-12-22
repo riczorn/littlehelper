@@ -45,7 +45,7 @@ class JedcheckerControllerPolice extends JControllerlegacy
 		// Loop through each folder and police it
 
 		$folders = $this->getFolders();
-
+		$this->flush();
 
 		foreach ($folders as $folder)
 		{
@@ -140,9 +140,9 @@ class JedcheckerControllerPolice extends JControllerlegacy
 				. $report->getHTML();
 			$this->flush();
 		} else {
-			if ($this->filesChecked % 100 == 1) {
+			if ($this->filesChecked % 100 == 99) {
 				// output something otherwise the user will start thinking we're not there
-				echo "<br>$this->filesChecked folders examined<br>";
+				echo "<br><b>".($this->filesChecked+1)."</b> folders examined<br>";
 				$this->flush();
 			}
 		}

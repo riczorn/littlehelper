@@ -344,7 +344,7 @@ class JedcheckerRulesJamss extends JEDcheckerRule
 								$first_line = $this->calculate_line_number($match[1], $content);
 								break;
 							}
-							$first_code = str_replace(array('"','`'),"'", $first_code);
+							$first_code = str_replace(array('"','`','<'),array('&quot;','<code>&#96;</code>','&lt;'), $first_code);
 							$this->jamssWarning(
 									$path,
 									JText::_('COM_JEDCHECKER_ERROR_JAMSS_PATTERN') . "#$pattern[2] - $pattern[1]",
