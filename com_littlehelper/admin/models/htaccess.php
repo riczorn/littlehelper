@@ -517,6 +517,7 @@ class LittleHelperModelHtaccess extends JModelLegacy
 		foreach ($rules as $rule)
 		{
 			echo "<h1>Testing ".$rule."</h1>";
+			$this->flush();
 			$input->set('rule', $rule);
 			JRequest::setVar('rule',$rule);
 			$JedcheckerControllerPolice->check();
