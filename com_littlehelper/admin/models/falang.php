@@ -57,7 +57,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 		echo "<h1>inverto lingue falang $sourceId, $targetId</h1>";
 
 		$items = $db->setQuery($sql = 'select reference_id, reference_table from #__falang_content where language_id='.
-			$targetId.' group by reference_id, reference_table')->loadObjectList();
+			$sourceId.' group by reference_id, reference_table')->loadObjectList();
 		echo $sql . "<br>";
 		if ($items)
 		foreach ($items as $item) {
@@ -99,7 +99,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 		//var_dump($menuItem);
 		if ($joomlaItem) {
 			$translations = $db->setQuery('select * from #__falang_content where language_id='.
-				$targetId.' and reference_id= '.$db->quote($element->reference_id))->loadObjectList();
+				$sourceId.' and reference_id= '.$db->quote($element->reference_id))->loadObjectList();
 			echo "<h4>Translations $element->reference_id</h4>";
 			//var_dump($translations);
 			echo "<table>";
@@ -115,7 +115,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 							$joomlaItem->{$translation->reference_field}."</td></tr>";
 					}
 				} else echo "/ignored " . $translation->reference_field;
-				$translation->language_id = $sourceId;
+				$translation->language_id = $targetId;
 				$db->updateObject('#__falang_content', $translation, ['id']);
 			}
 			echo "</table>";
