@@ -58,6 +58,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 
 		$items = $db->setQuery($sql = 'select reference_id, reference_table from #__falang_content where language_id='.
 			$targetId.' group by reference_id, reference_table')->loadObjectList();
+		echo $sql . "<br>";
 		if ($items)
 		foreach ($items as $item) {
 			echo "<h2>Translate $item->id, $item->reference_table</h2>";
@@ -72,7 +73,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 					break;
 			}
 		} else if ($db->getErrorNum()) {
-			echo "<h3>Error:</h3>".$sql . "<br>".$db->getErrorMsg();
+			echo "<h3>Error:</h3>".$db->getErrorMsg();
 		}
 	}
 
