@@ -56,7 +56,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 		$db = JFactory::getDbo();
 		echo "<h1>inverto lingue falang $sourceId, $targetId</h1>";
 
-		$items = $db->setQuery('select reference_id, reference_table from #__falang_content where language_id='.
+		$items = $db->setQuery($sql = 'select reference_id, reference_table from #__falang_content where language_id='.
 			$targetId.' group by reference_id, reference_table')->loadObjectList();
 		if ($items)
 		foreach ($items as $item) {
@@ -71,6 +71,8 @@ class LittleHelperModelFalang extends JModelLegacy {
 					echo "Type not supported: $item->reference_table<br>";
 					break;
 			}
+		} else if ($db->getErrorNum()) {
+			echo "<h3>Error:</h3>".$sql . "<br>".$db->getErrorMsg();
 		}
 	}
 
@@ -92,7 +94,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 		$translateElements['content'] = array('title','alias','introtext','fulltext','metakey','metadesc');
 
 		$joomlaItem  = $db->setQuery("select * from $table where id=".$element->reference_id)->loadObject();
-		echo "<h3>Element $element->reference_table</h3>";
+		echo "<h3>$element->reference_table element</h3>";
 		//var_dump($menuItem);
 		if ($joomlaItem) {
 			$translations = $db->setQuery('select * from #__falang_content where language_id='.
