@@ -60,6 +60,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 			$targetId.' group by reference_id, reference_table')->loadObjectList();
 		if ($items)
 		foreach ($items as $item) {
+			echo "<h2>Translate $item->id, $item->reference_table</h2>";
 			switch ($item->reference_table) {
 				case 'menu':
 				case 'content':
@@ -68,6 +69,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 					break;
 				default:
 					echo "Type not supported: $item->reference_table<br>";
+					break;
 			}
 		}
 	}
@@ -90,12 +92,12 @@ class LittleHelperModelFalang extends JModelLegacy {
 		$translateElements['content'] = array('title','alias','introtext','fulltext','metakey','metadesc');
 
 		$joomlaItem  = $db->setQuery("select * from $table where id=".$element->reference_id)->loadObject();
-		echo "<h2>Element $element->reference_table</h2>";
+		echo "<h3>Element $element->reference_table</h3>";
 		//var_dump($menuItem);
 		if ($joomlaItem) {
 			$translations = $db->setQuery('select * from #__falang_content where language_id='.
 				$targetId.' and reference_id= '.$db->quote($element->reference_id))->loadObjectList();
-			echo "<h3>Translations $element->reference_id</h3>";
+			echo "<h4>Translations $element->reference_id</h4>";
 			//var_dump($translations);
 			echo "<table>";
 			echo "<tr><td>id</td><td>ref_id</td><td>field</td><td>Orig</td><td>Transl</td></tr>";
@@ -109,7 +111,7 @@ class LittleHelperModelFalang extends JModelLegacy {
 							$translation->reference_field."</td><td>$mainVal</td><td>".
 							$joomlaItem->{$translation->reference_field}."</td></tr>";
 					}
-				} else echo "/ignored ".$translation->reference_field;
+				} else echo "/ignored " . $translation->reference_field;
 				$translation->language_id = $sourceId;
 				$db->updateObject('#__falang_content', $translation, ['id']);
 			}
