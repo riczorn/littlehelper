@@ -207,7 +207,11 @@ Version 2.0.0 (2013/10/2)
   Removed hundreds of false positives
 
 2.4.3 (2015/12/23)
-  Added PHP 5.3. compatibility
+  Restored PHP 5.3. compatibility
 
 2.4.4 (2016/01/13)
   New round of tests on Joomla 3.5
+
+2.5.1 (2016/04/18)
+*   <b>Restored legacy PHP compatibility</b>
+	Now compatible with 5.3.10+
