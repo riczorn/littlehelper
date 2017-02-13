@@ -3,7 +3,7 @@ use Joomla\Application\Cli\Output\Stdout;
 /**
  * LittleHelper component helper.
  * Favicon helper: bridge to the thumnbail and php-ico libraries, expose the needed functionalities
- * 
+ *
  * @version SVN: $Id$
  * @package    LittleHelper
  * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
@@ -16,7 +16,7 @@ defined('_JEXEC') or die;
 class LittleHelperHelperFavicon
 {
 	public static $extension = 'com_littlehelper';
-	
+
 	//see getImageInfo for $favicons;
 	public static $favicons = array(
 			144=>false,114=>false,72=>false,57=>false,48=>false,32=>false,24=>false,16=>false);
@@ -29,7 +29,7 @@ class LittleHelperHelperFavicon
 	public static $templatePathAdmin = "";
 	public static $imagesPathIsSet = false;
 	public static $params = null;
-	
+
 	/**
 	 * Initialize all paths: source, cropped, resized;
 	 * Create the folders if necessary;
@@ -52,30 +52,30 @@ class LittleHelperHelperFavicon
 		self::$imagesPath = $basepath;
 		self::$thumbsPath = $basepath.'resized/';
 		self::$sourcePath = $basepath.'source/';
-		
+
 		$templatePathAdmin = "/administrator/templates/".JFactory::getApplication()->getTemplate()."/";
 		self::$templatePathAdmin = $templatePathAdmin;
-	
+
 		$db	= JFactory::getDBO();
 		$sql = 'SELECT template FROM #__template_styles WHERE client_id=0 AND home=1';
 		$db->setQuery($sql);
 		$template = $db->loadResult();
-	
+
 		self::$templatePath ="/templates/$template/";
-		
+
 		if (!self::$imagesPathIsSet) return; // otherwise we'd create folders under /images !
-		
+
 		if (!file_exists(JPATH_SITE . self::$imagesPath)) {
 			mkdir(JPATH_SITE . self::$imagesPath,0755);
 		}
-		
+
 		if (!file_exists(JPATH_SITE . self::$thumbsPath)) {
 			mkdir(JPATH_SITE . self::$thumbsPath,0755);
 		}
-		
+
 		if (!file_exists(JPATH_SITE . self::$sourcePath)) {
 			mkdir(JPATH_SITE . self::$sourcePath,0755);
-		}	
+		}
 		// let's see if there are any images in the source folder, just to be on the safe side:
 		jimport('joomla.filesystem.folder');
 		$files = JFolder::files(JPATH_SITE.self::$sourcePath,'.',false,false,array('^.+','~$','.html$'));
@@ -84,10 +84,10 @@ class LittleHelperHelperFavicon
 			copy(JPATH_ADMINISTRATOR.'/components/com_littlehelper/assets/images/fasterjoomla.png',JPATH_SITE . self::$sourcePath.'/sample.png');
 			JError::raiseWarning(1040,JText::_("COM_LITTLEHELPER_FILE_ERROR_COPIED_SAMPLE"));
 		}
-	}	
-	
+	}
+
 	/**
-	 * Main initialization: get images, find their sizes, build the list of destination 
+	 * Main initialization: get images, find their sizes, build the list of destination
 	 * images with all the sizes, create missing thumbnails.
 	 * @return boolean|multitype:boolean
 	 */
@@ -112,29 +112,29 @@ class LittleHelperHelperFavicon
 		self::createMissingThumbnails();
 		return self::$favicons;
 	}
-	
+
 	public static function getHeadFavicon($admin = false) {
 		$random = "";
 		if (!isset(self::$params->favicons_forcepreview) || self::$params->favicons_forcepreview) {
 			$random = "?random=".rand(1000,1000000);
 		}
-		
+
 		$path = "/templates/{template_path}/favicon.ico";
 		if ($admin) {
 			$path = '..'. self::$imagesPath . 'admin/favicon.ico';
 		}
-		
+
 		return '<link href="'.$path.$random.'" rel="shortcut icon" type="image/vnd.microsoft.icon" />';
 	}
-	
+
 	/**
 	 * Return all the headers that should be added to the template <HEAD> section.
 	 * {template_path} is a placeholder replaced at the end;
 	 */
 	public static function getHead($removeComments = false) {
 		$headDeclarations = array();
-		
-		$headDeclarations[] = self::getHeadFavicon(false); 
+
+		$headDeclarations[] = self::getHeadFavicon(false);
 		if (!$removeComments)
 			$headDeclarations[] = '<!-- For third-generation iPad with high-resolution Retina display: -->';
 		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/templates/{template_path}/apple-touch-icon-144x144-precomposed.png" />';
@@ -149,22 +149,22 @@ class LittleHelperHelperFavicon
 		$headDeclarations[] = '<link rel="apple-touch-icon-precomposed" href="/templates/{template_path}/apple-touch-icon-precomposed.png" />';
 
 		$template = LittleHelperHelperFavicon::$templatePath;
-		
+
 		$head = str_replace("/templates/{template_path}/", $template, join("\n", $headDeclarations));
 		return $head;
 	}
 
 	public static function getHeadAdmin() {
 		$headDeclarations = array();
-	
+
 		$headDeclarations[] = self::getHeadFavicon(true);
-		
+
 		$template = LittleHelperHelperFavicon::$templatePath;
-	
+
 		$head = str_replace("/templates/{template_path}/", $template, join("\n", $headDeclarations));
 		return $head;
 	}
-	
+
 	/**
 	 * Create the multiresolution favicon using PHP-ICO
 	 * If $sideAdmin, then a new icon set will be generated for the admin
@@ -173,18 +173,18 @@ class LittleHelperHelperFavicon
 	 */
 	public static function createFavicon($sideAdmin=false) {
 		require_once( dirname(dirname( __FILE__ )) . '/libraries/php-ico-master/class-php-ico.php' );
-		if ($sideAdmin) 
+		if ($sideAdmin)
 		{
 			$faviconName = JPATH_SITE . self::$imagesPath.'admin/favicon.ico';
 			// we don't want to save to /administrator/templates/isis/favicon
 			// as an update package will overwrite the icon.
 			// $faviconName = JPATH_SITE.self::$templatePathAdmin."favicon.ico";
-		} else 
+		} else
 		{
 			$faviconName = JPATH_SITE . self::$templatePath . "favicon.ico";
 		}
 		$ico_lib = new PHP_ICO();
-		foreach(array(16,24,32,48) as $size) 
+		foreach(array(16,24,32,48) as $size)
 		{
 			$image = self::$favicons[$size];
 			if ($sideAdmin) {
@@ -200,7 +200,7 @@ class LittleHelperHelperFavicon
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Apply some "random" changes to the image so we will be able to differentiate
 	 * 	the admin icon from the site's;
@@ -209,6 +209,9 @@ class LittleHelperHelperFavicon
 	 * @return string
 	 */
 	private static function applyAdminStyle(&$sourceImage) {
+		if (!self::testLibraries()) {
+			return NULL;
+		}
 		jimport('joomla.image.image');
 		$jImage = new Jimage($sourceImage->fullpath);
 		if (!$jImage->isLoaded()) {
@@ -219,14 +222,14 @@ class LittleHelperHelperFavicon
 			if (!defined('LH_ERR_FILTER_WARNED')) {
 				// if we ran into a filter error already, let's not raise more!
 				$jImage = $jImage->filter('sketchy');
-			}	
+			}
 			// 		if ($jImage->isTransparent()) {
 			// 			// replace transparent with Red;
 			// 			$jImage = $jImage->filter('negate');
 			// 		} else {
-			
-				
-			// 		}		
+
+
+			// 		}
 		} catch(Exception $e) {
 			if (!defined('LH_ERR_FILTER_WARNED')) {
 				// The image filter already enqueues a message
@@ -235,22 +238,22 @@ class LittleHelperHelperFavicon
 			}
 			// there is no action required, the user will do without the filter!
 		}
-		
-		
+
+
 		// change the file name adding an admin folder under /icon
 		$adminImagePath = str_replace(self::$imagesPath, self::$imagesPath.'admin/', $sourceImage->fullpath);
 		if (!JFolder::exists(dirname($adminImagePath))) {
 			JFolder::create(dirname($adminImagePath),0755);
 		}
-		
+
 		$jImage->toFile($adminImagePath, IMAGETYPE_PNG);
-		
+
 		// now draw a rectangle with gd! Joomla doesn't support it?
 		$image = imagecreatefrompng($adminImagePath);
 		$brown=imagecolorallocate($image,150,20,20);
 		$red=imagecolorallocate($image,255,0,0);
 		$white=imagecolorallocate($image,255,255,255);
-		
+
 		imagerectangle($image,0, 0, $jImage->getWidth()-1, $jImage->getHeight()-1, $brown);
 		// red outer top and left
 		imageline($image,0, 0, $jImage->getWidth()-2, 0, $red);
@@ -265,9 +268,23 @@ class LittleHelperHelperFavicon
 		imagedestroy($image);
 		return $adminImagePath;
 	}
-	
+
 	/**
-	 * Gather some image info with GD: 
+	 * See that we at least have a image...
+	 */
+		public static function testLibraries() {
+			 if(!function_exists('imagecreatefrompng')) {
+				if (!DEFINED('MISSINGFUNCTIONERROR')) {
+					DEFINE('MISSINGFUNCTIONERROR',1);
+					JFactory::getApplication()->enqueueMessage('imagecreatefrompng is not available! This could be an issue with the PHP GD library installation','error');
+				}
+				return false;
+			}
+			return true;
+		}
+
+	/**
+	 * Gather some image info with GD:
 	 * $imagePath is relative to the root;
 	 * @param unknown_type $image
 	 */
@@ -295,18 +312,18 @@ class LittleHelperHelperFavicon
 		$new->description =$desc;
 		return $new;
 	}
-	
+
 	/**
-	 * Iterate through the currently available source images, and find the best 
+	 * Iterate through the currently available source images, and find the best
 	 * matches.  If more than one match is found, the other is ignored and a warning is issued.
-	 * 
+	 *
 	 * @param unknown_type $images
 	 */
 	private static function findSizeBestMatches($images) {
 		// determine which are the best candidates for our favicon sizes.
 		if (empty($images)) {
 			// so there were no cropped images. Let's see if we can use the last uploaded file:
-			// 
+			//
 			if (! self::$master = self::getLastSourceUploaded())
 				return false;// and getImages returns "No images found" error.
 			else {
@@ -314,17 +331,17 @@ class LittleHelperHelperFavicon
 			}
 		}
 		$widestImageKey = 0;
-		
+
 		foreach($images as $key=>$image) {
 			if (array_key_exists($image->size, self::$favicons)) {
 				self::$favicons[$image->size] = $image;
 			}
-			if ($widestImageKey<$image->size) { 
+			if ($widestImageKey<$image->size) {
 				// $key is also the image width ($image->size)
 				$widestImageKey = $key;
 			}
 		}
-		
+
 		// now $widestImageKey must contain a valid index:
 		if ($widestImageKey>0) {
 			self::$master = $images[$widestImageKey];
@@ -334,9 +351,9 @@ class LittleHelperHelperFavicon
 		}
 		return true;
 	}
-	
+
 	/**
-	 * Returns the name of the last file uploaded. This is useful when we have no crop information and 
+	 * Returns the name of the last file uploaded. This is useful when we have no crop information and
 	 * we need to arbitrarily choose one of the sources.
 	 * @return boolean|Ambigous <boolean, stdClass>
 	 */
@@ -353,10 +370,10 @@ class LittleHelperHelperFavicon
 		}
 		ksort($arr);
 		$last = array_pop($arr);
-		
+
 		return self::getImageInfo(self::$sourcePath,$last);
 	}
-	
+
 	/**
 	 * All relevant images are in self::$favicons.
 	 * The largest has the index 'master';
@@ -368,11 +385,11 @@ class LittleHelperHelperFavicon
 	 		JError::raiseWarning(109, JText::_("COM_LITTLEHELPER_FAVICON_ERROR_NO_MASTER_IMAGE"));
 	 		return false;
 	 	}
-	 	 
+
 	 	if (self::$master->size<144) {
 	 		JError::raiseWarning(110,JText::_("COM_LITTLEHELPER_FAVICON_WARN_MASTER_LOWRES"));
 	 	}
-	 	
+
 	 	// the actual images resize:
 		foreach(self::$favicons as $key=>$favicon) {
 			if (!$favicon) {
@@ -383,7 +400,7 @@ class LittleHelperHelperFavicon
 			}
 		}
 	}
-	
+
 	/**
 	 * Wrapper for external thumbnail library
 	 * New in v.2.0: Now supports explicit cropping
@@ -396,7 +413,7 @@ class LittleHelperHelperFavicon
 		if (!$folder)
 			$folder = self::$thumbsPath;
 		$thumbfilename = JPATH_SITE. $folder . $size . "x". $size . ".png";
-			
+
 		if ($source==$thumbfilename) {
 			$tempSource = JPATH_SITE.'/cache/tempsource.png';
 			if (file_exists($tempSource)) {
@@ -405,7 +422,7 @@ class LittleHelperHelperFavicon
 			if (copy($source,$tempSource)) {
 				$source = $tempSource;
 			}
-			
+
 		}
 		if (!self::testFilesPermissions($source, $thumbfilename, true)) {
 			return false;
@@ -417,7 +434,7 @@ class LittleHelperHelperFavicon
 		// return a imageInfo record for this new image:
 		return self::getImageInfo($folder, $size . "x". $size . ".png");
 	}
-	
+
 	/**
 	 *  Common routine checks files existance and permissions before create/copy,
 	 *  invokes it in htaccess model.
