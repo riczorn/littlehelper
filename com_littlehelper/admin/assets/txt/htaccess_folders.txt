@@ -9,16 +9,4 @@ Options -ExecCGI
 RemoveHandler .cgi .pl .py .php4 .pcgi4 .php .php3 .phtml .pcgi .php5 .pcgi5
 RemoveType .cgi .pl .py .php4 .pcgi4 .php .php3 .phtml .pcgi .php5 .pcgi5
 
-<FilesMatch "(^#.*#|\.(php|bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$">
-# Apache < 2.3
-<IfModule !mod_authz_core.c>
-Order allow,deny
-Deny from all
-Satisfy All
-</IfModule>
-# Apache ≥ 2.3
-<IfModule mod_authz_core.c>
-Require all denied
-</IfModule>
-</FilesMatch>
 

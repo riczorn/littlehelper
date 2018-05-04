@@ -215,3 +215,18 @@ Version 2.0.0 (2013/10/2)
 2.5.1 (2016/04/18)
 *   <b>Restored legacy PHP compatibility</b>
 	Now compatible with 5.3.10+
+
+2.5.2 (2017/04/30)
+   Fine tuned JAMSS to prevent some antivirus false positives
+
+2.5.9 (2018/05/03) 
+   Last version with JEDChecker bundled.
+   The JEDChecker is in the folder 
+   administrator/components/com_littlehelper/admin/libraries/jedchecker/
+
+   If you still wish to run the full jedchecker tests 
+   using a later version, it is necessary to install 
+   version 2.5.9, then reinstall the current version on top.
+
+2.6.1 (2018/05/04)
+   Added new html5boilerplate .htaccess updated and tested on apache 2.4

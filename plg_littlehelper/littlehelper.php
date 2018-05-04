@@ -1,6 +1,6 @@
 <?php
 /**
- * System Plugin LittleHelperKnife adds the necessary markup to support favicons / apple precomposed favicons etc.
+ * System Plugin LittleHelper adds the necessary markup to support favicons / apple precomposed favicons etc.
  * All configuration is handled in the LittleHelper component.
  * 
  * @version	$Id

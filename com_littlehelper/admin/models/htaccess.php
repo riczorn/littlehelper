@@ -238,7 +238,7 @@ class LittleHelperModelHtaccess extends JModelLegacy
 				 * Options +FollowSymLinks
 				 * Options +FollowSymlinks
 				 */
-				if (preg_match("@^[ \t]*Options[ \t]+\+FollowSymLinks@i", $line))
+				if (preg_match("@^\s*Options\s+\+FollowSymLinks@i", $line))
 				{
 					$htLines[$key] = "#littlehelper: commented the next line hoping the file will work\n#" . $line;
 				}
@@ -335,7 +335,7 @@ class LittleHelperModelHtaccess extends JModelLegacy
 	{
 		if ($res)
 		{
-			echo "Result: $res <span class='ok'>No matching files found, which is good.</span>";
+			echo "Result: [$res] <span class='ok'>No matching files found, which is good.</span>";
 		}
 		else
 		{
@@ -500,7 +500,13 @@ class LittleHelperModelHtaccess extends JModelLegacy
 	 */
 	private function runJedCheckerTests ()
 	{
-		require_once (dirname(dirname(__FILE__)) . '/libraries/jedchecker/police.raw.php');
+		$policeFile = dirname(dirname(__FILE__)) . '/libraries/jedchecker/police.raw.php';
+		if (!file_exists($policeFile )) {
+			echo "<span class='error'>".JText::_("COM_LITTLEHELPER_EXPLOIT_SEARCH_NOJEDCHECKER")."</span><br>";
+			//JFactory::getApplication()->enqueueMessage('warning','');
+			return false;
+		}
+		require_once ($policeFile);
 		// JController::getI
 		$langpath = JPATH_ADMINISTRATOR . '/components/com_littlehelper/libraries/jedchecker';
 		$language = JFactory::getLanguage();
