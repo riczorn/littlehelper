@@ -220,13 +220,21 @@ Version 2.0.0 (2013/10/2)
    Fine tuned JAMSS to prevent some antivirus false positives
 
 2.5.9 (2018/05/03) 
-   Last version with JEDChecker bundled.
+   We chose to remove the JEDChecker libraries, mostly because 
+   we were tired of the random false positive alerts
+   from antivirus software.
+
+   This is the Last version with JEDChecker bundled.
    The JEDChecker is in the folder 
    administrator/components/com_littlehelper/admin/libraries/jedchecker/
+   administrator/components/com_littlehelper/admin/libraries/rules/
 
    If you still wish to run the full jedchecker tests 
-   using a later version, it is necessary to install 
+   using a later version, it will be necessary to install 
    version 2.5.9, then reinstall the current version on top.
+
+   To remove jedchecker from a previous version, you need
+   to manually remove the aforementioned folder.
 
 2.6.1 (2018/05/04)
    Added new html5boilerplate .htaccess updated and tested on apache 2.4
