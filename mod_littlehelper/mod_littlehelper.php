@@ -16,11 +16,12 @@ $language = JFactory::getLanguage();
 $language->load('com_littlehelper', $langpath, 'en-GB', true);
 $language->load('com_littlehelper', $langpath, null, true);
 
-// behavior modal etc?
-JHtml::_('behavior.modal');
  
 require_once dirname(__FILE__).'/helper.php';
-if (modLittleHelperHelper::excludeComps())
-	return;
+
+if (!modLittleHelperHelper::excludeComps()) {
+	// for some reason this breaks when other components are loaded.
+	JHtml::_('behavior.modal');
+}
 $toolbar = modLittleHelperHelper::getButtons($module->position);
 require JModuleHelper::getLayoutPath('mod_littlehelper', $params->get('layout', 'default'));
