@@ -129,11 +129,18 @@ abstract class modLittleHelperHelper
 	/**
 	 * K2 throws an ugly error "item must have a title" on its Item view.
 	 * so we'll just prevent execution there for now. 
+	 * 
+	 * Cforms has an incompatibility as well:
 	 */
-	public static function excludeK2() {
+	public static function excludeComps() {
 		$input = JFactory::getApplication()->input;
 		if ($input->get('option')=='com_k2') {
 			if ($input->get('view')=='item') {
+				return true;
+			}
+		}
+		if ($input->get('option')=='com_cforms') {
+			if ($input->get('view')=='form') {
 				return true;
 			}
 		}

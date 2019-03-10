@@ -238,3 +238,7 @@ Version 2.0.0 (2013/10/2)
 
 2.6.1 (2018/05/04)
    Added new html5boilerplate .htaccess updated and tested on apache 2.4
+
+2.6.2 (2019/03/10)
+	Added an exclusion for compatibility with CForms
+	
