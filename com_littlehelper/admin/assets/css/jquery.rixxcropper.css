@@ -22,7 +22,7 @@
 }
 
 #dcrop {display:none;
-	min-height:230px;}
+	min-height:260px;}
 img.galleryimage {margin-right:6px;}
 h3.step {background-color:gray;
 	padding:10px;
@@ -46,7 +46,7 @@ h3.step {background-color:gray;
   overflow: hidden;
 }
 #preview-pane .buttons-container{
-  height: 210px;
+  height: 240px;
   width:220px;
   overflow: hidden;
 }

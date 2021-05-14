@@ -80,6 +80,10 @@ abstract class modLittleHelperHelper
 				#trashncacheForm .icon-ccfs {
 					background-image:url(components/com_littlehelper/assets/images/cachefs16.png);
 				}
+
+				.modal-backdrop, .modal-backdrop.fade.in {
+					z-index:1015;
+				}
 				
 				','text/css');
 		if (version_compare(JVERSION, '3.0.0', 'lt')) {
@@ -93,6 +97,7 @@ abstract class modLittleHelperHelper
 		}
 		//load the JToolBar library and create a toolbar
 		jimport('joomla.html.toolbar');
+		JHTML::_( 'behavior.modal', 'input#your_hidden_button_id' );
 		$bar = new JToolBar( 'littlehelpermoduletoolbar-'.$view_mode );
 		
 		//and make whatever calls you require

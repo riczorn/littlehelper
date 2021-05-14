@@ -11,9 +11,10 @@ defined('_JEXEC') or die;
 
 $document = JFactory::getDocument();
 $document->addStyleDeclaration('
-	body,* {color:#00DDDD;background-color:black}
+	body,* {color:#33FF33;background-color:black; font-family:monospace;}
 	button {padding:20px 60px;font-size:135%; color:blue}
-	div.container {width:100%}
+	div.container {width:100%; font-family:monospace;}
+	#closemodalbutton {color:#33FF33;font-family:monospace;}
 ');
 
 $document->addScriptDeclaration('
@@ -24,8 +25,14 @@ $document->addScriptDeclaration('
 				document.getElementById("closemodalbutton").innerHTML = "Close in " + (parseInt(countDownValue / 1000)+1);
 				setTimeout("countDown("+countDownValue+")",201);
 			} else {
-				window.parent.SqueezeBox.close();
-				window.parent.location.reload();
+				// window.parent.SqueezeBox.close();
+				// window.parent.document.getElementById( "sbox-window" ).close();
+				if (window.parent && window.parent.jQuery) {
+					window.parent.jQuery(".modal-backdrop").click();
+				} else if (window.parent && window.parent.SqueezeBox) {
+					window.parent.SqueezeBox.close();
+				}
+				// window.parent.location.reload();
 			}
 		}
 	(function() {

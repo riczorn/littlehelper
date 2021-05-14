@@ -72,7 +72,9 @@ class LittleHelperModelFavicon extends JModelLegacy {
 			if (copy(JPATH_SITE.$image->path . $image->name, $destFileName)) {
 				$copied++;
 			} else {
-				JError::raiseWarning(517,JText::_("COM_LITTLEHELPER_FILE_ERROR_CREATEFILE").": ".$destFileName.var_export(error_get_last(),true));
+				$errorMessages = error_get_last(); // array ( 'type' => 2, 'message' => 'copy(/home/fasterjoomla/public_html/templates/yoo_nite/apple-touch-icon-144x144-precomposed.png): failed to open stream: Permission denied', 'file' => '/home/fasterjoomla/public_html/administrator/components/com_littlehelper/models/favicon.php', 'line' => 72, )
+				// $destFileName.", ".
+				JError::raiseWarning(517,JText::_("COM_LITTLEHELPER_FILE_ERROR_CREATEFILE").": ". @$errorMessages['message']);
 			}
 		}
 		if ($copied==4) $returnMessage .= JText::_("COM_LITTLEHELPER_FAVICON_APPLE_COPIED")." $destFolder;";

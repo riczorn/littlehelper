@@ -11,8 +11,9 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.modal');
 $doc = JFactory::getDocument();
-if (!version_compare(JVERSION, '3.0.0', 'ge'))
+if (!version_compare(JVERSION, '3.0.0', 'ge')) {
 	$doc->addScript('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+}
 $doc->addScriptDeclaration('
 	jQuery(function($){
 		$("a.inline").click(function(event){

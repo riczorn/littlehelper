@@ -242,3 +242,13 @@ Version 2.0.0 (2013/10/2)
 2.6.2 (2019/03/10)
 	Added an exclusion for compatibility with CForms
 	
+2.6.3 (2020/07/14)
+	Added Fields to the trash cleaning function
+	
+2.7.0 (2021/05/14) 
+	Module in statusbar: 	
+		Removed the page refresh after closing the popup
+		Made the popup more visible
+	Fixed a few graphic glitches with Joomla 3.9.20+
+	Improved the Favicons drag and drop 
+

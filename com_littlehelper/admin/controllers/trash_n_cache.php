@@ -44,6 +44,7 @@ class LittleHelperControllerTrash_n_Cache extends JControllerForm
 		$model = $this->getModel();
 		$model->performCleanCache(true);
 		$this->additionalInit();
+		JFactory::getApplication()->input->set('task', '');
 		parent::display();
 	}
 
@@ -55,6 +56,7 @@ class LittleHelperControllerTrash_n_Cache extends JControllerForm
 	{
 		$model = $this->getModel();
 		$model->clearAdministratorCache(true);
+		JFactory::getApplication()->input->set('task', '');
 		$this->additionalInit();
 		parent::display();
 	}
@@ -81,6 +83,7 @@ class LittleHelperControllerTrash_n_Cache extends JControllerForm
 		$this->additionalInit();
 		$model = $this->getModel();
 		$model->emptyRecycleBin();
+		JFactory::getApplication()->input->set('task', '');
 		parent::display();
 	}
 

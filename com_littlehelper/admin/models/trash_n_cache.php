@@ -64,8 +64,11 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 			$this->trashes[] = $this->buildTrashItem('featured', 'content_frontpage', "`#__content_frontpage` WHERE ordering>$startfromOrdering");
 
 		//BannersTableBanner
-		$this->trashes[] = $banners = $this->buildTrashModelItem('banners','banners','banners','banner','state');
-		$banners->tableObjectPrefix = "BannersTable";
+		$banners = $this->buildTrashModelItem('banners','banners','banners','banner','state');
+		if (isset($banners) && $banners) {
+			$this->trashes[] = $banners;
+			$banners->tableObjectPrefix = "BannersTable";
+		}
 		
 		//CategoriesTableCategory
 		$this->trashes[] = $categories = $this->buildTrashModelItem('categories','categories','categories','category','published');
@@ -103,6 +106,12 @@ class LittleHelperModelTrash_n_Cache extends JModelLegacy {
 		if ($tags = $this->buildTrashModelItem('tags','tags','tags','Tag',$defaultPublishedColumnName)) {
 			$tags->tableObjectPrefix = "TagsTable";
 			$this->trashes[] = $tags;
+		}
+
+		//Fields
+		if ($fields = $this->buildTrashModelItem('fields','fields','fields','Field',$defaultPublishedColumnName)) {
+			$fields->tableObjectPrefix = "FieldsTable";
+			$this->trashes[] = $fields;
 		}
 		
 		// K2
