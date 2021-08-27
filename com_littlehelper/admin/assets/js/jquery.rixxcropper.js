@@ -1,6 +1,6 @@
 /**
  * jQuery rixxCropper
- * http://fasterjoomla.com/
+ * https://fasterjoomla.com/
  *
  * Simple jQuery plugin that complements JCrop with a drag and drop a client's image 
  * handles the upload and crop server side.

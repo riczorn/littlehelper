@@ -6,7 +6,7 @@
  * @version	$Id
  * @package littlehelper.fixhead
  * @author  Riccardo Zorn support@fasterjoomla.com
- * @copyright (C) 2011-2013 - http://fasterjoomla.com
+ * @copyright (C) 2011-2013 - https://fasterjoomla.com
  * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 

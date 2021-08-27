@@ -6,7 +6,7 @@
  * @author Riccardo Zorn <code@fasterjoomla.com>
  * @copyright 2011 Riccardo Zorn
  * @license GNU/GPL v2
- * @link http://www.fasterjoomla.com/littlehelper
+ * @link https://www.fasterjoomla.com/littlehelper
  */
 defined('_JEXEC') or die();
 

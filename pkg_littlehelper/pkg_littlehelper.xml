@@ -4,8 +4,8 @@
 	<author>Riccardo Zorn</author>
 	<creationDate>February 2013</creationDate>
  	<packagename>littlehelper</packagename>
-	 <version>2.7.0</version>
-	 <url>http://www.fasterjoomla.com/littlehelper</url>
+	 <version>2.7.1</version>
+	 <url>https://www.fasterjoomla.com/littlehelper</url>
 	 <packager>Riccardo Zorn</packager>
 	 <packagerurl>http://www.fasterjoomla.com</packagerurl>
 	 <license>GNU/GPLv3 www.gnu.org/licenses/gpl-3.0.html</license>
@@ -23,6 +23,6 @@
 	</languages>		
 	<scriptfile>install.php</scriptfile>
     <updateservers>
-        <server name="FasterJoomla.com Little Helper Update Site" type="collection" priority="1" >http://www.fasterjoomla.com/files/extensions/littlehelper.xml</server>
+        <server name="FasterJoomla.com Little Helper Update Site" type="collection" priority="1" >https://www.fasterjoomla.com/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=3&amp;dummy=littlehelper.xml</server>
    </updateservers>
 </extension>

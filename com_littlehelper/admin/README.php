@@ -4,7 +4,7 @@
  * @author     Riccardo Zorn <code@fasterjoomla.com>
  * @copyright  2011 Riccardo Zorn
  * @license    GNU/GPL v2
- * @link       http://www.fasterjoomla.com/littlehelper
+ * @link       https://www.fasterjoomla.com/littlehelper
  */
 defined('_JEXEC') or die();
 die();
@@ -14,12 +14,12 @@ die();
  * @copyright Copyright (C) 2013-2014 Riccardo Zorn. All rights reserved.
  * @license GNU General Public License version 2 or later; see LICENSE.txt
  * @author Riccardo Zorn <support@fasterjoomla.com> -
- *         http://www.fasterjoomla.com/littlehelper
+ *         https://www.fasterjoomla.com/littlehelper
  */
 ?>
 
 Little Helper for Joomla Admin
-Homepage: http://www.fasterjoomla.com/littlehelper
+Homepage: https://www.fasterjoomla.com/littlehelper
 
 --------------------------------------
 Version 1.7.5 (2013/04/28)

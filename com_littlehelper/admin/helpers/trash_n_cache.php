@@ -8,7 +8,7 @@
  * 
  * @version    2.3.3
  * @package    LittleHelper
- * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
+ * @author     Riccardo Zorn {@link https://www.fasterjoomla.com/littlehelper}
  * @copyright  Riccardo Zorn
  * @license    GNU/GPL
  *

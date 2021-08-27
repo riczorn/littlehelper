@@ -1,7 +1,7 @@
 <?php
 /**
  * @package    LittleHelper
- * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
+ * @author     Riccardo Zorn {@link https://www.fasterjoomla.com/littlehelper}
  * @author     Created on 26-Jun-2014
  * @license    GNU/GPL v2
  */

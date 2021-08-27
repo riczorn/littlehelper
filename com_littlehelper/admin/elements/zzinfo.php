@@ -4,7 +4,7 @@
  * 
  * @version SVN: $Id$
  * @package    LittleHelper
- * @author     Riccardo Zorn {@link http://www.fasterjoomla.com/littlehelper}
+ * @author     Riccardo Zorn {@link https://www.fasterjoomla.com/littlehelper}
  * @author     Created on 22-Dec-2011
  * @license    GNU/GPL
  */
@@ -67,7 +67,7 @@ class JFormFieldZzinfo extends JFormField
 				<h3>$title</h3>
 				<div class='zzheader'>$header</div>
 				<div class='zzbody'>$body</div> 
-				<div class='zzfooter'>Copyright (c) 2012 <a href='http://www.fasterjoomla.com' target='_blank'>www.fasterjoomla.com</a> $footer</div> 
+				<div class='zzfooter'>Copyright (c) 2012 <a href='https://www.fasterjoomla.com' target='_blank'>www.fasterjoomla.com</a> $footer</div> 
 			</div>";
 	}
 }
